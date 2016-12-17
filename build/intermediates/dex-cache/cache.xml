@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\slf4j-android-1.5.8.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="78bb288ee8f11b0a08400230359151677e33a371">
+        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\slf4j-android-1.5.8_76699bdbd6a1eab7dbbac64155823381413de5f9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="787206c50ab8001c1c2f8bf7e3941196ca70d4f3">
+        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f5f09c25774e8d021e5af81536d983f3cc0956a2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="28da586bc0cb0e5b37fcc3d6b72a528842b13255">
+        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_6203a08b76acae6600ed7273ee8fc2efc8c1aeba\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\osmdroid-android-4.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="2fcf7bc3cb27daa6e67c8990ea418d19f6b5b296">
+        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\osmdroid-android-4.3_c85e08021774b35628b072a3948bd753b2d13199\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\android-support-v13.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="636f0fc2e3ad660ba46e0632d44891ae1a616c81">
+        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-support-v13_5e02eddfe40223e6ef355712402a4458c7b7d451\classes.dex" />
+    </item>
+
+</items>

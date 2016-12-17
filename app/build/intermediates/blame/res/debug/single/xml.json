@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "C:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\xml\\pref_general.xml"
+    },
+    {
+        "merged": "C:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\build\\intermediates\\res\\merged\\debug\\xml\\pref_general.xml",
+        "source": "C:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\src\\main\\res\\xml\\pref_general.xml"
+    }
+]

@@ -1,0 +1,285 @@
+<LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="25dp"
+            android:text="P1" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="25dp"
+            android:text="P2" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="25dp"
+            android:text="P3" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="25dp"
+            android:text="P4" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="25dp"
+            android:text="P5" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/win"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linearLayout3"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/linearLayout4" >
+
+        <RadioButton
+            android:id="@+id/win1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/win2"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/win3"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/win4"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/win5"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linearLayout4"
+        android:layout_toRightOf="@+id/linearLayout2"
+        android:layout_marginTop="23dp"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/seen1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout2"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/linearLayout2" />
+
+        <CheckBox
+            android:id="@+id/seen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seen1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@+id/linearLayout2" />
+
+        <CheckBox
+            android:id="@+id/seen3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seen2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@+id/linearLayout2" />
+
+        <CheckBox
+            android:id="@+id/seen4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seen3"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@+id/linearLayout2" />
+
+        <CheckBox
+            android:id="@+id/seen5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seen4"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@+id/linearLayout2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_marginTop="62dp" >
+
+        <Button
+            android:id="@+id/calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout2"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/win"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/total1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="15dp"
+            android:text="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/total2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="15dp"
+            android:text="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/total3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="15dp"
+            android:text="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/total4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="15dp"
+            android:text="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/total5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout1"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="15dp"
+            android:text="0"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linearLayout2"
+        android:layout_toRightOf="@+id/linearLayout3"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/point1"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout3"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:ems="10"
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/point2"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout3"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/point3"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout3"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/point4"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout3"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:ems="10"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/point5"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearLayout3"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@+id/linearLayout3"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>

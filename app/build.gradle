@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 14
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        applicationId "com.crestaSom.KTMPublicRoute"
+        minSdkVersion 14
+        targetSdkVersion 14
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/android-support-v13.jar')
+    compile files('libs/osmdroid-android-4.3.jar')
+    compile files('libs/osmdroid-android-5.0-javadoc.jar')
+    compile files('libs/slf4j-android-1.5.8.jar')
+}
