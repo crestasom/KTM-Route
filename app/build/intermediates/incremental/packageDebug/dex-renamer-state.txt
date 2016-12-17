@@ -1,7 +1,0 @@
-#Fri Dec 09 20:11:16 NPT 2016
-base.0=C\:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_f5f09c25774e8d021e5af81536d983f3cc0956a2
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_6203a08b76acae6600ed7273ee8fc2efc8c1aeba\\classes.dex
-base.1=C\:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_6203a08b76acae6600ed7273ee8fc2efc8c1aeba
-file.0=C\:\\Users\\CrestaSom\\Downloads\\pjt\\pjt\\KTM Public Route\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_f5f09c25774e8d021e5af81536d983f3cc0956a2\\classes.dex
