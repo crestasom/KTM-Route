@@ -1,9 +1,19 @@
 package com.crestaSom.KTMPublicRoute;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,18 +33,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
-public class MainActivity2 extends Activity {
+public class MainActivity2 extends Activity implements View.OnClickListener {
 	private MapView mMapView;
 	private MapController mMapController;
 	List<Integer> cList;
 	TextView routeInfo;
+	Button tracker;
+	ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
+	ArrayList<OverlayItem> items;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
 		cList = new ArrayList<Integer>();
+		tracker=(Button)findViewById(R.id.tracker);
+		tracker.setOnClickListener(this);
 		cList.add(Color.BLUE);
 		cList.add(Color.GREEN);
 		cList.add(Color.MAGENTA);
@@ -80,6 +96,7 @@ public class MainActivity2 extends Activity {
 		}else{
 			String rName=getIntent().getStringExtra("routeName");
 			display+="Route View:"+rName;
+			tracker.setVisibility(View.INVISIBLE);
 		}
 		routeInfo.setText(display);
 		latCode /= path.size();
@@ -120,10 +137,10 @@ public class MainActivity2 extends Activity {
 
 	void createMarker(List<Vertex> path, int color) {
 
-		Log.d("", "Vertex Path in Map:" + path.toString());
-		Log.d("Line Color", "pos:" + color);
+//		Log.d("", "Vertex Path in Map:" + path.toString());
+//		Log.d("Line Color", "pos:" + color);
 		
-		ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+		items = new ArrayList<OverlayItem>();
 		DefaultResourceProxyImpl resourceProxy1 = new CustomResourceProxy(getApplicationContext());
 		PathOverlay myPath = new PathOverlay(cList.get(color), 15, resourceProxy1);
 		// Double latCode=0.0,longCode=0.0;
@@ -140,7 +157,7 @@ public class MainActivity2 extends Activity {
 		}
 
 		mMapView.getOverlays().add(myPath);
-		ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
+
 		DefaultResourceProxyImpl resourceProxy = new CustomResourceProxy(getApplicationContext());
 		// new DefaultResourceProxyImpl(getApplicationContext());
 
@@ -259,6 +276,156 @@ public class MainActivity2 extends Activity {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
 		finish();
+	}
+
+	@Override
+	public void onClick(View view) {
+
+		FetchCordinates gpstracker=new FetchCordinates();
+		gpstracker.execute();
+	}
+
+
+	public class FetchCordinates extends AsyncTask<String, Integer, String> {
+		ProgressDialog progDailog = null;
+
+		public double lati = 0.0;
+		public double longi = 0.0;
+
+		public LocationManager mLocationManager;
+		public VeggsterLocationListener mVeggsterLocationListener;
+
+		@Override
+		protected void onPreExecute() {
+//			ConnectivityManager connectivityMgr = (ConnectivityManager)
+//					getSystemService(Context.CONNECTIVITY_SERVICE);
+//			NetworkInfo[] nwInfos = connectivityMgr.getAllNetworkInfo();
+//			for (NetworkInfo nwInfo : nwInfos) {
+//				Log.d(TAG, "Network Type Name: " + nwInfo.getTypeName());
+//				Log.d(TAG, "Network available: " + nwInfo.isAvailable());
+//				Log.d(TAG, "Network c_or-c: " + nwInfo.isConnectedOrConnecting());
+//				Log.d(TAG, "Network connected: " + nwInfo.isConnected());
+//			}
+			mVeggsterLocationListener = new VeggsterLocationListener();
+			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
+				//	Toast.makeText(MainActivity.this,"Network Mode:"+LocationManager.NETWORK_PROVIDER.toString(),Toast.LENGTH_SHORT).show();
+				mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
+						mVeggsterLocationListener);
+
+			}else{
+				//	Toast.makeText(MainActivity.this,"GPS Mode",Toast.LENGTH_SHORT).show();
+				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+						mVeggsterLocationListener);
+			}
+
+
+			progDailog = new ProgressDialog(MainActivity2.this);
+			progDailog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					FetchCordinates.this.cancel(true);
+				}
+			});
+			progDailog.setMessage("Detecting your current location....");
+			progDailog.setIndeterminate(false);
+			progDailog.setCancelable(true);
+			progDailog.show();
+
+		}
+
+		@Override
+		protected void onCancelled(){
+			System.out.println("Cancelled by user!");
+			Toast.makeText(MainActivity2.this, "Location Detection Cancel", Toast.LENGTH_SHORT).show();
+			progDailog.dismiss();
+			mLocationManager.removeUpdates(mVeggsterLocationListener);
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			progDailog.dismiss();
+			ArrayList<OverlayItem> itemst=new ArrayList<OverlayItem>();
+			GeoPoint p1 = new GeoPoint(lati, longi);
+			itemst.add(new OverlayItem("Current Position", "", p1));
+			DefaultResourceProxyImpl resourceProxy = new CustomResourceProxy1(getApplicationContext());
+			currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(itemst,
+					new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+						@Override
+						public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+							Toast.makeText(getApplicationContext(), item.getTitle(), Toast.LENGTH_SHORT).show();
+							return true;
+
+						}
+
+						@Override
+						public boolean onItemLongPress(final int index, final OverlayItem item) {
+							return true;
+						}
+					}, resourceProxy);
+
+			mMapView.getOverlays().add(currentLocationOverlay);
+			mMapView.invalidate();
+
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			int x=0;
+			while (this.lati == 0.0) {
+//				Log.d("x:",""+x++);
+//				System.out.println("x:"+x++);
+			}
+			return null;
+		}
+
+		public class VeggsterLocationListener implements LocationListener {
+
+			@Override
+			public void onLocationChanged(Location location) {
+
+				int lat = (int) location.getLatitude(); // * 1E6);
+				int log = (int) location.getLongitude(); // * 1E6);
+				int acc = (int) (location.getAccuracy());
+
+				String info = location.getProvider();
+				try {
+
+					// LocatorService.myLatitude=location.getLatitude();
+
+					// LocatorService.myLongitude=location.getLongitude();
+
+					lati = location.getLatitude();
+					longi = location.getLongitude();
+
+				} catch (Exception e) {
+					// progDailog.dismiss();
+					// Toast.makeText(getApplicationContext(),"Unable to get Location"
+					// , Toast.LENGTH_LONG).show();
+				}
+
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				Log.i("OnProviderDisabled", "OnProviderDisabled");
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				Log.i("onProviderEnabled", "onProviderEnabled");
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+										Bundle extras) {
+				Log.i("onStatusChanged", "onStatusChanged");
+
+			}
+
+		}
+
 	}
 
 }

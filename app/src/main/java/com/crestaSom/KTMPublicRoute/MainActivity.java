@@ -228,11 +228,15 @@ public class MainActivity extends Activity implements OnClickListener{
 
 							public void onFinish() {
 								getCord.cancel(true);
+								if(getCord.isCancelled()){
+									Toast.makeText(getApplicationContext(), "Cannot Detect Location", Toast.LENGTH_SHORT).show();
+								}else {
 //								Toast dsply=new Toast(getApplicationContext());
 //								dsply.setText("Cannot Detect Location");
 //								dsply.setDuration(Toast.LENGTH_SHORT);
 
-								Toast.makeText(getApplicationContext(),"Cannot Detect Location",Toast.LENGTH_SHORT).show();
+
+								}
 							}
 
 						}.start();
@@ -721,7 +725,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		@Override
 		protected void onPostExecute(String result) {
 			progDailog.dismiss();
-
 			Queue<Vertex>  sourceV = imp.getNearestStop(lati, longi);
 			Vertex v;
 			//source.setText(sourceV.getName());
