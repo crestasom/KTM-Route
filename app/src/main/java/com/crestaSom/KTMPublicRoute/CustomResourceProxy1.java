@@ -20,10 +20,10 @@ public class CustomResourceProxy1 extends DefaultResourceProxyImpl {
       switch (pResId){
               case person:
                    //your image goes here!!!
-                   return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.icons_cpy);
+                   return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.person);
 
          }
-      return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.icons_cpy);
+      return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.person);
          //return super.getBitmap(pResId);
   }
 

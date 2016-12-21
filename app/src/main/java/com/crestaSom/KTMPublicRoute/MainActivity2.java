@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 	List<Integer> cList;
 	TextView routeInfo;
 	Button tracker;
+	ImageView currentPosition;
 	ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
 	ArrayList<OverlayItem> items;
 
@@ -48,9 +50,9 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
+		currentPosition=(ImageView)findViewById(R.id.current_location);
 		cList = new ArrayList<Integer>();
-		tracker=(Button)findViewById(R.id.tracker);
-		tracker.setOnClickListener(this);
+		currentPosition.setOnClickListener(this);
 		cList.add(Color.BLUE);
 		cList.add(Color.GREEN);
 		cList.add(Color.MAGENTA);
@@ -96,7 +98,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 		}else{
 			String rName=getIntent().getStringExtra("routeName");
 			display+="Route View:"+rName;
-			tracker.setVisibility(View.INVISIBLE);
+			currentPosition.setVisibility(View.INVISIBLE);
 		}
 		routeInfo.setText(display);
 		latCode /= path.size();
@@ -178,6 +180,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 
 		mMapView.getOverlays().add(currentLocationOverlay);
 		mMapView.invalidate();
+
 //		
 //		ArrayList<OverlayItem> items1 = new ArrayList<OverlayItem>();
 //		DefaultResourceProxyImpl resourceProxy11 = new CustomResourceProxy1(getApplicationContext());
@@ -345,6 +348,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 		@Override
 		protected void onPostExecute(String result) {
 			progDailog.dismiss();
+			mMapView.getOverlays().remove(currentLocationOverlay);
 			ArrayList<OverlayItem> itemst=new ArrayList<OverlayItem>();
 			GeoPoint p1 = new GeoPoint(lati, longi);
 			itemst.add(new OverlayItem("Current Position", "", p1));
@@ -366,6 +370,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 
 			mMapView.getOverlays().add(currentLocationOverlay);
 			mMapView.invalidate();
+			mMapController.setCenter(new GeoPoint(lati,longi));
 
 		}
 
