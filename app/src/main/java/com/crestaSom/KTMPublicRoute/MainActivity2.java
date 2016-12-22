@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -43,6 +44,8 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 	TextView routeInfo;
 	Button tracker;
 	ImageView currentPosition;
+	String provider;
+	Criteria cri;
 	ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
 	ArrayList<OverlayItem> items;
 
@@ -72,6 +75,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 		BoundingBoxE6 boundingBox=new BoundingBoxE6(27.79778, 85.583496, 27.589241, 85.216141);
 		//new BoundingBoxE6(north, east, south, west)
 		mMapView.setScrollableAreaLimit(boundingBox);
+		mMapView.setBuiltInZoomControls(false);
 		// double latCenter,LongCenter;
 
 		// GeoPoint gPt = new GeoPoint(27.7, 85.3);
@@ -311,14 +315,19 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 //			}
 			mVeggsterLocationListener = new VeggsterLocationListener();
 			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			cri = new Criteria();
+			provider = mLocationManager.getBestProvider(cri, false);
 			if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
 				//	Toast.makeText(MainActivity.this,"Network Mode:"+LocationManager.NETWORK_PROVIDER.toString(),Toast.LENGTH_SHORT).show();
-				mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
+				mLocationManager.requestLocationUpdates(provider, 0, 0,
 						mVeggsterLocationListener);
+				Location currentL=mLocationManager.getLastKnownLocation(provider);
+				lati=currentL.getLatitude();
+				longi=currentL.getLongitude();
 
 			}else{
 				//	Toast.makeText(MainActivity.this,"GPS Mode",Toast.LENGTH_SHORT).show();
-				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+				mLocationManager.requestLocationUpdates(provider, 0, 0,
 						mVeggsterLocationListener);
 			}
 
@@ -348,9 +357,10 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 		@Override
 		protected void onPostExecute(String result) {
 			progDailog.dismiss();
-			mMapView.getOverlays().remove(currentLocationOverlay);
+			//mMapView.getOverlays().remove(currentLocationOverlay);
 			ArrayList<OverlayItem> itemst=new ArrayList<OverlayItem>();
 			GeoPoint p1 = new GeoPoint(lati, longi);
+			mMapController.setCenter(p1);
 			itemst.add(new OverlayItem("Current Position", "", p1));
 			DefaultResourceProxyImpl resourceProxy = new CustomResourceProxy1(getApplicationContext());
 			currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(itemst,
@@ -370,7 +380,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 
 			mMapView.getOverlays().add(currentLocationOverlay);
 			mMapView.invalidate();
-			mMapController.setCenter(new GeoPoint(lati,longi));
+
 
 		}
 

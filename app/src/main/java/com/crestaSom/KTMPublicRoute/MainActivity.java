@@ -1,5 +1,6 @@
 package com.crestaSom.KTMPublicRoute;
 
+import java.security.Provider;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -108,6 +109,7 @@ public class MainActivity extends Activity implements OnClickListener{
         sv=(ScrollView)findViewById(R.id.scrollView1);
 		// viewMap = (Button) findViewById(R.id.submit);
 		// viewMap.setOnClickListener(this);
+
 
 		try {
 			imp = new KtmPublicRoute(this);
@@ -687,16 +689,20 @@ public class MainActivity extends Activity implements OnClickListener{
 //				Log.d(TAG, "Network connected: " + nwInfo.isConnected());
 //			}
 			mVeggsterLocationListener = new VeggsterLocationListener();
+
 			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			cri = new Criteria();
+			provider = mLocationManager.getBestProvider(cri, false);
 			if(mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
 			//	Toast.makeText(MainActivity.this,"Network Mode:"+LocationManager.NETWORK_PROVIDER.toString(),Toast.LENGTH_SHORT).show();
-				mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
+				mLocationManager.requestLocationUpdates(provider, 30000, 0,
 						mVeggsterLocationListener);
 
 			}else{
 			//	Toast.makeText(MainActivity.this,"GPS Mode",Toast.LENGTH_SHORT).show();
-				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
+				mLocationManager.requestLocationUpdates(provider, 0, 0,
 						mVeggsterLocationListener);
+
 			}
 
 
