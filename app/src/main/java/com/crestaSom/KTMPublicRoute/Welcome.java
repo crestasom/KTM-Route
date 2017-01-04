@@ -88,8 +88,8 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         mViewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragments(new HomeFragment(),"Search");
-        mViewPagerAdapter.addFragments(new NewFragment(),"View");
+        mViewPagerAdapter.addFragments(new SearchRouteFragment(),"Search");
+        mViewPagerAdapter.addFragments(new ViewRouteFragment(),"View");
         viewPager.setAdapter(mViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -102,7 +102,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 
             // moveFile(Environment.getRootDirectory()+"/osmdroid/","tiles.zip",Environment.getExternalStorageDirectory()+"/osmdroid/");
             // copyAssets();
-            new CopyMap().execute();
+            //new CopyMap().execute();
 
             sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             editor = sharedPref.edit();
@@ -402,6 +402,13 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             pDialog.setMessage("Initializing Map");
             pDialog.setIndeterminate(false);
             pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            pDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Continue",new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
 
             // pDialog.setCancelable(true);
             pDialog.show();

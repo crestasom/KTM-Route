@@ -1,0 +1,70 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crestaSom.KTMPublicRoute.MapFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context="com.crestaSom.KTMPublicRoute.MainActivity2">
+
+
+        <org.osmdroid.views.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+
+        <TextView
+            android:id="@+id/routeInfo"
+            android:background="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textStyle="bold|italic"
+            android:layout_marginTop="5dp"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+        <ImageView
+            android:id="@+id/zoomin"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingTop="3dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/plus"
+            android:layout_marginTop="182dp"
+            android:layout_below="@+id/routeInfo"
+            android:layout_alignParentLeft="true" />
+
+        <ImageView
+            android:id="@+id/current_location"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingTop="3dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/current_location"
+            android:layout_below="@+id/zoomin"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:id="@+id/zoomout"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingTop="3dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/minus"
+            android:layout_below="@+id/current_location"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>

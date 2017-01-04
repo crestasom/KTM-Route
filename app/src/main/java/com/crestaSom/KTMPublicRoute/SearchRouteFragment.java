@@ -59,7 +59,7 @@ import java.util.Queue;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class SearchRouteFragment extends Fragment implements View.OnClickListener {
 
 
     SharedPreferences prefs;
@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ViewGroup cont;
 
 
-    public HomeFragment() {
+    public SearchRouteFragment() {
         // Required empty public constructor
     }
 
@@ -249,7 +249,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         startActivity(onGPS);
                     } else if (gpsFlag == 0) {
                         gpsFlag = 1;
-                        final HomeFragment.FetchCordinates getCord = new HomeFragment.FetchCordinates();
+                        final SearchRouteFragment.FetchCordinates getCord = new SearchRouteFragment.FetchCordinates();
                         getCord.execute();
                         new CountDownTimer(10000, 1000) {
 
@@ -555,11 +555,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 srcId = src.getId();
                 destId = dst.getId();
-                new HomeFragment.CalculatePath().execute();
+                new SearchRouteFragment.CalculatePath().execute();
 
             }
         } else if (v.getId() == R.id.viewDetailRoute) {
-            Intent i = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
+            Intent i = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
             i.putExtra("data", new DataWrapper(path1));
             i.putExtra("flag", false);
             // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
@@ -570,6 +570,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Intent i = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
             i.putExtra("data", new DataWrapper(singleRouteVertex));
             i.putExtra("flag", false);
+            Log.d("data in search route",singleRouteVertex.toString());
+
             // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
             // path);
             startActivity(i);
@@ -639,6 +641,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            if (getView() != null) {
+                // your code goes here
+                source.requestFocus();
+            }
+        }
+
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -667,11 +680,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         public double longi = 0.0;
 
         public LocationManager mLocationManager;
-        public HomeFragment.FetchCordinates.VeggsterLocationListener mVeggsterLocationListener;
+        public SearchRouteFragment.FetchCordinates.VeggsterLocationListener mVeggsterLocationListener;
 
         @Override
         protected void onPreExecute() {
-            mVeggsterLocationListener = new HomeFragment.FetchCordinates.VeggsterLocationListener();
+            mVeggsterLocationListener = new SearchRouteFragment.FetchCordinates.VeggsterLocationListener();
 
             mLocationManager = (LocationManager) getActivity().getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
             cri = new Criteria();
@@ -693,7 +706,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             progDailog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    HomeFragment.FetchCordinates.this.cancel(true);
+                    SearchRouteFragment.FetchCordinates.this.cancel(true);
                 }
             });
             progDailog.setMessage("Detecting your current location....");
@@ -877,4 +890,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+
+
+    @Override
+    public void onResume() {
+        destination.clearFocus();
+        source.requestFocus();
+        super.onResume();
+    }
 }

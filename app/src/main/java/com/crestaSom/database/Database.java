@@ -148,7 +148,7 @@ public class Database {
 			try {
 				db.execSQL(sqlFare);
 				Log.d("Database", "Fare Table Populated");
-				Toast.makeText(con,"Fare Table Populated",Toast.LENGTH_LONG).show();
+				//Toast.makeText(con,"Fare Table Populated",Toast.LENGTH_LONG).show();
 			} catch (SQLiteException ex) {
 				Log.d("Sqlite Error", ex.getMessage());
 				Toast.makeText(con,ex.getMessage(),Toast.LENGTH_LONG).show();

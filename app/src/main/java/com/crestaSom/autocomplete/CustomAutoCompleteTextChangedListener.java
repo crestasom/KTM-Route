@@ -2,9 +2,8 @@ package com.crestaSom.autocomplete;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.crestaSom.KTMPublicRoute.HomeFragment;
 import com.crestaSom.KTMPublicRoute.MainActivity;
+import com.crestaSom.KTMPublicRoute.SearchRouteFragment;
 import com.crestaSom.KTMPublicRoute.Welcome;
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Vertex;
@@ -48,7 +47,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher {
 
 		// if you want to see in the logcat what the user types
 		//Log.e(TAG, "User input: " + userInput);
-		HomeFragment mainActivity = new HomeFragment();
+		SearchRouteFragment mainActivity = new SearchRouteFragment();
 		List<Vertex> vertexes =getItemsFromDb(userInput
 				.toString());
 		// query the database based on the user input

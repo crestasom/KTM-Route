@@ -22,14 +22,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NewFragment extends Fragment {
+public class ViewRouteFragment extends Fragment {
     ListView routeList;
     List<String> routeName;
     List<Integer> routeId;
     List<Route> routes;
     Database db;
 
-    public NewFragment() {
+    public ViewRouteFragment() {
         // Required empty public constructor
     }
 
@@ -75,7 +75,7 @@ public class NewFragment extends Fragment {
                     v=db.getVertex(idr);
                     vLists.add(v);
                 }
-                Intent i = new Intent(getActivity(), MainActivity2.class);
+                Intent i = new Intent(getActivity(), DetailActivity.class);
                 i.putExtra("data", new DataWrapper(vLists));
                 i.putExtra("flag", true);
                 i.putExtra("routeName", routes.get(position).getName());
