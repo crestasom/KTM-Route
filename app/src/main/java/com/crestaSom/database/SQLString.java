@@ -673,4 +673,18 @@ public class SQLString {
 			"(104, 'Lagankhel-Lubhu', '94,93,92,356,357,358,359,360,361,362,363', 'Micro Bus'),"+
 			"(105, 'Lubu - Lagankhel', '363,362,361,360,359,358,357,356,92,93,94', 'Micro Bus'),"+
 			"(106, 'Godawari-Lagankhel', '355,354,353,352,351,350,349,348,347,93,94', 'Micro Bus');";
+
+
+	public String sqlFare="INSERT INTO fare_rate ('distance', 'fare') VALUES" +
+			"(4, 13)," +
+			"(5, 15)," +
+			"(6, 16)," +
+			"(8, 17)," +
+			"(10, 19)," +
+			"(13, 21)," +
+			"(16, 23)," +
+			"(19, 24)," +
+			"(19, 25);";
 }
+
+

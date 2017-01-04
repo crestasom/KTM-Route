@@ -16,6 +16,7 @@ import android.content.Context;
 
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Edge;
+import com.crestaSom.model.Fare;
 import com.crestaSom.model.NearestStop;
 import com.crestaSom.model.Route;
 import com.crestaSom.model.Vertex;
@@ -1100,27 +1101,35 @@ public class KtmPublicRoute {
 	
 	
 	public int getRouteCost(double routeDistance){
-		int cost=0;
-		if(routeDistance<=4.0){
-			return 13;
-		}else if(routeDistance<=5.0){
-			return 15;
-		}else if(routeDistance<=6.0){
-			return 16;
-		}else if(routeDistance<=8.0){
-			return 17;
-		}else if(routeDistance<=10.0){
-			return 19;
-		}else if(routeDistance<=13.0){
-			return 21;
-		}else if(routeDistance<=16.0){
-			return 23;
-		}else if(routeDistance<=19.0){
-			return 24;
-		}else if(routeDistance>19.0){
-			return 25;
+		List<Fare> fareList=db.getFareList();
+		for(Fare f:fareList){
+			if(routeDistance<f.getDistance())
+				return f.getFare();
 		}
 		return 0;
+//		int cost=0;
+//		if(routeDistance<=4.0){
+//			return 13;
+//		}else if(routeDistance<=5.0){
+//			return 15;
+//		}else if(routeDistance<=6.0){
+//			return 16;
+//		}else if(routeDistance<=8.0){
+//			return 17;
+//		}else if(routeDistance<=10.0){
+//			return 19;
+//		}else if(routeDistance<=13.0){
+//			return 21;
+//		}else if(routeDistance<=16.0){
+//			return 23;
+//		}else if(routeDistance<=19.0){
+//			return 24;
+//		}else if(routeDistance>19.0){
+//			return 25;
+//		}
+//		return 0;
+
+
 	}
 
 }

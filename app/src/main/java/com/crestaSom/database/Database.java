@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.crestaSom.model.Edge;
+import com.crestaSom.model.Fare;
 import com.crestaSom.model.Route;
 import com.crestaSom.model.Vertex;
 
@@ -52,6 +54,10 @@ public class Database {
 	//private static final String ROUTE_STATUS = "status";
 	//private static final String ROUTE_NEW = "isNew";
 
+	private static final String DATABASE_TABLE_FARE = "fare_rate";
+	private static final String FARE_DISTANCE = "distance";
+	private static final String FARE_RATE = "fare";
+
 	private static final String DATABASE_NAME = "ktm_public_route";
 	private static final int DATABASE_VERSION = 2;
 
@@ -63,15 +69,21 @@ public class Database {
 	String[] allColumnsRoute = { ROUTE_ID, ROUTE_NAME, ROUTE_STOPS,
 			ROUTE_VEHICLETYPE};
 
+	String[] allColumnsFare = { FARE_DISTANCE, FARE_RATE};
+
 	private DbHelper dbHelper;
 	private final Context dbContext;
 	private SQLiteDatabase dbTest;
 	Cursor cursor;
 
-	public static class DbHelper extends SQLiteOpenHelper {
 
+
+	public static class DbHelper extends SQLiteOpenHelper {
+ 		Context con;
 		public DbHelper(Context context) {
+
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+			con=context;
 		}
 
 		@Override
@@ -98,15 +110,21 @@ public class Database {
 					+ " VARCHAR(255) NOT NULL, " + ROUTE_STOPS
 					+ " VARCHAR(255) NOT NULL, " + ROUTE_VEHICLETYPE
 					+ " VARCHAR(25) NOT NULL); ");
+			db.execSQL("CREATE TABLE " + DATABASE_TABLE_FARE + "(" + FARE_DISTANCE
+					+ "  DOUBLE NOT NULL , " + FARE_RATE
+					+ " INTEGER NOT NULL); ");
 			Log.d("Database", "Database Created");
 
-			String sqlEdge, sqlVertex, sqlRoute;
+			String sqlEdge, sqlVertex, sqlRoute,sqlFare;
 			SQLString sqls = new SQLString();
 			sqlVertex = sqls.sqlVertex;
 			sqlEdge = sqls.sqlEdge;
 			sqlRoute = sqls.sqlRoute;
+			sqlFare=sqls.sqlFare;
+
 			try {
 				db.execSQL(sqlVertex);
+				Log.d("Database", "Vertex Table Populated");
 			} catch (SQLiteException ex) {
 				Log.d("Sqlite Error", ex.getMessage());
 				Log.d("Database", "Vertex Table Populated");
@@ -114,9 +132,10 @@ public class Database {
 
 			try {
 				db.execSQL(sqlEdge);
+				Log.d("Database", "Edge Table Populated");
 			} catch (SQLiteException ex) {
 				Log.d("Sqlite Error", ex.getMessage());
-				Log.d("Database", "Edge Table Populated");
+
 			}
 
 			try {
@@ -124,6 +143,15 @@ public class Database {
 				Log.d("Database", "Route Table Populated");
 			} catch (SQLiteException ex) {
 				Log.d("Sqlite Error", ex.getMessage());
+			}
+
+			try {
+				db.execSQL(sqlFare);
+				Log.d("Database", "Fare Table Populated");
+				Toast.makeText(con,"Fare Table Populated",Toast.LENGTH_LONG).show();
+			} catch (SQLiteException ex) {
+				Log.d("Sqlite Error", ex.getMessage());
+				Toast.makeText(con,ex.getMessage(),Toast.LENGTH_LONG).show();
 			}
 
 		}
@@ -134,16 +162,20 @@ public class Database {
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_VERTEX);
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_EDGE);
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ROUTE);
+			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_FARE);
 			onCreate(db);
 		}
 
 	}
 
 	public Database(Context c) {
-		dbContext = c;
+		Log.d("Context",c.toString());
+		dbContext=c;
+
 	}
 
 	public Database open() {
+
 		dbHelper = new DbHelper(dbContext);
 		dbTest = dbHelper.getWritableDatabase();
 		return this;
@@ -397,6 +429,7 @@ public class Database {
 
 	public List<Vertex> getVertexUsingQuery(String searchTerm) {
 		// TODO Auto-generated method stub
+		Log.d("Context",dbContext.toString());
 		List<Vertex> result = new ArrayList<Vertex>();
 		Vertex v = null;
 		open();
@@ -505,6 +538,35 @@ public class Database {
 		
 	}
 
-	
+
+	public List<Fare> getFareList() {
+		List<Fare> fareList=new ArrayList<Fare>();
+		Fare fare=new Fare();
+		open();
+
+		cursor = dbTest.query(DATABASE_TABLE_FARE, allColumnsFare,
+				null, null, null, null,
+				null);
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+
+			fare = cursorToFare(cursor);
+			cursor.moveToNext();
+			fareList.add(fare);
+		}
+
+		cursor.close();
+		close();
+		return fareList;
+	}
+
+	private Fare cursorToFare(Cursor cursor) {
+		Fare v = new Fare();
+		v.setDistance(cursor.getDouble(0));
+		v.setFare(cursor.getInt(1));
+		//cursor.close();
+		return v;
+	}
+
 
 }

@@ -67,6 +67,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	SharedPreferences.Editor editor;
 	Button viewMap;
 	List<Vertex> path1;
+	Double distMin=0.0;
 	LocationManager locationmanager;
 	List<Vertex> singleRouteVertex;
 	String provider;
@@ -95,6 +96,10 @@ public class MainActivity extends Activity implements OnClickListener{
 	KtmPublicRoute imp;
 	boolean checkNw = false;
     ScrollView sv;
+
+	public MainActivity(){
+
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -294,6 +299,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		getMenuInflater().inflate(R.menu.auto_complete, menu);
 		menu.add(0, 2, 0, "About");
 		menu.add(0, 3, 0, "Help");
+		menu.add(0,4,0,"Setting");
 		return true;
 	}
 
@@ -309,6 +315,9 @@ public class MainActivity extends Activity implements OnClickListener{
 		} else if (id == 2) {
 			startActivity(new Intent(getApplicationContext(),
 					AboutActivity.class));
+		}else if(id==4){
+			startActivity(new Intent(getApplicationContext(),
+					SettingsActivity.class));
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -328,75 +337,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		source = db.getVertex(srcId);
 		dest = db.getVertex(destId);
 		path.clear();
-		// for(Vertex v:vertexes){
-		// if(v.getId()==srcId)
-		// source=v;
-		// else if(v.getId()==destId)
-		// dest=v;
-		// }
-		// System.out.println(source.toString()+"\t"+dest.toString());
-		// List<Vertex> path1 = imp.getSingleRoute(source, dest);
 
-		// System.out.println("Single Route:"+imp.getRouteName());
-		// for(Vertex v:path1){
-		// System.out.println(v);
-		// }
 		path = imp.findShortestPath(source, dest);
 		path1.clear();
 		path1.addAll(path);
-
-		// System.out.println("Shortest Path detected:");
-		// Map<Integer,Map<Integer,List<Vertex>>> routeLists=new
-		// HashMap<Integer, Map<Integer,List<Vertex>>>();
-		// routeLists=imp.findRoutePath(path);
-		// Log.d("Route Data", routeLists.toString());
-		// //Map<Integer, List<Vertex>> routeList = imp.findRoutePath(path);
-		// Map<Integer, List<Vertex>> routeList=new HashMap<Integer,
-		// List<Vertex>>();
-		// List<Vertex> vertexList = new ArrayList<Vertex>();
-		// // Iterator<Map.Entry<Integer, List<Vertex>>> it =
-		// routeList.entrySet()
-		// // .iterator();
-		// Iterator<Map.Entry<Integer, Map<Integer,List<Vertex>>>> it =
-		// routeLists.entrySet().iterator();
-		// int i = 1;
-		// while (it.hasNext()) {
-		// Map.Entry<Integer, Map<Integer,List<Vertex>>> pair =
-		// (Map.Entry<Integer, Map<Integer,List<Vertex>>>) it
-		// .next();
-		// routeList = pair.getValue();
-		// Iterator<Map.Entry<Integer, List<Vertex>>>
-		// routeIterator=routeList.entrySet().iterator();
-		// while(routeIterator.hasNext()){
-		// Map.Entry<Integer, List<Vertex>> pair1 = (Map.Entry<Integer,
-		// List<Vertex>>) routeIterator
-		// .next();
-		// // System.out.println(String.valueOf(pair.getKey()));
-		// // }
-		// // Route
-		// // r=imp.getRoute(Integer.parseInt(String.valueOf(pair.getKey())));
-		// Route r = imp.getRoute(pair1.getKey());
-		// Log.d("Route"+i, r.toString());
-		// vertexList=pair1.getValue();
-		//
-		// // System.out.println(r);
-		// // System.out.println("\nRoute"+i+":"+r.getName());
-		// display += "\nRoute" + i + ":" + r.getName();
-		// // System.out.println("Vehicle Type:"+r.getVehicleType());
-		// display += "\nVehicle Type:" + r.getVehicleType();
-		// for (Vertex v : vertexList) {
-		// System.out.println(v);
-		// display += "\n" + v.toString();
-		// }
-		// double d = imp.getRouteDistance(vertexList);
-		// System.out.println("\nRoute Distance:" + d);
-		// display += "\nRoute Distance:" + d;
-		// routeIterator.remove();
-		// }
-		// // System.out.println(pair.getKey() + " = " + pair.getValue());
-		// it.remove(); // avoids a ConcurrentModificationException
-		// i++;
-		// }
 
 		List<Vertex> vertexList = new ArrayList<Vertex>();
 		Route r;
@@ -418,18 +362,18 @@ public class MainActivity extends Activity implements OnClickListener{
 			// Iterator<Map.Entry<Integer, List<Vertex>>> it =
 			// pathRoute.entrySet()
 			// .iterator();
-			
+
 			Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
 			while (it.hasNext()) {
 				// Map.Entry<Integer, List<Vertex>> pair=(Map.Entry<Integer,
 				// List<Vertex>>) it
 				// .next();
 				Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
-				
+
 				routeIds = pair.getKey();
 				// Log.d("Mapped Routes", "Mapped Routes" + routeIds);
 				// System.out.println("Mapped Routes" + routeIds);
-				
+
 
 				vertexList = pair.getValue();
 				// display += "\nRoute" + i + ":" + r.getName();
@@ -439,30 +383,54 @@ public class MainActivity extends Activity implements OnClickListener{
 				// System.out.println(v);
 				// display += "\n" + v.toString();
 				// }
-				display += "Travel " + i;
-				display += "\nTake a ride from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
 				double d = imp.getRouteDistance(vertexList);
-				int fare = imp.getRouteCost(d);
-				totalCost+=fare;
-				totalDist+=d;
-				// System.out.println("\nRoute Distance:" + d);
+				if (distMin<d) {
+					display += "Travel " + i;
+					display += "\nTake a ride from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
 
-				display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
-				display += " and cost Rs." + fare + "\n";
-				display+="Available Routes:";
-				for (int z : routeIds) {
+					int fare = imp.getRouteCost(d);
+					totalCost += fare;
+					totalDist += d;
+					// System.out.println("\nRoute Distance:" + d);
 
-					r = imp.getRoute(z);
-					display += "\n" + r.getName();
-					// System.out.println("Vehicle Type:"+r.getVehicleType());
-					display += "\n(" + r.getVehicleType()+")";
+					display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
+					display += " and cost Rs." + fare + "\n";
+					display += "Available Routes:";
+					for (int z : routeIds) {
+
+						r = imp.getRoute(z);
+						display += "\n" + r.getName();
+						// System.out.println("Vehicle Type:"+r.getVehicleType());
+						display += "\n(" + r.getVehicleType() + ")";
+					}
+
+					i++;
+				}else{
+					display += "Travel " + i;
+					display += "\nWalk from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
+
+					//int fare = imp.getRouteCost(d);
+					//totalCost += fare;
+					totalDist += d;
+					// System.out.println("\nRoute Distance:" + d);
+
+					display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
+					//display += " and cost Rs." + fare + "\n";
+//					display += "Available Routes:";
+//					for (int z : routeIds) {
+//
+//						r = imp.getRoute(z);
+//						display += "\n" + r.getName();
+//						// System.out.println("Vehicle Type:"+r.getVehicleType());
+//						display += "\n(" + r.getVehicleType() + ")";
+//					}
+
+					i++;
 				}
-				
-				i++;
+				// i++;
+				display += "\n\n";
+
 			}
-			// i++;
-			display+="\n\n";
-			
 		}
 		display+="\nTotal Distance:"+new DecimalFormat("#.##").format(totalDist)+" km";
 		display+="\nTotal Cost:Rs. "+totalCost;
@@ -554,6 +522,7 @@ public class MainActivity extends Activity implements OnClickListener{
 				Toast.makeText(getApplicationContext(), "Source and destination cannot be same", Toast.LENGTH_SHORT)
 						.show();
 			} else {
+				distMin=Double.parseDouble(prefs.getString("walkingDist","0.0"));
 				sv.smoothScrollTo(0,0);
 				tv.setVisibility(View.INVISIBLE);
 				singleRoute.setVisibility(View.INVISIBLE);
@@ -679,15 +648,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
 		@Override
 		protected void onPreExecute() {
-//			ConnectivityManager connectivityMgr = (ConnectivityManager)
-//					getSystemService(Context.CONNECTIVITY_SERVICE);
-//			NetworkInfo[] nwInfos = connectivityMgr.getAllNetworkInfo();
-//			for (NetworkInfo nwInfo : nwInfos) {
-//				Log.d(TAG, "Network Type Name: " + nwInfo.getTypeName());
-//				Log.d(TAG, "Network available: " + nwInfo.isAvailable());
-//				Log.d(TAG, "Network c_or-c: " + nwInfo.isConnectedOrConnecting());
-//				Log.d(TAG, "Network connected: " + nwInfo.isConnected());
-//			}
 			mVeggsterLocationListener = new VeggsterLocationListener();
 
 			mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -731,6 +691,7 @@ public class MainActivity extends Activity implements OnClickListener{
 		@Override
 		protected void onPostExecute(String result) {
 			progDailog.dismiss();
+			Log.d("coordinates",lati+longi+"");
 			Queue<Vertex>  sourceV = imp.getNearestStop(lati, longi);
 			Vertex v;
 			//source.setText(sourceV.getName());
