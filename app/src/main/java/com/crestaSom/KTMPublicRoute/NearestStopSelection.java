@@ -63,7 +63,7 @@ public class NearestStopSelection extends ListActivity {
 
                 String vName=vertexList.get(position).getName();
                 recv.putExtra("vName",vName);
-                setResult(RESULT_OK,recv);
+                setResult(200,recv);
                 finish();
             }
         });

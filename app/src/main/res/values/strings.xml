@@ -9,8 +9,8 @@
     <string name="welcome_message">Welcome To Marriage Point Calculator</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_score_card">Score Card</string>
-    <string name="title_activity_help">Help</string>
-    <string name="title_activity_about">About</string>
+    <string name="title_activity_help">HELP</string>
+    <string name="title_activity_about">ABOUT</string>
     <string name="help_text"><b>Finding Route</b>\n\n
         1. Click on <b>Find Route</b>\n
         2.Enter Source and Destination.
@@ -31,10 +31,16 @@
         2. Click on a route from the list\n
         3. The details of route will be shown in map and each stop name can be viewed by clicking on stop icon.\n
 </string>
+
+    <string name="disclaimer_text">
+        Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
+        Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.
+</string>
+
     <string name="about_text">
         The “KTM Public Route” is the app which aims to provide the offline route for the users who needs to navigate new places.
         The main purpose of this app is to provide the overall comfort for any user to browse the different routes along with the transport fares needed for the ride.
-       It has been developed as Final Year Project in Nepal Engineering College by <b>Sudin Gurung, Sushant Suwal</b> and <b>Som Prasad Shrestha</b> under Supervision of Assistant Professor <b>Dinesh Dangol</b>.\n
+       It has been developed as Final Year Project in Nepal Engineering College by <b>Sudin Gurung, Sushant Suwal</b> and <b>Som Prasad Shrestha</b> under Supervision of Assistant Professor and  <b>Dinesh Dangol</b> and Department of Computer Science and Engineering.\n
 
        Features:\n
        1. Source and destination can be chosen from the places stored in the database.
@@ -45,15 +51,17 @@
         The shortest path between location and the destination will be shown.\n
        5. Nearest places will be calculated as aerial distance between current location and all possible location from database.
         Four nearest stops will be taken into account while calculating\n
-       6. The travel cost (for all the transit including travel distance in every transit will be displayed) based on the fare details provided by the Department of Transport Management.\n
-        7. The routes will also be shown in the map for better understanding of route.\n
-        8. Updates notification will be displayed if any update is released from server.\n\n\n
+        6. Concept of Walking distance has been implemented where user can set the maximum preferred walking distance. If any transit route has distance less than the preferred distance than app recommmends to walk instead of taking any public route.\n
+       7. The travel cost (for all the transit including travel distance in every transit will be displayed) based on the fare details provided by the Department of Transport Management.\n
+        8. The routes will also be shown in the map for better understanding of route.\n
+        9. Updates notification will be displayed if any update is released from server.\n\n\n
         Disclaimer:\n
+        यो एप्लिकतिओनमा देखायिएको भाडादर यातायात ब्यबस्था बिभागले प्रकाशित गरेको भाडादर अनुसार हो।
         Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
         Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.\n\n
        If you find any bug in App, Please report it to any of following email addresses\n
        Developer: Sudin Gurung © \n
-       E-mail: suding012340@nec.edu.np\n
+       E-mail: sudingrng@gmail.com\n
         Developer: Sushant Suwal © \n
        E-mail: er.sushant881@gmail.com\n
         Developer: Som Prasad Shrestha © \n
@@ -76,5 +84,9 @@
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_details">Details</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_welcome_tabbed">WelcomeTabbed</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -2,49 +2,76 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\slf4j-android-1.5.8.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.3"
-        sha1="78bb288ee8f11b0a08400230359151677e33a371">
-        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\slf4j-android-1.5.8_76699bdbd6a1eab7dbbac64155823381413de5f9\classes.dex" />
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_95e582b56589ae899bbbf875d4efed86513e4476.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="787206c50ab8001c1c2f8bf7e3941196ca70d4f3">
-        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_f5f09c25774e8d021e5af81536d983f3cc0956a2\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.3"
-        sha1="28da586bc0cb0e5b37fcc3d6b72a528842b13255">
-        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_6203a08b76acae6600ed7273ee8fc2efc8c1aeba\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\osmdroid-android-4.3.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\libs\osmdroid-android-4.3.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.3"
         sha1="2fcf7bc3cb27daa6e67c8990ea418d19f6b5b296">
-        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\osmdroid-android-4.3_c85e08021774b35628b072a3948bd753b2d13199\classes.dex" />
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\osmdroid-android-4.3_1c9ee052ca762c766d3dadaac29100f3eb503b01.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\libs\android-support-v13.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_dbf5272a2fe667d56bd5b61abd26f0d5f8bc76de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\user\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_af3ff41e4f7c1efd311bba3c56bce336f57a0db8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_c8a1c9d96eedb020eef4fffc0b99d38576abad31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\libs\android-support-v13.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.3"
         sha1="636f0fc2e3ad660ba46e0632d44891ae1a616c81">
-        <dex dex="C:\Users\CrestaSom\Downloads\pjt\pjt\KTM Public Route\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-support-v13_5e02eddfe40223e6ef355712402a4458c7b7d451\classes.dex" />
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\android-support-v13_137f1abcde279518a12877bef430292e6fa24404.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\libs\slf4j-android-1.5.8.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="78bb288ee8f11b0a08400230359151677e33a371">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\slf4j-android-1.5.8_76a0c65fa775d534d47514e12f1f4961c6e5f803.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.3"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="E:\projects\KTM Public Route\ktm-public-route\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.0.1_bc29c5612f7b61ff90f22c4101ea801fe033e3cd.jar" />
     </item>
 
 </items>

@@ -43,7 +43,7 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 	List<Integer> cList;
 	TextView routeInfo;
 	Button tracker;
-	ImageView currentPosition;
+	ImageView currentPosition,zoomIn,zoomOut;
 	String provider;
 	Criteria cri;
 	ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
@@ -54,6 +54,13 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main2);
 		currentPosition=(ImageView)findViewById(R.id.current_location);
+		currentPosition=(ImageView)findViewById(R.id.current_location);
+		zoomIn=(ImageView)findViewById(R.id.zoomin);
+		zoomOut=(ImageView)findViewById(R.id.zoomout);
+//		zoomIn.setVisibility(View.INVISIBLE);
+//		zoomOut.setVisibility(View.INVISIBLE);
+		zoomIn.setOnClickListener(this);
+		zoomOut.setOnClickListener(this);
 		cList = new ArrayList<Integer>();
 		currentPosition.setOnClickListener(this);
 		cList.add(Color.BLUE);
@@ -287,9 +294,14 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 
 	@Override
 	public void onClick(View view) {
-
-		FetchCordinates gpstracker=new FetchCordinates();
-		gpstracker.execute();
+		if(view.getId()==R.id.current_location) {
+			FetchCordinates gpstracker = new FetchCordinates();
+			gpstracker.execute();
+		}else if(view.getId()==R.id.zoomin){
+			mMapController.zoomIn();
+		}else if(view.getId()==R.id.zoomout){
+			mMapController.zoomOut();
+		}
 	}
 
 
@@ -321,9 +333,9 @@ public class MainActivity2 extends Activity implements View.OnClickListener {
 				//	Toast.makeText(MainActivity.this,"Network Mode:"+LocationManager.NETWORK_PROVIDER.toString(),Toast.LENGTH_SHORT).show();
 				mLocationManager.requestLocationUpdates(provider, 0, 0,
 						mVeggsterLocationListener);
-				Location currentL=mLocationManager.getLastKnownLocation(provider);
-				lati=currentL.getLatitude();
-				longi=currentL.getLongitude();
+//				Location currentL=mLocationManager.getLastKnownLocation(provider);
+//				lati=currentL.getLatitude();
+//				longi=currentL.getLongitude();
 
 			}else{
 				//	Toast.makeText(MainActivity.this,"GPS Mode",Toast.LENGTH_SHORT).show();

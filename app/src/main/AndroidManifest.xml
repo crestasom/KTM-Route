@@ -21,10 +21,14 @@
         android:allowBackup="true"
         android:icon="@drawable/busz"
         android:label="KTM Public Route"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyMaterialTheme">
         <activity
             android:name=".MainActivity"
             android:label="KTM Public Route" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Preferences"
+            android:theme="@android:style/Theme.Holo.Dialog" />
         <activity
             android:name=".RouteList"
             android:label="KTM Public Route" />
@@ -41,28 +45,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TestActivity"
-            android:label="@string/title_activity_test" />
-        <activity
-            android:name=".Details"
-            android:label="@string/title_activity_details"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar.MinWidth"></activity>
-
-        <activity android:name=".NearestStopSelection"></activity>
-
+            android:name=".DisclaimerActivity"
+            android:label="KTM Public Route"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar.MinWidth" />
+        <activity android:name=".NearestStopSelection" />
         <activity
             android:name=".HelpActivity"
-            android:label="@string/title_activity_help"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            >
-        </activity>
+            android:label="@string/title_activity_help"></activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            >
-        </activity>
-
+            android:label="@string/title_activity_about"></activity>
     </application>
 
 </manifest>

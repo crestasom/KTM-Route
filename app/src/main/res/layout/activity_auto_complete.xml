@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.crestaSom.KTMPublicRoute.AutoCompleteete" >
+    android:background="@color/colorAccent"
+    tools:context="com.crestaSom.KTMPublicRoute.AutoCompleteete">
 
     <com.crestaSom.autocomplete.CustomAutoCompleteView
         android:id="@+id/editDestination"
@@ -11,16 +12,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editSource"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/windowBackground"
         android:completionThreshold="3"
         android:ems="10"
+        android:foregroundGravity="center_vertical"
         android:gravity="center"
         android:hint="Destination"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:singleLine="true"
         android:textColor="#093F95"
-        android:textSize="20sp"
-        android:textStyle="italic" >
-    </com.crestaSom.autocomplete.CustomAutoCompleteView>
+        android:textColorHint="@color/colorAccent"
+        android:textSize="27sp"
+        android:textStyle="italic"></com.crestaSom.autocomplete.CustomAutoCompleteView>
 
     <com.crestaSom.autocomplete.CustomAutoCompleteView
         android:id="@+id/editSource"
@@ -29,16 +34,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/editDestination"
+        android:layout_marginTop="10dp"
+        android:background="@color/windowBackground"
         android:completionThreshold="3"
         android:ems="10"
         android:gravity="center"
         android:hint="Source"
         android:inputType="text"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:singleLine="true"
         android:textColor="#093F95"
-        android:textSize="20sp"
-        android:textStyle="italic" >
+        android:textColorHint="@color/colorAccent"
+        android:textSize="27sp"
+        android:textStyle="italic">
 
         <requestFocus />
     </com.crestaSom.autocomplete.CustomAutoCompleteView>
@@ -51,13 +60,13 @@
         android:layout_alignParentLeft="false"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/findRoute"
-        android:background="@drawable/display" >
+        android:background="@drawable/display">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="267dp"
             android:orientation="vertical"
-            android:paddingLeft="10dp" >
+            android:paddingLeft="10dp">
 
             <TextView
                 android:id="@+id/shortestRoute"
@@ -118,14 +127,17 @@
 
     <Button
         android:id="@+id/findRoute"
+        style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editDestination"
         android:layout_alignRight="@+id/editDestination"
         android:layout_below="@+id/editDestination"
+        android:layout_marginTop="10dp"
         android:layout_weight="2.05"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
+        android:background="#DAD7D7"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:text="Search Route"
         android:textColor="#093F95"
         android:textSize="35sp"
@@ -134,10 +146,10 @@
     <ImageView
         android:id="@+id/gpslocation"
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:paddingTop="3dp"
+        android:paddingTop="13dp"
         android:scaleType="fitXY"
         android:src="@drawable/gps" />
 
