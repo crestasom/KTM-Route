@@ -416,15 +416,15 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                     // System.out.println("\nRoute Distance:" + d);
 
                     display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
-                    display += " and cost Rs." + fare + "\n";
-                    display += "Available Routes:";
-                    for (int z : routeIds) {
-
-                        r = imp.getRoute(z);
-                        display += "\n" + r.getName();
-                        // System.out.println("Vehicle Type:"+r.getVehicleType());
-                        display += "\n(" + r.getVehicleType() + ")";
-                    }
+                    display += " and cost Rs." + fare;
+//                    display += "Available Routes:";
+//                    for (int z : routeIds) {
+//
+//                        r = imp.getRoute(z);
+//                        display += "\n" + r.getName();
+//                        // System.out.println("Vehicle Type:"+r.getVehicleType());
+//                        display += "\n(" + r.getVehicleType() + ")";
+//                    }
 
                     i++;
                 } else {
@@ -570,7 +570,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             Intent i = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
             i.putExtra("data", new DataWrapper(singleRouteVertex));
             i.putExtra("flag", false);
-            Log.d("data in search route",singleRouteVertex.toString());
+            Log.d("data in search route", singleRouteVertex.toString());
 
             // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
             // path);
@@ -889,7 +889,6 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
 
     }
-
 
 
     @Override

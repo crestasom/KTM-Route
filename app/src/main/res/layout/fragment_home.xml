@@ -1,8 +1,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/homeFrag"
     tools:context="com.crestaSom.KTMPublicRoute.Welcome">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/editSource"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/windowBackground"
             android:completionThreshold="3"
             android:ems="10"
@@ -31,7 +31,7 @@
             android:singleLine="true"
             android:textColor="#093F95"
             android:textColorHint="@color/colorAccent"
-            android:textSize="27sp"
+            android:textSize="20sp"
             android:textStyle="italic"></com.crestaSom.autocomplete.CustomAutoCompleteView>
 
         <com.crestaSom.autocomplete.CustomAutoCompleteView
@@ -53,7 +53,7 @@
             android:singleLine="true"
             android:textColor="#093F95"
             android:textColorHint="@color/colorAccent"
-            android:textSize="27sp"
+            android:textSize="20sp"
             android:textStyle="italic">
 
             <requestFocus />
@@ -80,10 +80,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="18dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@color/colorPrimary"
                     android:paddingLeft="10dp"
                     android:text="TextView"
-                    android:background="@color/colorPrimary"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
                     android:textStyle="bold|italic"
@@ -93,15 +93,15 @@
                     android:id="@+id/viewDetailRoute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="18dp"
-                    android:gravity="right"
-                    android:paddingRight="5dp"
+                    android:layout_marginRight="10dp"
                     android:background="@color/colorPrimary"
+                    android:gravity="right"
+                    android:paddingRight="0dp"
                     android:text="[View Detail]"
                     android:textColor="#32CD32"
                     android:textColorHighlight="#000000"
                     android:textSize="25sp"
-                    android:textStyle="bold|italic"
+                    android:textStyle="bold"
                     android:visibility="invisible" />
 
                 <TextView
@@ -109,10 +109,10 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginRight="18dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
-                    android:paddingLeft="10dp"
                     android:background="@color/colorPrimary"
+                    android:paddingLeft="10dp"
                     android:text="TextView"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="20sp"
@@ -123,11 +123,11 @@
                     android:id="@+id/viewSingleRoute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="18dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/colorPrimary"
                     android:gravity="right"
                     android:paddingRight="5dp"
                     android:text="[View Detail]"
-                    android:background="@color/colorPrimary"
                     android:textColor="#32CD32"
                     android:textColorHighlight="#000000"
                     android:textSize="25sp"
@@ -156,11 +156,11 @@
 
         <ImageView
             android:id="@+id/gpslocation"
-            android:layout_width="40dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:paddingTop="10dp"
+            android:paddingTop="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/gps" />
 

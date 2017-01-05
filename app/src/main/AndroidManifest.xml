@@ -51,10 +51,16 @@
         <activity android:name=".NearestStopSelection" />
         <activity
             android:name=".HelpActivity"
-            android:label="@string/title_activity_help"></activity>
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"></activity>
+            android:label="@string/title_activity_about" />
+        <activity
+            android:name=".DetailActivity"
+            android:label="Route Detail"
+            >
+
+        </activity>
     </application>
 
 </manifest>

@@ -12,6 +12,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,6 +107,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         Bundle bundle=getArguments();
         DataWrapper dw =(DataWrapper) bundle.getSerializable("vList");
         path=dw.getvList();
+        flag=bundle.getBoolean("flag");
         localPath=new ArrayList<>();
         localPath.addAll(path);
         Log.d("Vertex List",path.toString());
@@ -116,6 +119,9 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         for (Vertex v : path) {
             latCode += v.getLatCode();
             longCode += v.getLongCode();
+        }
+        if(flag){
+            currentPosition.setVisibility(View.INVISIBLE);
         }
 
         String display="";
@@ -205,8 +211,34 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.current_location) {
-            FetchCordinates gpstracker = new FetchCordinates();
+            String off = Settings.Secure.getString(getActivity().getApplicationContext().getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            if (off.isEmpty()) {
+                Toast.makeText(getActivity().getApplicationContext(), "Please Enable Location", Toast.LENGTH_SHORT).show();
+                Intent onGPS = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(onGPS);
+            }
+            final FetchCordinates gpstracker = new FetchCordinates();
             gpstracker.execute();
+
+            new CountDownTimer(10000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    // Do nothing
+                    Log.d("Time left:", millisUntilFinished + "");
+                }
+
+                public void onFinish() {
+                    Log.d("Status message", "Finish reached of Countdown");
+                    Log.d("async task status", gpstracker.getStatus().toString());
+                    if (gpstracker.getStatus() == AsyncTask.Status.RUNNING) {
+                        Log.d("Asnc Task canceal", "true");
+                        gpstracker.cancel(true);
+                    }
+                }
+
+            }.start();
+
+
         }else if(view.getId()==R.id.zoomin){
             mMapController.zoomIn();
         }else if(view.getId()==R.id.zoomout){
@@ -269,6 +301,31 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(String result) {
+
+            progDailog.dismiss();
+            //mMapView.getOverlays().remove(currentLocationOverlay);
+            ArrayList<OverlayItem> itemst=new ArrayList<OverlayItem>();
+            GeoPoint p1 = new GeoPoint(lati, longi);
+            mMapController.setCenter(p1);
+            itemst.add(new OverlayItem("Current Position", "", p1));
+            DefaultResourceProxyImpl resourceProxy = new CustomResourceProxy1(getActivity());
+            currentLocationOverlay = new ItemizedIconOverlay<OverlayItem>(itemst,
+                    new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                        @Override
+                        public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                            Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                            return true;
+
+                        }
+
+                        @Override
+                        public boolean onItemLongPress(final int index, final OverlayItem item) {
+                            return true;
+                        }
+                    }, resourceProxy);
+
+            mMapView.getOverlays().add(currentLocationOverlay);
+            mMapView.invalidate();
 //            progDailog.dismiss();
 //            Log.d("coordinates", lati + longi + "");
 //            Queue<Vertex> sourceV = imp.getNearestStop(lati, longi);

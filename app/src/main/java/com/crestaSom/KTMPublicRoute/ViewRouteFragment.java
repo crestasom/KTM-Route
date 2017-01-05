@@ -79,6 +79,7 @@ public class ViewRouteFragment extends Fragment {
                 i.putExtra("data", new DataWrapper(vLists));
                 i.putExtra("flag", true);
                 i.putExtra("routeName", routes.get(position).getName());
+                i.putExtra("vehicleType", routes.get(position).getVehicleType());
                 // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>) path);
                 startActivity(i);
 //							int rid = routeId.get(position);

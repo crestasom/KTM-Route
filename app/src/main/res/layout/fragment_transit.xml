@@ -17,24 +17,15 @@
         android:background="@drawable/display">
 
         <LinearLayout
+            android:id="@+id/transitDetail"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@color/detailBackground"
             android:orientation="vertical"
-            android:paddingLeft="10dp">
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
 
-            <TextView
-                android:id="@+id/displayFragmentText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="18dp"
-                android:paddingLeft="10dp"
-                android:text="TextView"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp"
-                android:textStyle="bold|italic"
-                 />
         </LinearLayout>
     </ScrollView>
 

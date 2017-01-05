@@ -24,7 +24,7 @@ public class DetailActivity extends AppCompatActivity {
 
     List<Vertex> path;
     Boolean flag;
-    String rName="";
+    String rName="",vehicleType="";
 
 
     @Override
@@ -37,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
         flag=getIntent().getBooleanExtra("flag", false);
         if(flag){
             rName=getIntent().getStringExtra("routeName");
+            vehicleType=getIntent().getStringExtra("vehicleType");
         }
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -66,6 +67,7 @@ public class DetailActivity extends AppCompatActivity {
         bundle.putBoolean("flag",flag);
         if(flag){
             bundle.putString("routeName",rName);
+            bundle.putString("vehicleType",vehicleType);
         }
         //TransitFragment transitFragment=new TransitFragment();
         fragment.setArguments(bundle);
