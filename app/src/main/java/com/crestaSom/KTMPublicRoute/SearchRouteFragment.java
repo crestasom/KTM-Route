@@ -567,7 +567,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             startActivity(i);
 
         } else if (v.getId() == R.id.viewSingleRoute) {
-            Intent i = new Intent(getActivity().getApplicationContext(), MainActivity2.class);
+            Intent i = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
             i.putExtra("data", new DataWrapper(singleRouteVertex));
             i.putExtra("flag", false);
             Log.d("data in search route", singleRouteVertex.toString());

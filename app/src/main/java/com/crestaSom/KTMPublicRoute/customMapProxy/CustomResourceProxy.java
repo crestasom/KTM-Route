@@ -1,4 +1,4 @@
-package com.crestaSom.KTMPublicRoute;
+package com.crestaSom.KTMPublicRoute.customMapProxy;
 
 import org.osmdroid.DefaultResourceProxyImpl;
 
@@ -7,10 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 
-public class CustomResourceProxy1 extends DefaultResourceProxyImpl {
+import com.crestaSom.KTMPublicRoute.R;
+
+public class CustomResourceProxy extends DefaultResourceProxyImpl {
 
     private final Context mContext;
-    public CustomResourceProxy1(Context pContext) {
+    public CustomResourceProxy(Context pContext) {
          super(pContext);
       mContext = pContext;
     }
@@ -20,10 +22,10 @@ public class CustomResourceProxy1 extends DefaultResourceProxyImpl {
       switch (pResId){
               case person:
                    //your image goes here!!!
-                   return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.person);
+                   return BitmapFactory.decodeResource(mContext.getResources(), R.drawable.icons);
 
          }
-      return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.person);
+      return BitmapFactory.decodeResource(mContext.getResources(),R.drawable.icons);
          //return super.getBitmap(pResId);
   }
 
@@ -32,7 +34,7 @@ public class CustomResourceProxy1 extends DefaultResourceProxyImpl {
       switch (pResId){
               case person:
                    //your image goes here!!!
-                   return mContext.getResources().getDrawable(R.drawable.icons_cpy);
+                   return mContext.getResources().getDrawable(R.drawable.icons);
          }
          return super.getDrawable(pResId);
   }

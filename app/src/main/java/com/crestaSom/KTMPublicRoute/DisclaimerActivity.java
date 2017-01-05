@@ -2,7 +2,6 @@ package com.crestaSom.KTMPublicRoute;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class DisclaimerActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_refractor);
+		setContentView(R.layout.activity_disclaimer);
 		searchBtn = (Button) findViewById(R.id.button);
 
 		searchBtn.setOnClickListener(new View.OnClickListener() {

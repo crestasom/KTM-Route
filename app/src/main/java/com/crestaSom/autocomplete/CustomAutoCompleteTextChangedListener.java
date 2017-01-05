@@ -2,9 +2,8 @@ package com.crestaSom.autocomplete;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.crestaSom.KTMPublicRoute.MainActivity;
+
 import com.crestaSom.KTMPublicRoute.SearchRouteFragment;
-import com.crestaSom.KTMPublicRoute.Welcome;
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Vertex;
 

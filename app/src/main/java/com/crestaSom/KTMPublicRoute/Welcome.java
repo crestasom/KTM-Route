@@ -20,7 +20,6 @@ import com.crestaSom.autocomplete.CustomAutoCompleteView;
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Vertex;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -45,7 +44,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import viewPageAdapter.ViewPagerAdapter;
+import com.crestaSom.viewPageAdapter.ViewPagerAdapter;
 
 public class Welcome extends AppCompatActivity implements OnClickListener {
 
@@ -169,16 +168,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        if (v.getId() == R.id.searchRoute) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            // finish();
-        }
-        if (v.getId() == R.id.viewRoute) {
-            Intent i = new Intent(getApplicationContext(), RouteList.class);
-            startActivity(i);
-            // finish();
-        }
+
     }
 
     private void setupTabIcons() {

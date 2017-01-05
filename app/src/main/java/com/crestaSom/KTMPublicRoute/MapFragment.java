@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crestaSom.KTMPublicRoute.customMapProxy.CustomResourceProxy;
+import com.crestaSom.KTMPublicRoute.customMapProxy.CustomResourceProxy1;
 import com.crestaSom.implementation.KtmPublicRoute;
 import com.crestaSom.model.Vertex;
 
@@ -41,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 
 /**
