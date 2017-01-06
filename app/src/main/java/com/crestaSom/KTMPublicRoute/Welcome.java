@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.crestaSom.KTMPublicRoute.data.JSONParser;
 import com.crestaSom.autocomplete.CustomAutoCompleteView;
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Vertex;
@@ -58,6 +59,8 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     JSONParser jsonParser = new JSONParser();
     private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
     private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
+//private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
+//    private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
     //	private static String urlCheckTail = "/collegeDatabase/admin.php?url=version/checkNew";
 //	private static String urlTail = "/collegeDatabase/admin.php?url=route/findNewRecords";
 //	private static String urlCheck,url;

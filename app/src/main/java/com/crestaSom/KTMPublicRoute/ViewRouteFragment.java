@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.crestaSom.KTMPublicRoute.data.DataWrapper;
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Route;
 import com.crestaSom.model.Vertex;
@@ -38,7 +39,7 @@ public class ViewRouteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_new, container, false);
+        View view=inflater.inflate(R.layout.fragment_view_route, container, false);
         routeList=(ListView)view.findViewById(R.id.list);
         db=new Database(getActivity());
         routes=db.getAllRoute();

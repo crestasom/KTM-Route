@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -21,25 +21,25 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crestaSom.autocomplete.CustomAutoCompleteTextChangedListener;
+import com.crestaSom.KTMPublicRoute.data.DataWrapper;
 import com.crestaSom.autocomplete.CustomAutoCompleteView;
 import com.crestaSom.database.Database;
 import com.crestaSom.implementation.KtmPublicRoute;
@@ -49,11 +49,13 @@ import com.crestaSom.model.Vertex;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 
 /**
@@ -61,7 +63,7 @@ import java.util.Queue;
  */
 public class SearchRouteFragment extends Fragment implements View.OnClickListener {
 
-
+    double []distanceList;
     SharedPreferences prefs;
     ProgressDialog dialog;
     List<Vertex> path;
@@ -88,12 +90,12 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     // adapter for auto-complete
     public ArrayAdapter<String> myAdapter;
 
-    ImageView gpsToggle;
+    ImageView gpsToggle,clearSource,clearDestination;
     int gpsFlag = 0;
     // just to add some initial value
     public List<String> item = new ArrayList<String>();
     public List<Integer> itemId = new ArrayList<Integer>();
-    TextView tv, singleRoute, ViewDetail, ViewDetailSingle;
+    TextView tv, singleRoute, ViewDetail, ViewDetailSingle, displayTextView;
     EditText source1, dest;
     Button submit;
     Button b, next;
@@ -103,6 +105,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     ScrollView sv;
     LayoutInflater inf;
     ViewGroup cont;
+    LinearLayout shortestRouteLayout, singleRouteLayout,singleRouteLayoutMain;
 
 
     public SearchRouteFragment() {
@@ -111,7 +114,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
 
     public void setUIElements() {
-        v = inf.inflate(R.layout.fragment_home, cont, false);
+        v = inf.inflate(R.layout.fragment_search_route, cont, false);
         source = (CustomAutoCompleteView) v.findViewById(R.id.editSource);
         destination = (CustomAutoCompleteView) v.findViewById(R.id.editDestination);
         myAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, item);
@@ -123,7 +126,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         inf = inflater;
         cont = container;
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_search_route, container, false);
         // Inflate the layout for this fragment
         path = new LinkedList<Vertex>();
         path1 = new ArrayList<Vertex>();
@@ -131,6 +134,10 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
         startFlag = sharedPref.getInt(KEY, -1);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         sv = (ScrollView) v.findViewById(R.id.scrollView1);
+        clearSource=(ImageView)v.findViewById(R.id.clearSource);
+        clearSource.setOnClickListener(this);
+        clearDestination=(ImageView)v.findViewById(R.id.clearDestination);
+        clearDestination.setOnClickListener(this);
         // viewMap = (Button) findViewById(R.id.submit);
         // viewMap.setOnClickListener(this);
 
@@ -140,11 +147,12 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
             submit = (Button) v.findViewById(R.id.findRoute);
             submit.setOnClickListener(this);
-            tv = (TextView) v.findViewById(R.id.shortestRoute);
-            singleRoute = (TextView) v.findViewById(R.id.singleRoute);
+            shortestRouteLayout = (LinearLayout) v.findViewById(R.id.shortestRoute);
+            singleRouteLayout = (LinearLayout) v.findViewById(R.id.singleRoute);
             ViewDetail = (TextView) v.findViewById(R.id.viewDetailRoute);
             ViewDetail.setOnClickListener(this);
             ViewDetailSingle = (TextView) v.findViewById(R.id.viewSingleRoute);
+            singleRouteLayoutMain=(LinearLayout)v.findViewById(R.id.singleRouteDisplay);
             ViewDetailSingle.setOnClickListener(this);
 
             // set our adapter
@@ -174,39 +182,17 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     destination.requestFocus();
-                    // TODO Auto-generated method stub
-                    // source.postDelayed(new Runnable() {
-                    // @Override
-                    // public void run() {
-                    // source.showDropDown();
-                    // }
-                    // },100);
-                    // source.setText(source.getText().toString());
-                    // source.setSelection(source.getText().length());
-                    // source.dismissDropDown();
-                    // Toast.makeText(MainActivity.this,
-                    // parent.getItemAtPosition(position).toString(),
-                    // Toast.LENGTH_SHORT)
-                    // .show();
-                    // srcId = itemId.get(position);
+
 
                 }
             });
-            // source.post(new Runnable() {
-            // public void run() {
-            // source.dismissDropDown();
-            // }
-            // });
-            // //source.setId(1);
-            // source.setTag("source");
+
 
             destination = (CustomAutoCompleteView) v.findViewById(R.id.editDestination);
 
             // add the listener so it will tries to suggest while the user types
             destination.addTextChangedListener(new CustomAutoCompleteTextChangedListener(getActivity().getApplicationContext(), destination.getId()));
             destination.setDropDownBackgroundResource(R.color.dropDownBackground);
-            //destination.setDropDownBackgroundResource(R.color.colorPrimary);
-            //destination.setTextColor(Color.BLUE);
             destination.setAdapter(myAdapter);
             destination.setOnKeyListener(new View.OnKeyListener() {
 
@@ -223,13 +209,6 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     submit.requestFocus();
                     // TODO Auto-generated method stub
-                    // destination.dismissDropDown();
-                    // Toast.makeText(MainActivity.this,
-                    // parent.getItemAtPosition(position).toString(),
-                    // Toast.LENGTH_SHORT)
-                    // .show();
-                    // destId = itemId.get(position);
-
                 }
             });
 
@@ -268,31 +247,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                             }
 
                         }.start();
-//						getNearestLocation();
-                        // // Log.d("Lat1,Long1", "" + lat + "\t" + longi);
-//						if (lat != 0.0 || longi != 0.0) {
-//                            Queue<Vertex>  sourceV = imp.getNearestStop(lat, longi);
-//							//source.setText(sourceV.getName());
-//                            List<Vertex> vList=new ArrayList<Vertex>();
-//                            vList.add(sourceV.poll());
-//                            vList.add(sourceV.poll());
-//                            vList.add(sourceV.poll());
-//							vList.add(sourceV.poll());
-//							Log.d("vertex", vList.toString());
-//                            Intent i=new Intent(MainActivity.this,NearestStopSelection.class);
-//                            i.putExtra("data", new DataWrapper(vList));
-//                            startActivityForResult(i,100);
 //
-//						} else {
-//							// gps.setChecked(false);
-//							flag = 0;
-//							Toast.makeText(getApplicationContext(), "Error Detecting Current Location",
-//									Toast.LENGTH_LONG).show();
-//							source.requestFocus();
-//							InputMethodManager imm = (InputMethodManager) getSystemService(
-//									Context.INPUT_METHOD_SERVICE);
-//							imm.showSoftInput(destination, 0);
-//						}
                     } else {
                         gpsFlag = 0;
                         source.setText("");
@@ -315,36 +270,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     }
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getActivity().getApplicationContext().getMenuInflater().inflate(R.menu.auto_complete, menu);
-//        menu.add(0, 2, 0, "About");
-//        menu.add(0, 3, 0, "Help");
-//        menu.add(0,4,0,"Setting");
-//        return true;
-//    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == 3) {
-            startActivity(new Intent(getActivity().getApplicationContext(),
-                    HelpActivity.class));
-        } else if (id == 2) {
-            startActivity(new Intent(getActivity().getApplicationContext(),
-                    AboutActivity.class));
-        } else if (id == 4) {
-            startActivity(new Intent(getActivity().getApplicationContext(),
-                    SettingsActivity.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public String findShortestPath(int srcId, int destId) {
+
         String display = "";
         Database db = new Database(getActivity().getApplicationContext());
         new ArrayList<Route>();
@@ -352,9 +279,6 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
         new ArrayList<Edge>();
         new ArrayList<Vertex>();
 
-        //
-        //
-        //
         Vertex source = null, dest = null;
         source = db.getVertex(srcId);
         dest = db.getVertex(destId);
@@ -364,148 +288,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
         path1.clear();
         path1.addAll(path);
 
-        List<Vertex> vertexList = new ArrayList<Vertex>();
-        Route r;
-        int i = 0;
-        int totalCost = 0;
-        double totalDist = 0;
-        List<Integer> routeIds = new ArrayList<Integer>();
-        // Map<Integer,List<Vertex>> pathRoute;
-        Map<List<Integer>, List<Vertex>> pathRoute;
-        i = 1;
-        display += "Shortest Route:\n";
-        while (!path.isEmpty()) {
-            if (path.size() == 1) {
-                break;
-            }
-            pathRoute = imp.findRoutePath(path);
-            // Log.d("path", "" + pathRoute);
-
-            // Iterator<Map.Entry<Integer, List<Vertex>>> it =
-            // pathRoute.entrySet()
-            // .iterator();
-
-            Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
-            while (it.hasNext()) {
-                // Map.Entry<Integer, List<Vertex>> pair=(Map.Entry<Integer,
-                // List<Vertex>>) it
-                // .next();
-                Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
-
-                routeIds = pair.getKey();
-                // Log.d("Mapped Routes", "Mapped Routes" + routeIds);
-                // System.out.println("Mapped Routes" + routeIds);
-
-
-                vertexList = pair.getValue();
-                // display += "\nRoute" + i + ":" + r.getName();
-                // System.out.println("Vehicle Type:"+r.getVehicleType());
-                // display += "\nVehicle Type:" + r.getVehicleType();
-                // for (Vertex v : vertexList) {
-                // System.out.println(v);
-                // display += "\n" + v.toString();
-                // }
-                double d = imp.getRouteDistance(vertexList);
-                if (distMin < d) {
-                    display += "Travel " + i;
-                    display += "\nTake a ride from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
-
-                    int fare = imp.getRouteCost(d);
-                    totalCost += fare;
-                    totalDist += d;
-                    // System.out.println("\nRoute Distance:" + d);
-
-                    display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
-                    display += " and cost Rs." + fare;
-//                    display += "Available Routes:";
-//                    for (int z : routeIds) {
-//
-//                        r = imp.getRoute(z);
-//                        display += "\n" + r.getName();
-//                        // System.out.println("Vehicle Type:"+r.getVehicleType());
-//                        display += "\n(" + r.getVehicleType() + ")";
-//                    }
-
-                    i++;
-                } else {
-                    display += "Travel " + i;
-                    display += "\nWalk from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
-
-                    //int fare = imp.getRouteCost(d);
-                    //totalCost += fare;
-                    totalDist += d;
-                    // System.out.println("\nRoute Distance:" + d);
-
-                    display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
-                    //display += " and cost Rs." + fare + "\n";
-//					display += "Available Routes:";
-//					for (int z : routeIds) {
-//
-//						r = imp.getRoute(z);
-//						display += "\n" + r.getName();
-//						// System.out.println("Vehicle Type:"+r.getVehicleType());
-//						display += "\n(" + r.getVehicleType() + ")";
-//					}
-
-                    i++;
-                }
-                // i++;
-                display += "\n\n";
-
-            }
-        }
-        display += "\nTotal Distance:" + new DecimalFormat("#.##").format(totalDist) + " km";
-        display += "\nTotal Cost:Rs. " + totalCost;
-        singleRouteVertex = new ArrayList<Vertex>();
-        displaySingle = "";
-        singleRouteVertex = imp.getSingleRoute(source, dest);
-        if (!singleRouteVertex.isEmpty() && !singleRouteVertex.equals(path1)) {
-
-            displaySingle += "\n\n Single Route Detected.";
-            displaySingle += "\nTake a ride from " + source.toString() + " to " + dest.toString();
-
-//			displaySingle+="Available Routes:";
-            Route singleRoute = imp.getSingleRoute();
-//			displaySingle += "\n Route:" + singleRoute.getName();
-//			displaySingle += "\n Vehicle Type:" + singleRoute.getVehicleType();
-            for (Vertex v : singleRouteVertex) {
-                // display+="\n"+v;
-            }
-            double d1 = imp.getRouteDistance(singleRouteVertex);
-
-            int fare1 = imp.getRouteCost(d1);
-            displaySingle += " with distance " + new DecimalFormat("#.##").format(d1) + " km";
-            displaySingle += " and cost Rs. " + fare1 + "\n";
-//			displaySingle += "\nRoute Distance:" + new DecimalFormat("#.##").format(d1) + "\n";
-//			displaySingle += "Route Cost:" + fare1 + "\n";
-            displaySingle += "Available Route:";
-            displaySingle += "\n" + singleRoute.getName();
-            displaySingle += "\n (" + singleRoute.getVehicleType() + ")";
-        }
-
-        // System.out.println("Path1:"+path1);
-        // System.out.println("Shortest Path detected:");
-        // for(int i=0;i<size;i++){
-        //
-        // }
-        //
-        // if (path != null) {
-        // for (Vertex nextVertex : path) {
-        // System.out.println(nextVertex.toString() + "\n");
-        // display += nextVertex.toString() + "\n";
-        // }
-        // System.out
-        // .println("\nTotal Path Cost is " + imp.getTotalDistance());
-        // display += "\nTotal Path Cost is " + imp.getTotalDistance();
-        // // // System.out.println("Total iteration no is " + imp.getI());
-        // } else {
-        // display += "No Path exists";
-        // System.out.println("No Path exists");
-        // }
         return display;
-        // tv.setText(display);
 
-        // }
 
     }
 
@@ -547,10 +331,11 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             } else {
                 distMin = Double.parseDouble(prefs.getString("walkingDist", "0.0"));
                 sv.smoothScrollTo(0, 0);
-                tv.setVisibility(View.INVISIBLE);
-                singleRoute.setVisibility(View.INVISIBLE);
+                sv.setVisibility(View.GONE);
+                ViewDetailSingle.setVisibility(View.GONE);
+                singleRouteLayout.setVisibility(View.GONE);
+                singleRouteLayoutMain.setVisibility(View.GONE);
                 ViewDetail.setVisibility(View.INVISIBLE);
-                ViewDetailSingle.setVisibility(View.INVISIBLE);
                 InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 srcId = src.getId();
@@ -562,6 +347,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             Intent i = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
             i.putExtra("data", new DataWrapper(path1));
             i.putExtra("flag", false);
+            i.putExtra("distanceList",distanceList);
+          //  i.putExtra("distanceList",distanceList);
             // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
             // path);
             startActivity(i);
@@ -575,6 +362,12 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
             // path);
             startActivity(i);
+        }else if(v.getId()==R.id.clearSource){
+            source.setText("");
+            source.setError(null);
+        }else if(v.getId()==R.id.clearDestination){
+            destination.setText("");
+            destination.setError(null);
         }
 
     }
@@ -603,7 +396,11 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             pDialog = new ProgressDialog(getActivity());
             pDialog.setIcon(R.drawable.busz);
             pDialog.setMessage("Detecting Path");
+            //findShortestPath(srcId,destId);
+            shortestRouteLayout.removeAllViews();
+            singleRouteLayout.removeAllViews();
             pDialog.show();
+
             // dialog = MyCustomProgressDialog.ctor(getApplicationContext());
             // dialog.show();
         }
@@ -619,24 +416,161 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
         @Override
         protected void onPostExecute(String file_url) {
             // dialog.dismiss();
-            pDialog.dismiss();
-            tv.setVisibility(View.VISIBLE);
-            ViewDetail.setVisibility(View.VISIBLE);
-            tv.setText(display);
-            if (!displaySingle.equals("")) {
-                singleRoute.setVisibility(View.VISIBLE);
-                ViewDetailSingle.setVisibility(View.VISIBLE);
-                singleRoute.setText(displaySingle);
-            } else {
-                singleRoute.setVisibility(View.INVISIBLE);
-                ViewDetailSingle.setVisibility(View.INVISIBLE);
-                displaySingle = "";
-            }
-            // if (flag == 1)
-            // Toast.makeText(MainActivity.this,
-            // "Please Enter Correct informations", Toast.LENGTH_LONG)
-            // .show();
 
+            List<Vertex> vertexList = new ArrayList<Vertex>();
+            ViewDetail.setVisibility(View.VISIBLE);
+            sv.setVisibility(View.VISIBLE);
+            Route r;
+            Database db = new Database(getActivity());
+            Vertex sourceP = db.getVertex(srcId);
+            Vertex destP = db.getVertex(destId);
+            int i = 0;
+            int totalCost = 0;
+            double totalDist = 0;
+            List<Integer> routeIds = new ArrayList<Integer>();
+            int pixels;
+            final float scale = getActivity().getResources().getDisplayMetrics().density;
+            Map<List<Integer>, List<Vertex>> pathRoute;
+            i = 1;
+            int temp=0;
+            display += "Shortest Route:";
+            singleRoute = new TextView(getActivity());
+            singleRoute.setText(display);
+            singleRoute.setPadding(2,10,2,0);
+            singleRoute.setGravity(Gravity.CENTER_HORIZONTAL);
+            singleRoute.setTypeface(Typeface.DEFAULT_BOLD);
+            pixels = (int) (15 * scale + 0.5f);
+            singleRoute.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            singleRoute.setTextSize(pixels);
+            shortestRouteLayout.addView(singleRoute);
+            distanceList=new double[10];
+            while (!path.isEmpty()) {
+                if (path.size() == 1) {
+                    break;
+                }
+                pathRoute = imp.findRoutePath(path);
+                Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
+
+
+                while (it.hasNext()) {
+                    Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
+
+                    routeIds = pair.getKey();
+
+                    vertexList = pair.getValue();
+                    display = "";
+                    display += "Travel " + i;
+                    singleRoute = new TextView(getActivity());
+                    singleRoute.setText(display);
+                    pixels = (int) (12 * scale + 0.5f);
+                    singleRoute.setTextSize(pixels);
+                    singleRoute.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    singleRoute.setPadding(2,0,2,0);
+                    shortestRouteLayout.addView(singleRoute);
+                    double d = imp.getRouteDistance(vertexList);
+                    Log.d("temp",temp+"");
+                    Log.d("d from search",d+"");
+                    distanceList[temp++]=d;
+
+                    if (distMin < d) {
+
+
+
+                        display = "";
+                        display += "Take a ride from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
+                        int fare = imp.getRouteCost(d);
+                        totalCost += fare;
+                        totalDist += d;
+                        display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
+                        display += " and cost Rs." + fare;
+                        i++;
+                    } else {
+                        display = "";
+                        display += "Walk from " + vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
+                        totalDist += d;
+
+                        display += " with distance " + new DecimalFormat("#.##").format(d) + " km";
+                        i++;
+                    }
+                    display += "\n";
+                    singleRoute = new TextView(getActivity());
+                    singleRoute.setText(display);
+                    pixels = (int) (8 * scale + 0.5f);
+                    singleRoute.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                    singleRoute.setTextSize(pixels);
+                    singleRoute.setPadding(2,0,2,0);
+                    shortestRouteLayout.addView(singleRoute);
+                }
+            }
+            display = "";
+            display += "Total Distance:" + new DecimalFormat("#.##").format(totalDist) + " km";
+            display += "\nTotal Cost:Rs. " + totalCost;
+            singleRoute = new TextView(getActivity());
+            singleRoute.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            singleRoute.setText(display);
+            singleRoute.setTypeface(Typeface.DEFAULT_BOLD);
+            pixels = (int) (8 * scale + 0.5f);
+            singleRoute.setTextSize(pixels);
+            singleRoute.setPadding(2,0,2,0);
+            shortestRouteLayout.addView(singleRoute);
+
+            singleRouteVertex = new ArrayList<Vertex>();
+            displaySingle = "";
+            singleRouteVertex = imp.getSingleRoute(sourceP, destP);
+            if (!singleRouteVertex.isEmpty() && !singleRouteVertex.equals(path1)) {
+                singleRouteLayout.setVisibility(View.VISIBLE);
+                ViewDetailSingle.setVisibility(View.VISIBLE);
+                singleRouteLayoutMain.setVisibility(View.VISIBLE);
+                displaySingle += "Direct Route:";
+                singleRoute = new TextView(getActivity());
+                singleRoute.setGravity(Gravity.CENTER_HORIZONTAL);
+                singleRoute.setTypeface(Typeface.DEFAULT_BOLD);
+                singleRoute.setText(displaySingle);
+                pixels = (int) (15 * scale + 0.5f);
+                singleRoute.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                singleRoute.setTextSize(pixels);
+                singleRoute.setPadding(2,2,2,0);
+                singleRouteLayout.addView(singleRoute);
+
+                displaySingle = "";
+                displaySingle += "Take a ride from " + sourceP.toString() + " to " + destP.toString();
+                Route singleRoute = imp.getSingleRoute();
+                double d1 = imp.getRouteDistance(singleRouteVertex);
+                int fare1 = imp.getRouteCost(d1);
+                displaySingle += " with distance " + new DecimalFormat("#.##").format(d1) + " km";
+                displaySingle += " and cost Rs. " + fare1 + "\n";
+                displayTextView = new TextView(getActivity());
+                displayTextView.setText(displaySingle);
+                displayTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                pixels = (int) (8 * scale + 0.5f);
+                displayTextView.setTextSize(pixels);
+                displayTextView.setPadding(2,0,2,0);
+                singleRouteLayout.addView(displayTextView);
+
+                displaySingle = "Available Route:";
+                displayTextView = new TextView(getActivity());
+                displayTextView.setText(displaySingle);
+                displayTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                displayTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                pixels = (int) (12 * scale + 0.5f);
+                displayTextView.setTextSize(pixels);
+                displayTextView.setPadding(2,0,2,0);
+                singleRouteLayout.addView(displayTextView);
+
+                displaySingle = "";
+                displaySingle += singleRoute.getName();
+                displaySingle += "(" + singleRoute.getVehicleType() + ")";
+
+                displayTextView = new TextView(getActivity());
+                displayTextView.setText(displaySingle);
+                displayTextView.setTypeface(Typeface.DEFAULT_BOLD);
+                displayTextView.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                pixels = (int) (8 * scale + 0.5f);
+                displayTextView.setTextSize(pixels);
+                displayTextView.setPadding(2,0,2,0);
+                singleRouteLayout.addView(displayTextView);
+            }
+            pDialog.dismiss();
         }
 
     }

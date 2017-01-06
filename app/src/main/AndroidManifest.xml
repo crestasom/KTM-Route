@@ -23,18 +23,9 @@
         android:label="KTM Public Route"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="KTM Public Route" />
-        <activity
             android:name=".SettingsActivity"
             android:label="Preferences"
             android:theme="@android:style/Theme.Holo.Dialog" />
-        <activity
-            android:name=".RouteList"
-            android:label="KTM Public Route" />
-        <activity
-            android:name=".MainActivity2"
-            android:label="KTM Public Route" />
         <activity
             android:name=".Welcome"
             android:label="@string/title_activity_auto_complete">

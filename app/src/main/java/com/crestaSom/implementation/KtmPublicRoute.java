@@ -13,6 +13,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.crestaSom.database.Database;
 import com.crestaSom.model.Edge;
@@ -1012,6 +1013,7 @@ public class KtmPublicRoute {
 		temp.addAll(stops);
 		while (temp.size() != 1) {
 			routeDistance += getEdgeDistance(temp.get(0), temp.get(1));
+		//	Log.d("route distance",routeDistance+"");
 			temp.remove(0);
 		}
 		return routeDistance;
@@ -1019,17 +1021,22 @@ public class KtmPublicRoute {
 
 	public Double getEdgeDistance(Vertex source, Vertex dest) {
 		double d = 0.0;
+		//Log.d("check point"," In getEdgeDistance");
+		//Log.d("edges",allEdges.toString());
+		List<Edge> allEdgeTemp=new ArrayList<>();
+
 		for (Edge e1 : allEdges) {
 			if ((e1.getSource().equals(source) && e1.getDestination().equals(
 					dest))) {
 				// System.out.println(e1);
 				d = e1.getWeight();
+			//	Log.d("Distance from getEdge:",e1.getName()+d+"");
 				break;
 
 			} else if ((e1.getSource().equals(dest) && e1.getDestination()
 					.equals(source))) {
 				d = e1.getWeight();
-
+			//	Log.d("Distance from getEdge:",e1.getName()+d+"");
 				break;
 			}
 

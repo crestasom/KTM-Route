@@ -1,37 +1,46 @@
 package com.crestaSom.KTMPublicRoute;
 
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crestaSom.KTMPublicRoute.data.DataWrapper;
+import com.crestaSom.database.Database;
 import com.crestaSom.implementation.KtmPublicRoute;
+import com.crestaSom.model.Edge;
 import com.crestaSom.model.Route;
 import com.crestaSom.model.Vertex;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TransitFragment extends Fragment {
-    List<Vertex> path,pathTemp;
+    List<Vertex> path, pathTemp;
+    double[] distanceList;
     Boolean flag;
     TextView tv;
     TextView disp;
-    LinearLayout displayTransit;
-    String vehicleType="";
+    LinearLayout displayTransit, dyLayout;
+    String vehicleType = "";
+    SharedPreferences prefs;
 
     public TransitFragment() {
         // Required empty public constructor
@@ -46,10 +55,18 @@ public class TransitFragment extends Fragment {
         Bundle bundle = getArguments();
         //tv = (TextView) view.findViewById(R.id.displayFragmentText);
         KtmPublicRoute imp = new KtmPublicRoute(getActivity());
-        displayTransit=(LinearLayout)view.findViewById(R.id.transitDetail);
+//        Database db=new Database(getActivity());
+//        List<Edge> edgeList=new ArrayList<>();
+//        edgeList=db.getAllEdges();
+//        Set<Edge> edgeSet=new HashSet<>();
+//        for(Edge e:edgeList){
+//            edgeSet.add(e);
+//        }
+//        imp.setAllEdges(edgeSet);
+        displayTransit = (LinearLayout) view.findViewById(R.id.transitDetail);
         DataWrapper dw = (DataWrapper) bundle.getSerializable("vList");
         pathTemp = dw.getvList();
-        path=new ArrayList<>();
+        path = new ArrayList<>();
         path.addAll(pathTemp);
         flag = bundle.getBoolean("flag");
         String display = "";
@@ -63,99 +80,125 @@ public class TransitFragment extends Fragment {
         i = 1;
         int pixels;
         final float scale = this.getResources().getDisplayMetrics().density;
+
         if (!flag) {
+            distanceList = new double[10];
+            distanceList = bundle.getDoubleArray("distanceList");
+            //Log.d("distanceList",distanceList.toString());
             while (!path.isEmpty()) {
                 if (path.size() == 1) {
                     break;
                 }
+
                 pathRoute = imp.findRoutePath(path);
                 Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
                 while (it.hasNext()) {
-                    display="";
+
+                    dyLayout = new LinearLayout(getActivity());
+                    dyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                    dyLayout.setBackgroundResource(R.drawable.rounded_layout);
+                    dyLayout.setOrientation(LinearLayout.VERTICAL);
+
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    params.setMargins(0, 0, 0, 20);
+                    dyLayout.setLayoutParams(params);
+                    display = "";
                     Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
                     routeIds = pair.getKey();
                     vertexList = pair.getValue();
-                    double d = imp.getRouteDistance(vertexList);
-                    display += "Travel " + i+": ";
+                   // Log.d("path", vertexList.toString());
+                    //double d = imp.getRouteDistance(vertexList);
+                    prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+                    double distMin = Double.parseDouble(prefs.getString("walkingDist", "0.0"));
+
+                    display += "Travel " + i + ": ";
                     display += vertexList.get(0) + " to " + vertexList.get(vertexList.size() - 1);
 
-                    disp=new TextView(getActivity());
+                    disp = new TextView(getActivity());
                     disp.setText(display);
                     pixels = (int) (12 * scale + 0.5f);
                     disp.setTextSize(pixels);
-                    disp.setBackgroundColor(Color.WHITE);
+                    disp.setPadding(2, 0, 2, 0);
+                    //disp.setBackgroundColor(Color.WHITE);
                     disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
                     //disp.setTextAppearance(R.style.displayTextStyleBold);
                     disp.setTypeface(Typeface.DEFAULT_BOLD);
-                    displayTransit.addView(disp);
-                    display="";
-
-                    disp=new TextView(getActivity());
+                    dyLayout.addView(disp);
+                    //displayTransit.addView(disp);
+                    display = "";
+                    disp = new TextView(getActivity());
                     disp.setText("Transit Stops:");
                     pixels = (int) (10 * scale + 0.5f);
                     disp.setTextSize(pixels);
                     disp.setTypeface(Typeface.DEFAULT_BOLD);
-                    disp.setBackgroundColor(Color.WHITE);
+                    //disp.setBackgroundColor(Color.WHITE);
+                    disp.setPadding(2, 0, 2, 0);
                     disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    displayTransit.addView(disp);
-                    display="";
-                    int cnt=0;
+                    dyLayout.addView(disp);
+                    display = "";
+                    int cnt = 0;
                     for (Vertex v : vertexList) {
-                        display += "-> "+v.getName() ;
+                        display += "-> " + v.getName();
                         cnt++;
-                        if(cnt<vertexList.size()){
-                            display+="\n";
+                        if (cnt < vertexList.size()) {
+                            display += "\n";
                         }
 
                     }
-                    disp=new TextView(getActivity());
+
+                    disp = new TextView(getActivity());
                     disp.setText(display);
                     pixels = (int) (8 * scale + 0.5f);
                     disp.setTextSize(pixels);
-                    disp.setBackgroundColor(Color.WHITE);
+                    disp.setPadding(2, 0, 2, 0);
+                    //disp.setBackgroundColor(Color.WHITE);
                     disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    displayTransit.addView(disp);
+                    dyLayout.addView(disp);
+                    Log.d("temp",(i-1)+"");
+                    Log.d("d from transit",distanceList[i - 1]+"");
+                     //Log.d("distance",""+distanceList[i - 1]);
+                    if (distMin < distanceList[i - 1]) {
+                        display = "";
+                        display += "Available Routes:";
+                        disp = new TextView(getActivity());
+                        disp.setText(display);
+                        disp.setPadding(2, 0, 2, 0);
+                        disp.setTypeface(Typeface.DEFAULT_BOLD);
+                        pixels = (int) (12 * scale + 0.5f);
+                        disp.setTextSize(pixels);
+                        //disp.setBackgroundColor(Color.WHITE);
+                        disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                        dyLayout.addView(disp);
 
-                    int fare = imp.getRouteCost(d);
-                    totalCost += fare;
-                    totalDist += d;
-                    display="";
-                    display += "Available Routes:";
-                    disp=new TextView(getActivity());
-                    disp.setText(display);
-                    disp.setTypeface(Typeface.DEFAULT_BOLD);
-                    pixels = (int) (12 * scale + 0.5f);
-                    disp.setTextSize(pixels);
-                    disp.setBackgroundColor(Color.WHITE);
-                    disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    displayTransit.addView(disp);
+                        display = "";
+                        cnt = 0;
+                        for (int z : routeIds) {
 
-                    display="";
-                    cnt=0;
-                    for (int z : routeIds) {
-
-                        r = imp.getRoute(z);
-                        display += "-> "+r.getName();
-                        display += " (" + r.getVehicleType() + ")";
-                        cnt++;
-                        if(cnt<routeIds.size()){
-                            display+="\n";
+                            r = imp.getRoute(z);
+                            display += "-> " + r.getName();
+                            display += " (" + r.getVehicleType() + ")";
+                            cnt++;
+                            if (cnt < routeIds.size()) {
+                                display += "\n";
+                            }
                         }
+                        //display += "\n";
+                        disp = new TextView(getActivity());
+                        disp.setText(display);
+                        pixels = (int) (8 * scale + 0.5f);
+                        disp.setPadding(2, 0, 2, 0);
+                        disp.setTextSize(pixels);
+                        //disp.setBackgroundColor(Color.WHITE);
+                        disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                        //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                        //params.setMargins(0,0,0,20);
+                        //disp.setLayoutParams(params);
+                        dyLayout.addView(disp);
                     }
-                    //display += "\n";
-                    disp=new TextView(getActivity());
-                    disp.setText(display);
-                    pixels = (int) (8 * scale + 0.5f);
-                    disp.setTextSize(pixels);
-                    disp.setBackgroundColor(Color.WHITE);
-                    disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                    params.setMargins(0,0,0,20);
-                    disp.setLayoutParams(params);
-                    displayTransit.addView(disp);
-
                     i++;
-
+                    displayTransit.addView(dyLayout);
 
 
                 }
@@ -163,49 +206,56 @@ public class TransitFragment extends Fragment {
 //        display += "\nTotal Distance:" + new DecimalFormat("#.##").format(totalDist) + " km";
 //        display += "\nTotal Cost:Rs. " + totalCost;
         } else {
-            System.out.println(path);
+            dyLayout = new LinearLayout(getActivity());
+            dyLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            dyLayout.setBackgroundResource(R.drawable.rounded_layout);
+            dyLayout.setOrientation(LinearLayout.VERTICAL);
             vehicleType = bundle.getString("vehicleType");
-            display += "Vehicle Type: "+vehicleType;
-            disp=new TextView(getActivity());
+            display += "Vehicle Type: " + vehicleType;
+            disp = new TextView(getActivity());
             disp.setText(display);
             pixels = (int) (12 * scale + 0.5f);
             disp.setTextSize(pixels);
-            disp.setBackgroundColor(Color.WHITE);
+            disp.setPadding(2, 0, 2, 0);
+            // disp.setBackgroundColor(Color.WHITE);
             disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             //disp.setTextAppearance(R.style.displayTextStyleBold);
             disp.setTypeface(Typeface.DEFAULT_BOLD);
-            displayTransit.addView(disp);
-            display="";
+            dyLayout.addView(disp);
+            display = "";
 
 
             display += "Transit Stops:";
-            disp=new TextView(getActivity());
+            disp = new TextView(getActivity());
             disp.setText(display);
             pixels = (int) (12 * scale + 0.5f);
             disp.setTextSize(pixels);
-            disp.setBackgroundColor(Color.WHITE);
+            //disp.setBackgroundColor(Color.WHITE);
             disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             //disp.setTextAppearance(R.style.displayTextStyleBold);
             disp.setTypeface(Typeface.DEFAULT_BOLD);
-            displayTransit.addView(disp);
-            display="";
-            int cnt=0;
+            dyLayout.addView(disp);
+            display = "";
+            int cnt = 0;
             for (Vertex v : path) {
-                display += "-> "+v.getName();
+                display += "-> " + v.getName();
                 cnt++;
-                if(cnt<path.size()){
-                    display+="\n";
+                if (cnt < path.size()) {
+                    display += "\n";
                 }
             }
-            disp=new TextView(getActivity());
+            disp = new TextView(getActivity());
             disp.setText(display);
             pixels = (int) (8 * scale + 0.5f);
             disp.setTextSize(pixels);
-            disp.setBackgroundColor(Color.WHITE);
+            //disp.setBackgroundColor(Color.WHITE);
+            disp.setPadding(2, 0, 2, 0);
             disp.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            displayTransit.addView(disp);
-            display="";
-
+            dyLayout.addView(disp);
+            display = "";
+            displayTransit.addView(dyLayout);
         }
 
 //        tv.setText(display);

@@ -1,10 +1,10 @@
 package com.crestaSom.KTMPublicRoute.data;
 
-import com.crestaSom.model.Vertex;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.crestaSom.model.Vertex;
 
 public class DataWrapper implements Serializable {
 

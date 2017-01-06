@@ -1,6 +1,5 @@
 package com.crestaSom.KTMPublicRoute;
 
-import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -9,11 +8,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.crestaSom.KTMPublicRoute.data.DataWrapper;
 import com.crestaSom.model.Vertex;
 
 import java.util.List;
 
-import viewPageAdapter.ViewPagerAdapter;
+import com.crestaSom.viewPageAdapter.ViewPagerAdapter;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
     List<Vertex> path;
     Boolean flag;
     String rName="",vehicleType="";
-
+    double []distanceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,14 @@ public class DetailActivity extends AppCompatActivity {
         if(flag){
             rName=getIntent().getStringExtra("routeName");
             vehicleType=getIntent().getStringExtra("vehicleType");
+        }else{
+            distanceList=new double[10];
+
+            distanceList=getIntent().getDoubleArrayExtra("distanceList");
+            for(int i=0;i<10;i++){
+
+                Log.d("d from detail",distanceList[i]+"");
+            }
         }
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
@@ -68,6 +76,8 @@ public class DetailActivity extends AppCompatActivity {
         if(flag){
             bundle.putString("routeName",rName);
             bundle.putString("vehicleType",vehicleType);
+        }else{
+            bundle.putDoubleArray("distanceList",distanceList);
         }
         //TransitFragment transitFragment=new TransitFragment();
         fragment.setArguments(bundle);

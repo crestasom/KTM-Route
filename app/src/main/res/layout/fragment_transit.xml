@@ -11,6 +11,7 @@
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="false"
+        android:backgroundTint="@color/detailBackground"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/findRoute"
 
@@ -23,7 +24,9 @@
             android:background="@color/detailBackground"
             android:orientation="vertical"
             android:paddingLeft="10dp"
+            android:paddingTop="10dp"
             android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             >
 
         </LinearLayout>
