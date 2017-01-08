@@ -19,7 +19,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/editSource"
             android:layout_marginTop="5dp"
-            android:background="@color/windowBackground"
+            android:background="@drawable/rounded_text_view"
             android:completionThreshold="3"
             android:ems="10"
             android:foregroundGravity="center_vertical"
@@ -38,7 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/windowBackground"
+            android:background="@drawable/rounded_text_view"
             android:completionThreshold="3"
             android:ems="10"
             android:gravity="center"
@@ -85,7 +85,9 @@
                     android:layout_marginLeft="2dp"
                     android:orientation="vertical"
                     android:background="@drawable/rounded_layout"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="10dp"
+                    android:visibility="invisible"
+                    >
 
                     <LinearLayout
                         android:id="@+id/shortestRoute"
@@ -96,7 +98,8 @@
                         android:layout_marginRight="7dp"
                         android:background="@color/colorPrimary"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp" />
+                        android:paddingLeft="10dp"
+                        />
 
 
                     <TextView
@@ -126,7 +129,7 @@
                     android:background="@drawable/rounded_layout"
                     android:orientation="vertical"
                     android:paddingLeft="10dp"
-                    android:visibility="invisible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:id="@+id/singleRoute"
@@ -187,7 +190,7 @@
         <ImageView
             android:id="@+id/clearSource"
             android:layout_width="35dp"
-            android:layout_height="37dp"
+            android:layout_height="33dp"
             android:layout_alignRight="@+id/editSource"
             android:layout_alignBottom="@id/editSource"
             android:layout_alignTop="@id/editSource"
@@ -198,7 +201,7 @@
         <ImageView
             android:id="@+id/clearDestination"
             android:layout_width="35dp"
-            android:layout_height="37dp"
+            android:layout_height="33dp"
             android:layout_alignRight="@id/editDestination"
             android:layout_alignBottom="@id/editDestination"
             android:layout_alignTop="@id/editDestination"

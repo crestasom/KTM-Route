@@ -4,11 +4,6 @@
     <string name="app_name">Marriage Point Calculator</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_welcome_">Marriage Point Calculator</string>
-    <string name="title_activity_player_selection">Marriage</string>
-    <string name="welcome_message">Welcome To Marriage Point Calculator</string>
-    <string name="title_activity_test">Test</string>
-    <string name="title_activity_score_card">Score Card</string>
     <string name="title_activity_help">HELP</string>
     <string name="title_activity_about">ABOUT</string>
     <string name="help_text"><b>Finding Route</b>\n\n
@@ -22,6 +17,7 @@
         Path2:\n
         A single route between source and destination will be displayed if available.\n
         Each path cah be seperately viewed in map to visualize the path information.
+        4. Click on [VIEW DEATAIL] to view more details about route. It will display details regarding routes like intermediate stop map view.
 
 
  \n\n<b>Nearby Location</b>\n
@@ -30,6 +26,12 @@
         1. Click on <b>View Route</b>\n
         2. Click on a route from the list\n
         3. The details of route will be shown in map and each stop name can be viewed by clicking on stop icon.\n
+        <b>Detail Route</b>\n
+        Detail Route will contain two section.
+        \na. Transit:\n
+        This section will contain detail regarding route. It will show intermediate transit stops and available routes for given transit
+        \nb. Map:\n
+        This section will show display all the transit position in an offline map where user can visualize the route. User can also tap on stop icon to see the stop name.
 </string>
 
     <string name="disclaimer_text">
@@ -59,13 +61,8 @@
         यो एप्लिकतिओनमा देखायिएको भाडादर यातायात ब्यबस्था बिभागले प्रकाशित गरेको भाडादर अनुसार हो।
         Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
         Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.\n\n
-       If you find any bug in App, Please report it to any of following email addresses\n
-       Developer: Sudin Gurung © \n
-       E-mail: sudingrng@gmail.com\n
-        Developer: Sushant Suwal © \n
-       E-mail: er.sushant881@gmail.com\n
-        Developer: Som Prasad Shrestha © \n
-       E-mail: crestasom@gmail.com\n
+       If you find any bug in App, Please report it email addresses\n
+        ktmpublicroute@gmail.com
 
 </string>
     <string name="title_activity_test_main">TestMainActivity</string>
