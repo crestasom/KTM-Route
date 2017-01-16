@@ -11,10 +11,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.acra.ACRA;
+import org.acra.ReportField;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+import org.acra.sender.HttpSender;
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
+
 
 import com.crestaSom.KTMPublicRoute.data.JSONParser;
 import com.crestaSom.autocomplete.CustomAutoCompleteView;
@@ -45,8 +53,34 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
+
+
 import com.crestaSom.viewPageAdapter.ViewPagerAdapter;
 
+
+
+
+@ReportsCrashes(
+        formUri = "https://{myusername}.cloudant.com/acra-{myapp}/_design/acra-storage/_update/report",
+        reportType = HttpSender.Type.JSON,
+        httpMethod = HttpSender.Method.POST,
+        formUriBasicAuthLogin = "GENERATED_USERNAME_WITH_WRITE_PERMISSIONS",
+        formUriBasicAuthPassword = "GENERATED_PASSWORD",
+       // formKey = "", // This is required for backward compatibility but not used
+        customReportContent = {
+                ReportField.APP_VERSION_CODE,
+                ReportField.APP_VERSION_NAME,
+                ReportField.ANDROID_VERSION,
+                ReportField.PACKAGE_NAME,
+                ReportField.REPORT_ID,
+                ReportField.BUILD,
+                ReportField.STACK_TRACE
+        },
+        mode = ReportingInteractionMode.TOAST,
+        resToastText = R.string.app_name
+)
 public class Welcome extends AppCompatActivity implements OnClickListener {
 
     CustomAutoCompleteView source, destination;
@@ -57,10 +91,10 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     ViewPagerAdapter mViewPagerAdapter;
 
     JSONParser jsonParser = new JSONParser();
-    private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
-    private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
-//private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
+//    private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
 //    private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
+    private static String urlCheck = "http://192.168.1.109/collegeDatabase/admin.php?url=version/checkNew";
+    private static String url = "http://192.168.1.109/collegeDatabase/admin.php?url=route/findNewRecords";
     //	private static String urlCheckTail = "/collegeDatabase/admin.php?url=version/checkNew";
 //	private static String urlTail = "/collegeDatabase/admin.php?url=route/findNewRecords";
 //	private static String urlCheck,url;
@@ -78,7 +112,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ACRA.init(getApplication());
 
         setContentView(R.layout.activity_welcome);
 //        srcDest = (TextView) findViewById(R.id.searchRoute);
@@ -87,11 +121,13 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 //        routes.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setIcon(R.drawable.buszcpy);
+        getSupportActionBar().setTitle(" KTM Public Route (Beta)");
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         mViewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragments(new SearchRouteFragment(),"Search");
-        mViewPagerAdapter.addFragments(new ViewRouteFragment(),"View");
+        mViewPagerAdapter.addFragments(new SearchRouteFragment()," Search");
+        mViewPagerAdapter.addFragments(new ViewRouteFragment()," View");
         viewPager.setAdapter(mViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -105,7 +141,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             // moveFile(Environment.getRootDirectory()+"/osmdroid/","tiles.zip",Environment.getExternalStorageDirectory()+"/osmdroid/");
             // copyAssets();
             //new CopyMap().execute();
-
+            new CopyMap().execute();
             sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             editor = sharedPref.edit();
             editor.putInt(KEY, 1);
@@ -135,7 +171,9 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         getMenuInflater().inflate(R.menu.auto_complete, menu);
         menu.add(0, 2, 0, "About");
         menu.add(0, 3, 0, "Help");
-        menu.add(0, 4, 0, "Setting");
+        menu.add(0,4,0,"Disclaimer");
+        menu.add(0,6,0,"Feedback");
+        menu.add(0, 5, 0, "Setting");
         return true;
     }
 
@@ -151,9 +189,20 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         } else if (id == 2) {
             startActivity(new Intent(getApplicationContext(),
                     AboutActivity.class));
-        } else if (id == 4) {
+        } else if (id == 5) {
             startActivity(new Intent(getApplicationContext(),
                     SettingsActivity.class));
+        } else if (id==4) {
+            startActivity(new Intent(getApplicationContext(),
+                    DisclaimerActivity.class));
+        }
+        else if (id==6) {
+            Intent intent=new Intent(Intent.ACTION_SEND);
+            String[] recipients={"ktmpublicroute@gmail.com"};
+            intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+            intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback Regarding Your App KTM Public Route");
+            intent.setType("text/html");
+            startActivity(Intent.createChooser(intent, "Send mail"));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -175,7 +224,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     }
 
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.find);
+        tabLayout.getTabAt(0).setIcon(R.drawable.direction);
         tabLayout.getTabAt(1).setIcon(R.drawable.view);
     }
 
@@ -327,8 +376,9 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
                         JSONArray vertexNew = json.getJSONArray("Vertex");
                         JSONArray edgeNew = json.getJSONArray("Edge");
                         JSONArray routeNew = json.getJSONArray("Route");
+                        JSONArray fareNew=json.getJSONArray("Fare");
                         String message = json.getString("message");
-                        db.addNewRecords(vertexNew, edgeNew, routeNew);
+                        db.addNewRecords(vertexNew, edgeNew, routeNew,fareNew);
                         sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
                         editor = sharedPref.edit();
                         editor.putInt(DB_KEY, dbFlagServer);
@@ -489,5 +539,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         return vertexes;
 
     }
+
+
 
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.crestaSom.KTMPublicRoute.data.DataWrapper;
+import com.crestaSom.model.RouteDataWrapper;
 import com.crestaSom.model.Vertex;
 
 import java.util.List;
@@ -16,53 +17,70 @@ import java.util.List;
 import com.crestaSom.viewPageAdapter.ViewPagerAdapter;
 
 public class DetailActivity extends AppCompatActivity {
-
+    RouteDataWrapper routeDataWrapper;
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter mViewPagerAdapter;
 
     List<Vertex> path;
-    Boolean flag;
+    Boolean flag,flagAlt=false;
     String rName="",vehicleType="";
     double []distanceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         setContentView(R.layout.activity_detail);
 
-        DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
-        path = dw.getvList();
+
+        flagAlt=getIntent().getBooleanExtra("flagAlt", false);
         flag=getIntent().getBooleanExtra("flag", false);
-        if(flag){
-            rName=getIntent().getStringExtra("routeName");
-            vehicleType=getIntent().getStringExtra("vehicleType");
-        }else{
-            distanceList=new double[10];
+        if(flagAlt){
+            routeDataWrapper=(RouteDataWrapper)getIntent().getSerializableExtra("data");
+        }else {
+            if (flag) {
+                DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
+                path = dw.getvList();
+                rName = getIntent().getStringExtra("routeName");
+                vehicleType = getIntent().getStringExtra("vehicleType");
+            } else {
+                DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
+                path = dw.getvList();
+                distanceList = new double[10];
 
-            distanceList=getIntent().getDoubleArrayExtra("distanceList");
-            for(int i=0;i<10;i++){
+                distanceList = getIntent().getDoubleArrayExtra("distanceList");
+                for (int i = 0; i < 10; i++) {
 
-                Log.d("d from detail",distanceList[i]+"");
+//                Log.d("d from detail",distanceList[i]+"");
+                }
             }
         }
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-        if(flag) {
-            getSupportActionBar().setTitle("Route Detail: " + rName);
-        }else{
-            getSupportActionBar().setTitle("Route Detail: " + path.get(0)+" - "+path.get((path.size()-1)));
+        getSupportActionBar().setTitle(" Route Detail");
+        if(flagAlt){
+            String source=routeDataWrapper.getRouteData1().get(0).getvList().get(0).toString();
+            String dest=routeDataWrapper.getRouteData2().get(0).getvList().get((routeDataWrapper.getRouteData2().get(0).getvList().size()-1)).toString();
+            getSupportActionBar().setSubtitle(source+" - "+dest);
+        }else {
+            if (flag) {
+                getSupportActionBar().setSubtitle(rName);
+            } else {
+                getSupportActionBar().setSubtitle(path.get(0) + " - " + path.get((path.size() - 1)));
+            }
         }
+
         tabLayout=(TabLayout)findViewById(R.id.tabLayoutDetail);
         viewPager=(ViewPager)findViewById(R.id.viewPagerDetail);
         mViewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragments(getFragmentData(new TransitFragment()),"Transit Detail");
-        mViewPagerAdapter.addFragments(getFragmentData(new MapFragment()),"Map");
+        mViewPagerAdapter.addFragments(getFragmentData(new TransitFragment())," Transit Detail");
+        mViewPagerAdapter.addFragments(getFragmentData(new MapFragment())," Map");
         viewPager.setAdapter(mViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-
 
     }
 
@@ -70,22 +88,45 @@ public class DetailActivity extends AppCompatActivity {
     public Fragment getFragmentData(Fragment fragment){
         Bundle bundle=new Bundle();
         bundle.putString("Test","Test Value");
-        bundle.putSerializable("vList",new DataWrapper(path));
+
         Log.d("Flag from Details",flag.toString());
         bundle.putBoolean("flag",flag);
-        if(flag){
-            bundle.putString("routeName",rName);
-            bundle.putString("vehicleType",vehicleType);
-        }else{
-            bundle.putDoubleArray("distanceList",distanceList);
+        if(flagAlt){
+         bundle.putSerializable("data",routeDataWrapper);
+            bundle.putBoolean("flagAlt",flagAlt);
+            bundle.putBoolean("flag",flag);
+        }else {
+            bundle.putSerializable("vList",new DataWrapper(path));
+            if (flag) {
+
+                bundle.putString("routeName", rName);
+                bundle.putString("vehicleType", vehicleType);
+            } else {
+                bundle.putDoubleArray("distanceList", distanceList);
+            }
         }
         //TransitFragment transitFragment=new TransitFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(android.R.anim.slide_out_right,android.R.anim.slide_in_left);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+    }
+
+
     private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(R.drawable.find);
-        tabLayout.getTabAt(1).setIcon(R.drawable.view);
+        tabLayout.getTabAt(0).setIcon(R.drawable.searchicon);
+        tabLayout.getTabAt(1).setIcon(R.drawable.mapview);
     }
 }

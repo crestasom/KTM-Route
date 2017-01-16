@@ -28,6 +28,7 @@ import com.crestaSom.KTMPublicRoute.customMapProxy.CustomResourceProxy;
 import com.crestaSom.KTMPublicRoute.customMapProxy.CustomResourceProxy1;
 import com.crestaSom.KTMPublicRoute.data.DataWrapper;
 import com.crestaSom.implementation.KtmPublicRoute;
+import com.crestaSom.model.RouteDataWrapper;
 import com.crestaSom.model.Vertex;
 
 import org.osmdroid.DefaultResourceProxyImpl;
@@ -53,14 +54,16 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     private MapView mMapView;
     private MapController mMapController;
     List<Integer> cList;
+    RouteDataWrapper routeDataWrapper;
     TextView routeInfo;
     Button tracker;
     ImageView currentPosition,zoomIn,zoomOut;
     String provider;
+    Toast t;
     Criteria cri;
     ItemizedIconOverlay<OverlayItem> currentLocationOverlay;
     ArrayList<OverlayItem> items;
-    Boolean flag;
+    Boolean flag,flagAlt;
     List<Vertex> path,localPath;
 
     public MapFragment() {
@@ -77,6 +80,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         currentPosition=(ImageView)view.findViewById(R.id.current_location);
         zoomIn=(ImageView)view.findViewById(R.id.zoomin);
         zoomOut=(ImageView)view.findViewById(R.id.zoomout);
+        routeInfo=(TextView)view.findViewById(R.id.routeInfo);
+       // t=new Toast(getActivity());
 //		zoomIn.setVisibility(View.INVISIBLE);
 //		zoomOut.setVisibility(View.INVISIBLE);
         zoomIn.setOnClickListener(this);
@@ -89,7 +94,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         cList.add(Color.CYAN);
         cList.add(Color.DKGRAY);
         cList.add(Color.YELLOW);
-        routeInfo=(TextView)view.findViewById(R.id.routeInfo);
+
         mMapView = (MapView) view.findViewById(R.id.mapview);
         mMapView.setTileSource(TileSourceFactory.MAPNIK);
         mMapView.setBuiltInZoomControls(true);
@@ -107,53 +112,60 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         //receiving data from activity
         Bundle bundle=getArguments();
-        DataWrapper dw =(DataWrapper) bundle.getSerializable("vList");
-        path=dw.getvList();
-        flag=bundle.getBoolean("flag");
-        localPath=new ArrayList<>();
-        localPath.addAll(path);
-        Log.d("Vertex List",path.toString());
-        List<Vertex> vertexList = null;
-        int i = 0;
-        Log.d("i", "i:"+i);
-        System.out.println(flag+" is value of flag");
-        double latCode = 0, longCode = 0;
-        for (Vertex v : path) {
-            latCode += v.getLatCode();
-            longCode += v.getLongCode();
-        }
-        if(flag){
-            currentPosition.setVisibility(View.INVISIBLE);
-        }
 
-        String display="";
-        routeInfo.setText(display);
-        mMapController.setCenter(new GeoPoint(path.get(0).getLatCode(),path.get(0).getLongCode()));
-        new ArrayList<Integer>();
-        Map<List<Integer>, List<Vertex>> pathRoute;
-        KtmPublicRoute imp = new KtmPublicRoute(getActivity());
-        while (!localPath.isEmpty()) {
-            vertexList = new ArrayList<Vertex>();
-            if (localPath.size() == 1) {
-                break;
+        flagAlt=bundle.getBoolean("flagAlt",false);
+        if(flagAlt) {
+            routeDataWrapper=(RouteDataWrapper)bundle.getSerializable("data");
+            Vertex start=routeDataWrapper.getRouteData1().get(0).getvList().get(0);
+            mMapController.setCenter(new GeoPoint(start.getLatCode(), start.getLongCode()));
+            createMarker(routeDataWrapper.getRouteData1().get(0).getvList(),0);
+            createMarker(routeDataWrapper.getRouteData2().get(0).getvList(),1);
+        }else{
+            DataWrapper dw =(DataWrapper) bundle.getSerializable("vList");
+            path=dw.getvList();
+            flag = bundle.getBoolean("flag");
+            localPath = new ArrayList<>();
+            localPath.addAll(path);
+            Log.d("Vertex List", path.toString());
+            List<Vertex> vertexList = null;
+            int i = 0;
+            Log.d("i", "i:" + i);
+            System.out.println(flag + " is value of flag");
+            double latCode = 0, longCode = 0;
+            for (Vertex v : path) {
+                latCode += v.getLatCode();
+                longCode += v.getLongCode();
             }
-            pathRoute = imp.findRoutePath(localPath);
-            Log.d("path", "" + pathRoute);
-
-            Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
-            while (it.hasNext()) {
-
-                Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
-
-                vertexList = pair.getValue();
-                createMarker(vertexList, i);
-                Log.d("Vertex", "" + vertexList);
-
-
+            if (flag) {
+                currentPosition.setVisibility(View.INVISIBLE);
             }
-            i++;
-        }
 
+            mMapController.setCenter(new GeoPoint(path.get(0).getLatCode(), path.get(0).getLongCode()));
+            new ArrayList<Integer>();
+            Map<List<Integer>, List<Vertex>> pathRoute;
+            KtmPublicRoute imp = new KtmPublicRoute(getActivity());
+            while (!localPath.isEmpty()) {
+                vertexList = new ArrayList<Vertex>();
+                if (localPath.size() == 1) {
+                    break;
+                }
+                pathRoute = imp.findRoutePath(localPath);
+                Log.d("path", "" + pathRoute);
+
+                Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
+                while (it.hasNext()) {
+
+                    Map.Entry<List<Integer>, List<Vertex>> pair = it.next();
+
+                    vertexList = pair.getValue();
+                    createMarker(vertexList, i);
+                    Log.d("Vertex", "" + vertexList);
+
+
+                }
+                i++;
+            }
+        }
 
         return view;
     }
@@ -175,6 +187,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             // latCode+=v.getLatCode();
             // longCode+=v.getLongCode();
             GeoPoint p1 = new GeoPoint(v.getLatCode(), v.getLongCode());
+            if(!v.isTransit())
             items.add(new OverlayItem(v.getName(), "", p1));
 
             myPath.addPoint(p1);
@@ -189,7 +202,12 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        Toast.makeText(getActivity(), item.getTitle(), Toast.LENGTH_SHORT).show();
+                        
+
+                        routeInfo.setText(item.getTitle());
+                        if(routeInfo.getVisibility()==View.INVISIBLE){
+                            routeInfo.setVisibility(View.VISIBLE);
+                        }
                         return true;
 
                     }

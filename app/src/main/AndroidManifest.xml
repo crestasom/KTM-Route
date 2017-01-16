@@ -38,8 +38,12 @@
         <activity
             android:name=".DisclaimerActivity"
             android:label="KTM Public Route"
-            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar.MinWidth" />
-        <activity android:name=".NearestStopSelection" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".NearestStopSelection"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help" />
@@ -48,8 +52,7 @@
             android:label="@string/title_activity_about" />
         <activity
             android:name=".DetailActivity"
-            android:label="Route Detail"
-            >
+            android:label="Route Detail">
 
         </activity>
     </application>

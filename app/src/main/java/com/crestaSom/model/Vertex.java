@@ -14,7 +14,17 @@ public class Vertex implements Comparable<Vertex>,Serializable{
 	 private double longCode;
 	 private int referenceStop;
 	 private int referenceStop1;
-	 public int getReferenceStop1() {
+	private boolean isTransit;
+
+	public boolean isTransit() {
+		return isTransit;
+	}
+
+	public void setTransit(boolean transit) {
+		isTransit = transit;
+	}
+
+	public int getReferenceStop1() {
 		return referenceStop1;
 	}
 

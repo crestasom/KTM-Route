@@ -21,4 +21,9 @@ public class DataWrapper implements Serializable {
 	public DataWrapper(List<Vertex> data) {
 	      this.vList = data;
 	   }
+
+	@Override
+	public String toString() {
+		return vList.toString();
 	}
+}

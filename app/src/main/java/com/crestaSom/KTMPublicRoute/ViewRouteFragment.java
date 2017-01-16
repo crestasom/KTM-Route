@@ -1,12 +1,14 @@
 package com.crestaSom.KTMPublicRoute;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -34,6 +36,23 @@ public class ViewRouteFragment extends Fragment {
         // Required empty public constructor
     }
 
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            if (getView() != null) {
+                // your code goes here
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                  imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+                //imm.showSoftInput(source,0);
+            }
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

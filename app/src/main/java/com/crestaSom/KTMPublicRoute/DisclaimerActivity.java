@@ -43,7 +43,7 @@ public class DisclaimerActivity extends Activity {
 			}
 		});
 
-		new CopyMap().execute();
+
 
 	}
 
