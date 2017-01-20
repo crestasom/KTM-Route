@@ -88,6 +88,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         zoomOut.setOnClickListener(this);
         cList = new ArrayList<Integer>();
         currentPosition.setOnClickListener(this);
+        currentPosition.setVisibility(View.INVISIBLE);
         cList.add(Color.BLUE);
         cList.add(Color.GREEN);
         cList.add(Color.MAGENTA);

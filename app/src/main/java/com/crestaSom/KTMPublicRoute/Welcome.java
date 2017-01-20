@@ -37,6 +37,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -170,10 +171,10 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.auto_complete, menu);
         menu.add(0, 2, 0, "About");
-        menu.add(0, 3, 0, "Help");
         menu.add(0,4,0,"Disclaimer");
         menu.add(0,6,0,"Feedback");
         menu.add(0, 5, 0, "Setting");
+        menu.add(0, 3, 0, "User Guide");
         return true;
     }
 
@@ -197,12 +198,8 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
                     DisclaimerActivity.class));
         }
         else if (id==6) {
-            Intent intent=new Intent(Intent.ACTION_SEND);
-            String[] recipients={"ktmpublicroute@gmail.com"};
-            intent.putExtra(Intent.EXTRA_EMAIL, recipients);
-            intent.putExtra(Intent.EXTRA_SUBJECT,"Feedback Regarding Your App KTM Public Route");
-            intent.setType("text/html");
-            startActivity(Intent.createChooser(intent, "Send mail"));
+            startActivity(new Intent(getApplicationContext(),
+                    FeedBackActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -351,7 +348,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             pDialog = new ProgressDialog(Welcome.this);
             pDialog.setMessage("Getting New Records");
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
 
@@ -443,6 +440,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             super.onPreExecute();
             pDialog = new ProgressDialog(Welcome.this);
             pDialog.setMessage("Initializing Map");
+            pDialog.setCancelable(false);
             pDialog.setIndeterminate(false);
             pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             pDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Continue",new DialogInterface.OnClickListener(){

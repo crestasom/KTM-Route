@@ -38,31 +38,27 @@
         Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
         Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.
 </string>
+    <string name="disclaimer_text_nepali">
+       यो एपमा देखाइएको यात्राको भाडाहरु यातायात ब्यबस्था बिभागको व्यवस्था अनुसार छ। स्थानिय भाडादर फरक पर्न सक्छ। एपमा देखाइएको यात्राको भाडाहरुलाई जानकारीका रुपमा लिनसकिन्छ । एपको डेभलपरहरु भाडादरको लागी जिम्मेवार छैनन् ।
+    </string>
 
     <string name="about_text">
         The “KTM Public Route” is the app which aims to provide the offline route for the users who needs to navigate new places.
         The main purpose of this app is to provide the overall comfort for any user to browse the different routes along with the transport fares needed for the ride.
-       It has been developed as Final Year Project in Nepal Engineering College by <b>Sudin Gurung, Sushant Suwal</b> and <b>Som Prasad Shrestha</b> under Supervision of Assistant Professor and  <b>Dinesh Dangol</b> and Department of Computer Science and Engineering.\n
+
+       It has been developed as Final Year Project in Nepal Engineering College by <b>Sudin Gurung, Sushant Suwal</b> and <b>Som Prasad Shrestha</b> under Supervision of Assistant Professor and  <b>Dinesh Dangol</b> and Department of Computer Science and Engineering.\n\n\n
 
        Features:\n
-       1. Source and destination can be chosen from the places stored in the database.
-        Shortest path based on the location provided will be displayed.\n
-       2. A single route will be displayed if there exists between source and destination.\n
-       3. Series of routes with start and end points (with the distance between the points) will be displayed that will take the user from the given source to the required destination.\n
-       4. The source can be taken as current location based on GPS and destination will be chosen from the databased stored place.
-        The shortest path between location and the destination will be shown.\n
-       5. Nearest places will be calculated as aerial distance between current location and all possible location from database.
-        Four nearest stops will be taken into account while calculating\n
-        6. Concept of Walking distance has been implemented where user can set the maximum preferred walking distance. If any transit route has distance less than the preferred distance than app recommmends to walk instead of taking any public route.\n
-       7. The travel cost (for all the transit including travel distance in every transit will be displayed) based on the fare details provided by the Department of Transport Management.\n
-        8. The routes will also be shown in the map for better understanding of route.\n
-        9. Updates notification will be displayed if any update is released from server.\n\n\n
-        Disclaimer:\n
-        यो एप्लिकतिओनमा देखायिएको भाडादर यातायात ब्यबस्था बिभागले प्रकाशित गरेको भाडादर अनुसार हो।
-        Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
-        Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.\n\n
+       - Routes info with distance and vehicle fares\n
+       - Shortest routes prioritized\n
+        - Direct and Alternate routes suggestions\n
+        - GPS for current location (Nearyby Stops)\n
+        - Complete offline Map Integration\n
+        - Simple user friendly interface\n\n\n
+
        If you find any bug in App, Please report it email addresses\n
-        ktmpublicroute@gmail.com
+        ktmpublicroute@gmail.com\n\n
+        For more information and updates regarding this app, Please visit official facebook page.
 
 </string>
     <string name="title_activity_test_main">TestMainActivity</string>
@@ -85,5 +81,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
 
 </resources>

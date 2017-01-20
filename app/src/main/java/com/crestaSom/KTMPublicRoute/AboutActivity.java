@@ -1,28 +1,53 @@
 package com.crestaSom.KTMPublicRoute;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
-public class AboutActivity extends FragmentActivity {
+import java.util.List;
 
+public class AboutActivity extends AppCompatActivity {
+
+	Toolbar toolbar;
+	LinearLayout facebookMessage,facebook;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
+		toolbar = (Toolbar) findViewById(R.id.toolBar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setIcon(R.drawable.buszcpy);
+		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+		getSupportActionBar().setSubtitle("About");
+		facebook=(LinearLayout) findViewById(R.id.facebook);
+		facebookMessage=(LinearLayout) findViewById(R.id.facebookMessage);
+		facebook.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				launchFacebook();
+			}
+		});
+		facebookMessage.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				launchFacebookMessenger();
+			}
+		});
+		//tabLayout=(TabLayout)findViewById(R.id.tabLayout);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.help, menu);
-		return true;
-	}
-	
-	
-	
 
 	@Override
 	public void onBackPressed() {
@@ -56,4 +81,53 @@ public class AboutActivity extends FragmentActivity {
 	  public void dismiss() {
 	        finish();
 	    }
+
+//	public static Intent getOpenFacebookIntent(Context context) {
+//
+//		try {
+//			context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+//			return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/KTMPublicRoute"));
+//		} catch (Exception e) {
+//			return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/KTMPublicRoute"));
+//		}
+//	}
+
+
+	public final void launchFacebook() {
+		final String urlFb = "fb://page/"+"1834218883515476";
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(urlFb));
+
+		// If a Facebook app is installed, use it. Otherwise, launch
+		// a browser
+		final PackageManager packageManager = getPackageManager();
+		List<ResolveInfo> list =
+				packageManager.queryIntentActivities(intent,
+						PackageManager.MATCH_DEFAULT_ONLY);
+		if (list.size() == 0) {
+			final String urlBrowser = "https://www.facebook.com/"+"1834218883515476";
+			intent.setData(Uri.parse(urlBrowser));
+		}
+
+		startActivity(intent);
+	}
+
+	public final void launchFacebookMessenger() {
+		final String urlFb = "fb://messaging/"+"1834218883515476";
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(Uri.parse(urlFb));
+
+		// If a Facebook app is installed, use it. Otherwise, launch
+		// a browser
+		final PackageManager packageManager = getPackageManager();
+		List<ResolveInfo> list =
+				packageManager.queryIntentActivities(intent,
+						PackageManager.MATCH_DEFAULT_ONLY);
+		if (list.size() == 0) {
+			final String urlBrowser = "https://www.facebook.com/messages/thread/"+"1834218883515476";
+			intent.setData(Uri.parse(urlBrowser));
+		}
+
+		startActivity(intent);
+	}
 }

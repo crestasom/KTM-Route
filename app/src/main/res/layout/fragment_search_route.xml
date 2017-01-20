@@ -20,7 +20,7 @@
             android:layout_below="@+id/editSource"
             android:layout_marginTop="5dp"
             android:background="@drawable/rounded_text_view"
-            android:completionThreshold="3"
+            android:completionThreshold="1"
             android:ems="10"
             android:foregroundGravity="center_vertical"
             android:gravity="center"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/rounded_text_view"
-            android:completionThreshold="3"
+            android:completionThreshold="1"
             android:ems="10"
             android:gravity="center"
             android:hint="Source"
@@ -166,48 +166,86 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/editDestination"
-
             android:layout_below="@+id/editDestination"
-            android:layout_marginTop="10dp"
+
             android:layout_weight="2.05"
-            android:background="#DAD7D7"
+            android:background="@drawable/custom_button"
+            android:layout_centerInParent="true"
             android:paddingBottom="2dp"
             android:paddingTop="2dp"
             android:text="Search Route"
-            android:textColor="#093F95"
+            android:textColor="#ffffff"
             android:textSize="30sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/gpslocation"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:layout_alignLeft="@+id/editSource"
             android:layout_alignBottom="@id/editSource"
             android:layout_alignTop="@id/editSource"
             android:scaleType="fitXY"
             android:src="@drawable/gps" />
+
+        <ImageView
+            android:id="@+id/swapText"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignLeft="@+id/editDestination"
+            android:layout_alignBottom="@id/editDestination"
+            android:layout_alignTop="@id/editDestination"
+            android:scaleType="fitXY"
+            android:src="@drawable/swap" />
+
+        <ImageView
+            android:id="@+id/gpslocationDest"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_alignLeft="@+id/editDestination"
+            android:layout_alignBottom="@id/editDestination"
+            android:layout_alignTop="@id/editDestination"
+            android:scaleType="fitXY"
+            android:src="@drawable/gps"
+            android:visibility="invisible"/>
         <ImageView
             android:id="@+id/clearSource"
             android:layout_width="35dp"
             android:layout_height="33dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="3dp"
             android:layout_alignRight="@+id/editSource"
             android:layout_alignBottom="@id/editSource"
             android:layout_alignTop="@id/editSource"
             android:gravity="right"
             android:scaleType="fitXY"
-            android:src="@drawable/clear" />
+            android:src="@drawable/clear"
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/clearDestination"
             android:layout_width="35dp"
             android:layout_height="33dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="3dp"
             android:layout_alignRight="@id/editDestination"
             android:layout_alignBottom="@id/editDestination"
             android:layout_alignTop="@id/editDestination"
             android:gravity="right"
             android:scaleType="fitXY"
-            android:src="@drawable/clear" />
+            android:src="@drawable/clear"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </FrameLayout>

@@ -25,7 +25,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="Preferences"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity
             android:name=".Welcome"
             android:label="@string/title_activity_auto_complete">
@@ -38,9 +38,7 @@
         <activity
             android:name=".DisclaimerActivity"
             android:label="KTM Public Route"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar">
-
-        </activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
         <activity
             android:name=".NearestStopSelection"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
@@ -52,9 +50,11 @@
             android:label="@string/title_activity_about" />
         <activity
             android:name=".DetailActivity"
-            android:label="Route Detail">
-
-        </activity>
+            android:label="Route Detail"></activity>
+        <activity
+            android:name=".FeedBackActivity"
+            android:label="@string/title_activity_feed_back"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
     </application>
 
 </manifest>
