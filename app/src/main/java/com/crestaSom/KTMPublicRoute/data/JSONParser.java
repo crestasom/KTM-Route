@@ -38,11 +38,11 @@ public class JSONParser {
 			
 			if(method == "POST")
 			 {		
-				Log.d("JsonTest", "Sending Request");
+				//Log.d("JsonTest", "Sending Request");
 				DefaultHttpClient httpClient = new DefaultHttpClient();
 				HttpPost httpPost = new HttpPost(url);
 				httpPost.setEntity(new UrlEncodedFormEntity(params));
-				Log.d("HTTP post", httpPost.toString());
+				//Log.d("HTTP post", httpPost.toString());
 				HttpResponse httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				is = httpEntity.getContent();

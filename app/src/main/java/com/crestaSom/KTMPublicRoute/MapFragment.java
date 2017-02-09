@@ -5,14 +5,18 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -65,6 +69,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
     ArrayList<OverlayItem> items;
     Boolean flag,flagAlt;
     List<Vertex> path,localPath;
+    SharedPreferences prefs;
+    int language;
 
     public MapFragment() {
         // Required empty public constructor
@@ -81,9 +87,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         zoomIn=(ImageView)view.findViewById(R.id.zoomin);
         zoomOut=(ImageView)view.findViewById(R.id.zoomout);
         routeInfo=(TextView)view.findViewById(R.id.routeInfo);
-       // t=new Toast(getActivity());
-//		zoomIn.setVisibility(View.INVISIBLE);
-//		zoomOut.setVisibility(View.INVISIBLE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        language = Integer.parseInt(prefs.getString("language", "1"));
         zoomIn.setOnClickListener(this);
         zoomOut.setOnClickListener(this);
         cList = new ArrayList<Integer>();
@@ -103,6 +108,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
         mMapController.setZoom(14);
         mMapView.setBuiltInZoomControls(true);
         mMapView.setMultiTouchControls(true);
+        if(!isNetworkAvailable())
         mMapView.setMaxZoomLevel(15);
         mMapView.setMinZoomLevel(13);
         BoundingBoxE6 boundingBox=new BoundingBoxE6(27.79778, 85.583496, 27.589241, 85.216141);
@@ -127,10 +133,10 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             flag = bundle.getBoolean("flag");
             localPath = new ArrayList<>();
             localPath.addAll(path);
-            Log.d("Vertex List", path.toString());
+            //Log.d("Vertex List", path.toString());
             List<Vertex> vertexList = null;
             int i = 0;
-            Log.d("i", "i:" + i);
+            //Log.d("i", "i:" + i);
             System.out.println(flag + " is value of flag");
             double latCode = 0, longCode = 0;
             for (Vertex v : path) {
@@ -151,7 +157,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
                     break;
                 }
                 pathRoute = imp.findRoutePath(localPath);
-                Log.d("path", "" + pathRoute);
+                //Log.d("path", "" + pathRoute);
 
                 Iterator<Map.Entry<List<Integer>, List<Vertex>>> it = pathRoute.entrySet().iterator();
                 while (it.hasNext()) {
@@ -160,7 +166,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
                     vertexList = pair.getValue();
                     createMarker(vertexList, i);
-                    Log.d("Vertex", "" + vertexList);
+                    //Log.d("Vertex", "" + vertexList);
 
 
                 }
@@ -174,8 +180,8 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
     void createMarker(List<Vertex> path, int color) {
 
-//		Log.d("", "Vertex Path in Map:" + path.toString());
-//		Log.d("Line Color", "pos:" + color);
+//		//Log.d("", "Vertex Path in Map:" + path.toString());
+//		//Log.d("Line Color", "pos:" + color);
 
         items = new ArrayList<OverlayItem>();
         DefaultResourceProxyImpl resourceProxy1 = new CustomResourceProxy(getActivity());
@@ -188,8 +194,13 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             // latCode+=v.getLatCode();
             // longCode+=v.getLongCode();
             GeoPoint p1 = new GeoPoint(v.getLatCode(), v.getLongCode());
-            if(!v.isTransit())
-            items.add(new OverlayItem(v.getName(), "", p1));
+            if(!v.isTransit()){
+                if(language==1)
+                items.add(new OverlayItem(v.getName(), "", p1));
+                else
+                    items.add(new OverlayItem(v.getNameNepali(), "", p1));
+            }
+
 
             myPath.addPoint(p1);
         }
@@ -245,14 +256,14 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
                 public void onTick(long millisUntilFinished) {
                     // Do nothing
-                    Log.d("Time left:", millisUntilFinished + "");
+                    //Log.d("Time left:", millisUntilFinished + "");
                 }
 
                 public void onFinish() {
-                    Log.d("Status message", "Finish reached of Countdown");
-                    Log.d("async task status", gpstracker.getStatus().toString());
+                    //Log.d("Status message", "Finish reached of Countdown");
+                    //Log.d("async task status", gpstracker.getStatus().toString());
                     if (gpstracker.getStatus() == AsyncTask.Status.RUNNING) {
-                        Log.d("Asnc Task canceal", "true");
+                        //Log.d("Asnc Task canceal", "true");
                         gpstracker.cancel(true);
                     }
                 }
@@ -312,7 +323,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onCancelled() {
-            Log.d("Cancel message", "Cancelled by user!");
+            //Log.d("Cancel message", "Cancelled by user!");
             Toast.makeText(getActivity().getApplicationContext(), "Location Not Found", Toast.LENGTH_SHORT).show();
             progDailog.dismiss();
             running = false;
@@ -348,7 +359,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             mMapView.getOverlays().add(currentLocationOverlay);
             mMapView.invalidate();
 //            progDailog.dismiss();
-//            Log.d("coordinates", lati + longi + "");
+//            //Log.d("coordinates", lati + longi + "");
 //            Queue<Vertex> sourceV = imp.getNearestStop(lati, longi);
 //            Vertex v;
 //            //source.setText(sourceV.getName());
@@ -356,11 +367,11 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 //            for (int i = 0; i < 4; i++) {
 //                v = sourceV.poll();
 //                if (v.getDistanceFromSource() < 1.0)
-//                    Log.d("Polled Vertex", v.getName());
+//                    //Log.d("Polled Vertex", v.getName());
 //                vList.add(v);
 //            }
 //            mLocationManager.removeUpdates(mVeggsterLocationListener);
-//            Log.d("vertex", vList.toString());
+//            //Log.d("vertex", vList.toString());
 //            Intent i = new Intent(getActivity().getApplicationContext(), NearestStopSelection.class);
 //            i.putExtra("data", new DataWrapper(vList));
 //            startActivityForResult(i, 100);
@@ -374,7 +385,7 @@ public class MapFragment extends Fragment implements View.OnClickListener {
             // TODO Auto-generated method stub
             int x = 0;
             while (this.lati == 0.0 && !this.isCancelled()) {
-//				Log.d("x:",""+x++);
+//				//Log.d("x:",""+x++);
 //				System.out.println("x:"+x++);
 //                if(isCancelled()){
 //                    break;
@@ -429,6 +440,12 @@ public class MapFragment extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

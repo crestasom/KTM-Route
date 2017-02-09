@@ -64,12 +64,12 @@ import com.crestaSom.viewPageAdapter.ViewPagerAdapter;
 
 
 @ReportsCrashes(
-        formUri = "https://{myusername}.cloudant.com/acra-{myapp}/_design/acra-storage/_update/report",
+        mailTo = "ktmpublicroute@gmail.com",
         reportType = HttpSender.Type.JSON,
         httpMethod = HttpSender.Method.POST,
-        formUriBasicAuthLogin = "GENERATED_USERNAME_WITH_WRITE_PERMISSIONS",
-        formUriBasicAuthPassword = "GENERATED_PASSWORD",
-       // formKey = "", // This is required for backward compatibility but not used
+//        formUriBasicAuthLogin = "ormediffelikozelinsepout",
+//        formUriBasicAuthPassword = "e2a3f4ebb4d4a81483885acfe93cf31ecbce285f",
+        // formKey = "", // This is required for backward compatibility but not used
         customReportContent = {
                 ReportField.APP_VERSION_CODE,
                 ReportField.APP_VERSION_NAME,
@@ -95,7 +95,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 //    private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
 //    private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
     private static String urlCheck = "http://192.168.1.109/collegeDatabase/admin.php?url=version/checkNew";
-    private static String url = "http://192.168.1.109/collegeDatabase/admin.php?url=route/findNewRecords";
+    private static String url = "http://192.168.1.109/collegeDatabase/admin.php?url=route/";
     //	private static String urlCheckTail = "/collegeDatabase/admin.php?url=version/checkNew";
 //	private static String urlTail = "/collegeDatabase/admin.php?url=route/findNewRecords";
 //	private static String urlCheck,url;
@@ -122,7 +122,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 //        routes.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setIcon(R.drawable.buszcpy);
+        getSupportActionBar().setIcon(R.drawable.iconktmlogo);
         getSupportActionBar().setTitle(" KTM Public Route (Beta)");
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
@@ -156,7 +156,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 //			urlHead=prefs.getString("serverIP","");
 //			urlCheck="http://"+urlHead+urlCheckTail;
 //			url="http://"+urlHead+urlTail;
-            Log.d("urls", urlHead + "\n" + url + "\n" + urlCheck);
+            ////Log.d("urls", urlHead + "\n" + url + "\n" + urlCheck);
             //Toast.makeText(this,urlHead+"\n"+url+"\n"+urlCheck,Toast.LENGTH_LONG).show();
             new CheckNewRecord().execute();
             if (dbCheckFlag.equals("1")) {
@@ -276,15 +276,15 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         @Override
         protected String doInBackground(String... arg0) {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            Log.d("urlcheck", isURLReachable(getApplicationContext()) + "");
+            ////Log.d("urlcheck", isURLReachable(getApplicationContext()) + "");
             if (isURLReachable(getApplicationContext())) {
                 try {
                     // pDialog.setMessage("Getting New Records");
                     JSONObject json = jsonParser.makeHttpRequest(urlCheck, "POST", params);
-                    Log.d("JSON Data", "" + json);
+                    ////Log.d("JSON Data", "" + json);
                     int dbFlagServer = json.getInt("dbVersion");
                     int dbFlagClient = sharedPref.getInt(DB_KEY, -1);
-                    Log.d("Flag Check", "server:" + dbFlagServer + "\tclient:" + dbFlagClient);
+                    ////Log.d("Flag Check", "server:" + dbFlagServer + "\tclient:" + dbFlagClient);
                     if (dbFlagClient < dbFlagServer) {
                         return "1";
                     } else {
@@ -302,7 +302,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         @Override
         protected void onPostExecute(String file_url) {
             // pDialog.dismiss();
-            Log.d("returning", file_url);
+            ////Log.d("returning", file_url);
             if (file_url.equals("1")) {
 
                 alertDialogBuilder.setMessage("New Records are available.Do you like to update records?");
@@ -364,16 +364,20 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
                 try {
                     // pDialog.setMessage("Getting New Records");
                     JSONObject json = jsonParser.makeHttpRequest(urlCheck, "POST", params);
-                    Log.d("JSON Data", "" + json);
+                    //Log.d("JSON Data", "" + json);
                     int dbFlagServer = json.getInt("dbVersion");
                     int dbFlagClient = sharedPref.getInt(DB_KEY, -1);
-                    Log.d("Flag Check", "server:" + dbFlagServer + "\tclient:" + dbFlagClient);
+                    ////Log.d("Flag Check", "server:" + dbFlagServer + "\tclient:" + dbFlagClient);
                     if (dbFlagClient < dbFlagServer) {
-                        json = jsonParser.makeHttpRequest(url, "GET", params);
-                        JSONArray vertexNew = json.getJSONArray("Vertex");
+                        json = jsonParser.makeHttpRequest(url+"findNewRecords", "GET", params);
+
+                        Log.d("json data", json.toString());
                         JSONArray edgeNew = json.getJSONArray("Edge");
-                        JSONArray routeNew = json.getJSONArray("Route");
                         JSONArray fareNew=json.getJSONArray("Fare");
+
+                        json = jsonParser.makeHttpRequest(url+"findNewRecords1", "GET", params);
+                        JSONArray vertexNew = json.getJSONArray("Vertex");
+                        JSONArray routeNew = json.getJSONArray("Route");
                         String message = json.getString("message");
                         db.addNewRecords(vertexNew, edgeNew, routeNew,fareNew);
                         sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -387,11 +391,11 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
                         // "No new records found", Toast.LENGTH_SHORT).show();
                     }
 
-                    // Log.d("Length", ""+size);
+                    // ////Log.d("Length", ""+size);
 
-                    // Log.d("Json Vertex", vertexNew.toString());
-                    // Log.d("Json Edge", edgeNew.toString());
-                    // Log.d("Json Route", routeNew.toString());
+                    // ////Log.d("Json Vertex", vertexNew.toString());
+                    // ////Log.d("Json Edge", edgeNew.toString());
+                    // ////Log.d("Json Route", routeNew.toString());
                     // for (int i = 0; i < values.length(); i++) {
                     // Vertex v = new Vertex();
                     // if (names.getString(i).equals("id")) {
@@ -420,8 +424,13 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             } else if (file_url.equals("-1")) {
                 Toast.makeText(Welcome.this, "Server Not available", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(Welcome.this, file_url, Toast.LENGTH_LONG).show();
+                Toast.makeText(Welcome.this, file_url+"\nRestarting App", Toast.LENGTH_LONG).show();
             }
+
+            Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
         }
 
     }
@@ -443,12 +452,12 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             pDialog.setCancelable(false);
             pDialog.setIndeterminate(false);
             pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            pDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Continue",new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+//            pDialog.setButton(DialogInterface.BUTTON_NEUTRAL,"Continue",new DialogInterface.OnClickListener(){
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            });
 
 
             // pDialog.setCancelable(true);
@@ -485,15 +494,15 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 //				while ((in.read(buffer)) != -1) {
 //					count++;
 //				}
-                //Log.d("count", ""+count);
+                //////Log.d("count", ""+count);
                 int prgss;
                 while ((read = in.read(buffer)) != -1) {
-                    prgss = (int) ((100 * i) / count);
+                    prgss = (100 * i) / count;
                     publishProgress(prgss);
                     out.write(buffer, 0, read);
                     i++;
                 }
-                Log.d("i:", "" + i);
+                ////Log.d("i:", "" + i);
                 in.close();
                 in = null;
                 out.flush();
@@ -509,7 +518,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
-            Log.d("Progress", progress[0] + "");
+            ////Log.d("Progress", progress[0] + "");
             pDialog.setProgress(progress[0]);
         }
 
@@ -525,10 +534,10 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     public List<Vertex> getItemsFromDb(String searchTerm) {
 
         // add items on the array dynamically
-        Log.d("Application Context",getApplicationContext().toString());
+        ////Log.d("Application Context",getApplicationContext().toString());
         Database db = new Database(getBaseContext());
         List<Vertex> vertexes = new ArrayList<Vertex>();
-        Log.d("Database",db.toString());
+        ////Log.d("Database",db.toString());
         vertexes = db.getVertexUsingQuery(searchTerm);
 //        itemId.clear();
 //        for (Vertex v : vertexes) {

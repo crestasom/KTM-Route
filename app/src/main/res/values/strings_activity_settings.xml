@@ -6,47 +6,17 @@
 
 
     <!-- Example General settings -->
-    <string name="pref_title_display_seen">Seen Penalty</string>
-    <string name="pref_title_display_unseen">Unseen Penalty</string>
-    <string name="pref_title_display_points">Rate per Points</string>
-    <string name="pref_default_display_seen">3</string>
-    <string name="pref_default_display_unseen">10</string>
-    <string name="pref_default_display_points">1</string>
-    <string name="pref_title_seen">Seen Penalty</string>
-    <string name="pref_title_unseen">Unseen Penalty</string>
-    <string name="pref_title_game_type">Game Type</string>
-    
+    <string name="pref_title_language">Language</string>
 
-    <string-array name="pref_unseen_list_titles">
-        <item>10</item>
-        <item>12</item>
-        <item>15</item>
+    <string-array name="pref_language_titles">
+        <item>English</item>
+        <item>नेपाली</item>
     </string-array>
-    <string-array name="pref_unseen_list_values">
-        <item>10</item>
-        <item>12</item>
-        <item>15</item>
-    </string-array>
-<string-array name="pref_seen_list_titles">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    <string-array name="pref_seen_list_values">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-    
-    <string-array name="pref_game_type_titles">
-        <item>Maal Dhus</item>
-        <item>Traditional</item>
-    </string-array>
-    <string-array name="pref_game_type_values">
-        <item>0</item>
+    <string-array name="pref_language_values">
         <item>1</item>
+        <item>2</item>
     </string-array>
-    
+
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>
     <string name="pref_title_sync_frequency">Sync frequency</string>

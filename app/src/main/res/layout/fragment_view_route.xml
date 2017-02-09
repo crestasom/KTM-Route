@@ -12,12 +12,34 @@
         android:background="@drawable/viewroute"
         tools:context="com.example.projapp.MainActivity" >
 
+        <com.crestaSom.autocomplete.CustomAutoCompleteView
+            android:id="@+id/searchPlace"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_text_view"
+            android:completionThreshold="1"
+            android:ems="10"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center"
+            android:hint="Search for a place here"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:textColor="#093F95"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="italic">
+
+        </com.crestaSom.autocomplete.CustomAutoCompleteView>
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/searchPlace"
             android:layout_marginTop="25dp"
             android:background="@drawable/white"
             android:divider="@drawable/blue"
@@ -37,6 +59,20 @@
             android:gravity="center_horizontal"
             android:text="List of Routes Available"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        <ImageView
+            android:id="@+id/clearSearchPlace"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="3dp"
+            android:layout_alignRight="@id/searchPlace"
+            android:layout_alignBottom="@id/searchPlace"
+            android:layout_alignTop="@id/searchPlace"
+            android:gravity="right"
+            android:scaleType="fitXY"
+            android:src="@drawable/clear"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 

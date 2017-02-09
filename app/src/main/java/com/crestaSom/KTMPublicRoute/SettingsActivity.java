@@ -4,11 +4,13 @@ package com.crestaSom.KTMPublicRoute;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
+import android.support.v7.widget.Toolbar;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -28,8 +30,10 @@ public class SettingsActivity extends PreferenceActivity implements
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.pref_general);
+
 		getPreferenceScreen().getSharedPreferences()
 				.registerOnSharedPreferenceChangeListener(this);
+		//getListView().setBackgroundColor(Color.BLUE);
 	}
 
 	@Override

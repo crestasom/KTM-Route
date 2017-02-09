@@ -549,7 +549,7 @@ public class KtmPublicRoute {
                         setTotalDistance(dist3);
                         return path;
                     }
-                } else if (dest.equals(refDst1)) {
+                } else if (source.equals(refDst1)) {
                     if (dist3 > dist4) {
                         setTotalDistance(dist4);
                         return path4;
@@ -932,13 +932,16 @@ public class KtmPublicRoute {
                         String tempName = rd.getrName();
                         tempName += "\n" + r.getName() + " (" + r.getVehicleType() + ")";
                         rd.setrName(tempName);
+                        tempName = rd.getrNameNepali();
+                        tempName += "\n" + r.getNameNepali() + " (" + r.getVehicleTypeNepali() + ")";
+                        rd.setrNameNepali(tempName);
                         tempFlag = true;
                         break;
                     }
 
                 }
                 if (tempFlag == false) {
-                    path = new RouteData(vertexList, r.getName() + " (" + r.getVehicleType() + ")");
+                    path = new RouteData(vertexList, r.getName() + " (" + r.getVehicleType() + ")",r.getNameNepali() + " (" + r.getVehicleTypeNepali() + ")");
                     singlePaths.add(path);
                 }
 
@@ -1080,7 +1083,7 @@ public class KtmPublicRoute {
         temp.addAll(stops);
         while (temp.size() != 1) {
             routeDistance += getEdgeDistance(temp.get(0), temp.get(1));
-            //	Log.d("route distance",routeDistance+"");
+            //	//Log.d("route distance",routeDistance+"");
             temp.remove(0);
         }
         return routeDistance;
@@ -1088,8 +1091,8 @@ public class KtmPublicRoute {
 
     public Double getEdgeDistance(Vertex source, Vertex dest) {
         double d = 0.0;
-        //Log.d("check point"," In getEdgeDistance");
-        //Log.d("edges",allEdges.toString());
+        ////Log.d("check point"," In getEdgeDistance");
+        ////Log.d("edges",allEdges.toString());
         List<Edge> allEdgeTemp = new ArrayList<>();
 
         for (Edge e1 : allEdges) {
@@ -1097,13 +1100,13 @@ public class KtmPublicRoute {
                     dest))) {
                 // System.out.println(e1);
                 d = e1.getWeight();
-                //	Log.d("Distance from getEdge:",e1.getName()+d+"");
+                //	//Log.d("Distance from getEdge:",e1.getName()+d+"");
                 break;
 
             } else if ((e1.getSource().equals(dest) && e1.getDestination()
                     .equals(source))) {
                 d = e1.getWeight();
-                //	Log.d("Distance from getEdge:",e1.getName()+d+"");
+                //	//Log.d("Distance from getEdge:",e1.getName()+d+"");
                 break;
             }
 
@@ -1299,4 +1302,25 @@ public class KtmPublicRoute {
         System.out.println("" + routeDatas);
         return routeDatas;
     }
+
+    /**
+     * To find all routes that contains given place
+     * @param Vertex Place
+     * @return List<Route> routeList
+     */
+    public List<Route> findRoutePlace(String place){
+        List<Route> routeList=new ArrayList<>();
+        List<Integer> stopIds;
+        Vertex placeDetail=db.getVertexDetail(place);
+        for(Route r:routes){
+            stopIds=new ArrayList<>();
+            stopIds=r.getAllVertexes();
+            if(stopIds.contains(placeDetail.getId())){
+                routeList.add(r);
+            }
+        }
+        return  routeList;
+
+    }
+
 }

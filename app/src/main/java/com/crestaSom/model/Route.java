@@ -6,9 +6,28 @@ import java.util.List;
 public class Route {
 	private int id;
 	private String name;
+	private String nameNepali;
 	private List<Integer> allVertexes;
 	private boolean doubleSided;
 	private String vehicleType;
+	private String vehicleTypeNepali;
+
+	public String getNameNepali() {
+		return nameNepali;
+	}
+
+	public void setNameNepali(String nameNepali) {
+		this.nameNepali = nameNepali;
+	}
+
+	public String getVehicleTypeNepali() {
+		return vehicleTypeNepali;
+	}
+
+	public void setVehicleTypeNepali(String vehicleTypeNepali) {
+		this.vehicleTypeNepali = vehicleTypeNepali;
+	}
+
 	private Date postDate;
 	
 	

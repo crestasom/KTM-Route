@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Marriage Point Calculator</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">KTM Public Route</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_help">HELP</string>
     <string name="title_activity_about">ABOUT</string>
@@ -35,52 +35,35 @@
 </string>
 
     <string name="disclaimer_text">
-        Travel Fare shown in this app is calculated according to the fare rates provided by DOTM. Local fares may vary.
-        Fares shown in the app should be taken as only reference. Developers do not guarantee the correctness of fare displayed.
+        Travel cost shown in this app is calculated according to the transportation rates provided by DOTM (Department of Transportation Management), Nepal.
+Costs shown in the app should be taken as reference only. Developers do not guarantee the correctness of the costs displayed.
 </string>
     <string name="disclaimer_text_nepali">
        यो एपमा देखाइएको यात्राको भाडाहरु यातायात ब्यबस्था बिभागको व्यवस्था अनुसार छ। स्थानिय भाडादर फरक पर्न सक्छ। एपमा देखाइएको यात्राको भाडाहरुलाई जानकारीका रुपमा लिनसकिन्छ । एपको डेभलपरहरु भाडादरको लागी जिम्मेवार छैनन् ।
     </string>
 
     <string name="about_text">
-        The “KTM Public Route” is the app which aims to provide the offline route for the users who needs to navigate new places.
-        The main purpose of this app is to provide the overall comfort for any user to browse the different routes along with the transport fares needed for the ride.
-
-       It has been developed as Final Year Project in Nepal Engineering College by <b>Sudin Gurung, Sushant Suwal</b> and <b>Som Prasad Shrestha</b> under Supervision of Assistant Professor and  <b>Dinesh Dangol</b> and Department of Computer Science and Engineering.\n\n\n
+       KTM Public Route is an offline android application that aims to provide the detailed information about the public vehicle routes of the Kathmandu valley.
+KTM Public Route will help you get around the Kathmandu valley and know the public vehicle routes better along with the total distance and cost needed for your journey.
+Navigating the valley now becomes easier.\n\n
 
        Features:\n
        - Routes info with distance and vehicle fares\n
        - Shortest routes prioritized\n
         - Direct and Alternate routes suggestions\n
-        - GPS for current location (Nearyby Stops)\n
+        - GPS for current location (Nearby Stops)\n
         - Complete offline Map Integration\n
         - Simple user friendly interface\n\n\n
 
-       If you find any bug in App, Please report it email addresses\n
+        KTM Public Route has been developed by Som Prasad Shrestha, Sudin Gurung and Sushant Suwal, under the supervision of Assistant Professor Dinesh Dangol and Department of Computer Science and Engineering.
+We would like to thank all the friends and relatives for helping us by providing the valid route information. Lastly, we are grateful to Nepal Engineering College for supporting us in every phase of our development of this app.\n\n
+       If you find any bug in App, Please report it email address\n
         ktmpublicroute@gmail.com\n\n
         For more information and updates regarding this app, Please visit official facebook page.
 
 </string>
-    <string name="title_activity_test_main">TestMainActivity</string>
-    <string name="title_activity_auto_complete">KTM Public Route</string>
-    <string name="title_activity_async_main">AsyncMainActivity</string>
-    <string name="title_activity_welcome">Welcome</string>
-    <string name="title_activity_device_list">DeviceListActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="non_paired">No paired Device</string>
-    <string name="title_activity_arduino_main">ArduinoMain</string>
-    <string name="title_activity_route_detail">RouteDetailActivity</string>
-    <string name="title_section1">Detail</string>
-    <string name="title_section2">Map View</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_activity_tabbed_main">TabbedMainActivity</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="title_activity_details">Details</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_welcome_tabbed">WelcomeTabbed</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_auto_complete">KTM Public Route</string>
     <string name="title_activity_feed_back">FeedBackActivity</string>
 
 </resources>

@@ -99,15 +99,15 @@ public class DisclaimerActivity extends Activity {
 //				while ((in.read(buffer)) != -1) {
 //					count++;
 //				}
-				//Log.d("count", ""+count);
+				////Log.d("count", ""+count);
 				int prgss;
 				while ((read = in.read(buffer)) != -1) {
-					prgss = (int) ((100 * i) / count);
+					prgss = (100 * i) / count;
 					publishProgress(prgss);
 					out.write(buffer, 0, read);
 					i++;
 				}
-				Log.d("i:", "" + i);
+				//Log.d("i:", "" + i);
 				in.close();
 				in = null;
 				out.flush();
@@ -123,7 +123,7 @@ public class DisclaimerActivity extends Activity {
 
 		@Override
 		protected void onProgressUpdate(Integer... progress) {
-			Log.d("Progress", progress[0] + "");
+			//Log.d("Progress", progress[0] + "");
 			pDialog.setProgress(progress[0]);
 		}
 

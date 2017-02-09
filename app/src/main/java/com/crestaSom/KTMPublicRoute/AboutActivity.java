@@ -29,9 +29,11 @@ public class AboutActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_about);
 		toolbar = (Toolbar) findViewById(R.id.toolBar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setIcon(R.drawable.buszcpy);
+		//getSupportActionBar().setIcon(R.drawable.buszcpy);
 		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
 		getSupportActionBar().setSubtitle("About");
+		getSupportActionBar().setHomeButtonEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		facebook=(LinearLayout) findViewById(R.id.facebook);
 		facebookMessage=(LinearLayout) findViewById(R.id.facebookMessage);
 		facebook.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +76,8 @@ public class AboutActivity extends AppCompatActivity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		}else if(id==android.R.id.home){
+			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}

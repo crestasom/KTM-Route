@@ -12,6 +12,15 @@ public class RouteData implements Serializable {
 
     private List<Vertex> vList;
     private String rName;
+    private String rNameNepali;
+
+    public String getrNameNepali() {
+        return rNameNepali;
+    }
+
+    public void setrNameNepali(String rNameNepali) {
+        this.rNameNepali = rNameNepali;
+    }
 
     public String getrName() {
         return rName;
@@ -33,9 +42,10 @@ public class RouteData implements Serializable {
 
 
 
-    public RouteData(List<Vertex> data, String name) {
+    public RouteData(List<Vertex> data, String name, String nameNepali) {
         this.vList = data;
         this.rName=name;
+        this.rNameNepali=nameNepali;
 
     }
 

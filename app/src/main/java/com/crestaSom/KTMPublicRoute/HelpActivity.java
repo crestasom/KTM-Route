@@ -18,13 +18,14 @@ public class HelpActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_help);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setIcon(R.drawable.buszcpy);
+		//getSupportActionBar().setIcon(R.drawable.buszcpy);
 		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
 		getSupportActionBar().setSubtitle("User Guide");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 
-	
+
 	
 	@Override
 	public void onBackPressed() {
@@ -51,6 +52,8 @@ public class HelpActivity extends AppCompatActivity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		}else if(id==android.R.id.home){
+			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}

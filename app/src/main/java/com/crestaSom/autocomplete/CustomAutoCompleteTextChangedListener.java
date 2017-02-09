@@ -71,7 +71,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher {
 		} else {
 			for (Vertex v : vertexes) {
 				mainActivity.item.add(v.getName());
-				Log.d("vertexes",mainActivity.item.toString());
+				//Log.d("vertexes",mainActivity.item.toString());
 		//		mainActivity.itemId.add(v.getId());
 
 			}
@@ -97,7 +97,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher {
 		// add items on the array dynamically
 		Database db = new Database(context);
 		List<Vertex> vertexes = new ArrayList<Vertex>();
-		Log.d("Database",db.toString());
+		//Log.d("Database",db.toString());
 		vertexes = db.getVertexUsingQuery(searchTerm);
 //		itemId.clear();
 //		for (Vertex v : vertexes) {

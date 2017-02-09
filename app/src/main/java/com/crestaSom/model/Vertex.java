@@ -15,6 +15,17 @@ public class Vertex implements Comparable<Vertex>,Serializable{
 	 private int referenceStop;
 	 private int referenceStop1;
 	private boolean isTransit;
+	private String nameNepali;
+
+	public String getNameNepali() {
+		return nameNepali;
+	}
+
+	public void setNameNepali(String nameNepali) {
+		this.nameNepali = nameNepali;
+	}
+
+
 
 	public boolean isTransit() {
 		return isTransit;
@@ -141,9 +152,7 @@ public class Vertex implements Comparable<Vertex>,Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Vertex other = (Vertex) obj;
-		if (id != other.id)
-			return false;
-		return true;
+		return id == other.id;
 	}
 
 	@Override
