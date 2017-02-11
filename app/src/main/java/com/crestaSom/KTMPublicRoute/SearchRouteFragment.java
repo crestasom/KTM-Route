@@ -85,9 +85,6 @@ import java.util.Set;
         mailTo = "ktmpublicroute@gmail.com",
         reportType = HttpSender.Type.JSON,
         httpMethod = HttpSender.Method.POST,
-//        formUriBasicAuthLogin = "ormediffelikozelinsepout",
-//        formUriBasicAuthPassword = "e2a3f4ebb4d4a81483885acfe93cf31ecbce285f",
-        // formKey = "", // This is required for backward compatibility but not used
         customReportContent = {
                 ReportField.APP_VERSION_CODE,
                 ReportField.APP_VERSION_NAME,
@@ -456,10 +453,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        // String src = source.getText().toString();
-        // String dst = dest.getText().toString();
-        // int srcId = Integer.parseInt(src);
-        // int destId = Integer.parseInt(dst);
+        language = Integer.parseInt(prefs.getString("language", "1"));
         if (v.getId() == R.id.findRoute) {
             Database db = new Database(getActivity().getApplicationContext());
             String sourceString = source.getText().toString();
@@ -472,24 +466,42 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             ////Log.d("Dest", "" + dst);
             if (sourceString.equals("") || destString.equals("")) {
                 if (sourceString.equals("")) {
+                    if(language==1)
                     Toast.makeText(getActivity().getApplicationContext(), "Source not selected!", Toast.LENGTH_SHORT).show();
+                    else if(language==2)
+                        Toast.makeText(getActivity().getApplicationContext(), "स्रोत खाली छ!", Toast.LENGTH_SHORT).show();
                 } else if (destString.equals("")) {
+                    if(language==1)
                     Toast.makeText(getActivity().getApplicationContext(), "Destination not selected!", Toast.LENGTH_SHORT).show();
+                    else if(language==2)
+                        Toast.makeText(getActivity().getApplicationContext(), "गन्त्यब्य खाली छ!", Toast.LENGTH_SHORT).show();
                 }
             } else if (src.getId() == -1 || dst.getId() == -1) {
                 if (src.getId() == -1) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Not a valid source!Please choose from suggestion",
+                    if(language==1)
+                    Toast.makeText(getActivity().getApplicationContext(), "Not a valid source!Please choose from suggestion!",
                             Toast.LENGTH_SHORT).show();
+                    else if(language==2)
+                        Toast.makeText(getActivity().getApplicationContext(), "स्रोत उपर्युक्त छैन। सुझावबाट छान्नुहोस्!",
+                                Toast.LENGTH_SHORT).show();
                 } else if (dst.getId() == -1) {
-                    Toast.makeText(getActivity().getApplicationContext(), "Not a valid destination!Please choose from suggestion",
+                    if(language==1)
+                    Toast.makeText(getActivity().getApplicationContext(), "Not a valid destination!Please choose from suggestion!",
                             Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getActivity().getApplicationContext(), "गन्त्यब्य उपर्युक्त छैन। सुझावबाट छान्नुहोस्!",
+                                Toast.LENGTH_SHORT).show();
                 }
             } else if (src.equals(dst)) {
-                Toast.makeText(getActivity().getApplicationContext(), "Source and destination cannot be same", Toast.LENGTH_SHORT)
+                if(language==1)
+                Toast.makeText(getActivity().getApplicationContext(), "Source and destination cannot be same!", Toast.LENGTH_SHORT)
                         .show();
+                else
+                    Toast.makeText(getActivity().getApplicationContext(), "स्रोत र गन्त्यब्य एउटै भयो!", Toast.LENGTH_SHORT)
+                            .show();
             } else {
                 distMin = Double.parseDouble(prefs.getString("walkingDist", "0.5"));
-                language = Integer.parseInt(prefs.getString("language", "1"));
+
 
                 //  Toast.makeText(getActivity(), "pref lang " + language, Toast.LENGTH_LONG).show();
                 sv.smoothScrollTo(0, 0);
@@ -510,9 +522,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             i.putExtra("data", new DataWrapper(path1));
             i.putExtra("flag", false);
             i.putExtra("distanceList", distanceList);
-            //  i.putExtra("distanceList",distanceList);
-            // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
-            // path);
+
             startActivity(i);
 
         } else if (v.getTag() == "View Detail") {
@@ -525,10 +535,6 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
             i.putExtra("flag", false);
             i.putExtra("distanceList", distanceList);
-            ////Log.d("data in search route", singleRouteVertex.toString());
-
-            // i.putParcelableArrayListExtra("path", (ArrayList<Vertex>)
-            // path);
             startActivity(i);
         } else if (v.getTag() == "View Detail Alternative") {
             Intent i = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
@@ -562,7 +568,6 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     }
 
     public List<Vertex> getItemsFromDb(String searchTerm) {
-
         // add items on the array dynamically
         Database db = new Database(getActivity());
         List<Vertex> vertexes = new ArrayList<Vertex>();
@@ -584,7 +589,10 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             // new MyCustomProgressDialog(getApplicationContext());
             pDialog = new ProgressDialog(getActivity());
             pDialog.setIcon(R.drawable.find);
+            if(language==1)
             pDialog.setMessage("Detecting Path...");
+            else
+                pDialog.setMessage("रुटहरु खोजी हुँदैछ...");
             pDialog.setCancelable(false);
             pDialog.setIndeterminate(false);
             //findShortestPath(srcId,destId);
@@ -619,6 +627,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
     }
 
     private void setDisplayText() {
+        Log.d("path",path.toString());
         sv.smoothScrollTo(0, 0);
         shortestRouteLayout.removeAllViews();
         singleRouteLayout.removeAllViews();
@@ -710,6 +719,10 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
             display += "\nTotal Cost: Rs. " + totalCost;
         }
         addTextView(new SpannableString(display), shortestRouteLayout, 16, true, textColor);
+        if(language==2)
+            ViewDetail.setText("[थप जानकारी]");
+        else if(language==1)
+            ViewDetail.setText("[View Detail]");
 //
 
         Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_down);
@@ -778,6 +791,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                     addTextView(new SpannableString(displaySingle), singleRouteLayout, 16, false, textColor);
                     viewDetailTemplate = (TextView) View.inflate(getActivity(), R.layout.view_detail_textview, null);
                     viewDetailTemplate.setId(1000 * (i - 1));
+                    if(language==2)
+                        viewDetailTemplate.setText("[थप जानकारी]");
                     viewDetailTemplate.setTag("View Detail");
                     viewDetailTemplate.setOnClickListener(SearchRouteFragment.this);
                     singleRouteLayout.addView(viewDetailTemplate);
@@ -929,6 +944,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
                         viewDetailTemplate = (TextView) View.inflate(getActivity(), R.layout.view_detail_textview, null);
                         viewDetailTemplate.setId(1000 * (i - 1));
+                        if(language==2)
+                            viewDetailTemplate.setText("[थप जानकारी]");
                         viewDetailTemplate.setTag("View Detail Alternative");
                         viewDetailTemplate.setOnClickListener(SearchRouteFragment.this);
                         singleRouteLayout.addView(viewDetailTemplate);

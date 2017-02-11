@@ -114,12 +114,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ACRA.init(getApplication());
-
         setContentView(R.layout.activity_welcome);
-//        srcDest = (TextView) findViewById(R.id.searchRoute);
-//        srcDest.setOnClickListener(this);
-//        routes = (TextView) findViewById(R.id.viewRoute);
-//        routes.setOnClickListener(this);
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.iconktmlogo);
@@ -138,32 +133,35 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         if (startFlag == -1) {
 
             // to copy map tile for first use
-
-            // moveFile(Environment.getRootDirectory()+"/osmdroid/","tiles.zip",Environment.getExternalStorageDirectory()+"/osmdroid/");
-            // copyAssets();
-            //new CopyMap().execute();
             new CopyMap().execute();
             sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             editor = sharedPref.edit();
             editor.putInt(KEY, 1);
             editor.putInt(DB_KEY, 1);
             editor.commit();
+            startActivityForResult(new Intent(this, DisclaimerActivity.class),100);
 
-            startActivity(new Intent(this, DisclaimerActivity.class));
-
+        }else if(startFlag==1){
+            startActivity(new Intent(this, LanguageSelection.class));
         }
         if (isNetworkAvailable()) {
-//			urlHead=prefs.getString("serverIP","");
-//			urlCheck="http://"+urlHead+urlCheckTail;
-//			url="http://"+urlHead+urlTail;
-            ////Log.d("urls", urlHead + "\n" + url + "\n" + urlCheck);
-            //Toast.makeText(this,urlHead+"\n"+url+"\n"+urlCheck,Toast.LENGTH_LONG).show();
             new CheckNewRecord().execute();
             if (dbCheckFlag.equals("1")) {
 
             }
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        startFlag = sharedPref.getInt(KEY, -1);
+        if(startFlag==1){
+            startActivity(new Intent(this, LanguageSelection.class));
+        }
     }
 
     @Override
@@ -203,16 +201,6 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-//    @Override
-//    public void onResume(){
-//
-//       HomeFragment frag=(HomeFragment) getSupportFragmentManager().findFragmentById(R.id.homeFrag);
-//        frag.source.setText("Hello");
-//    }
-
-
 
     @Override
     public void onClick(View v) {
@@ -266,11 +254,6 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             super.onPreExecute();
             alertDialogBuilder = new AlertDialog.Builder(Welcome.this);
 
-            // pDialog = new ProgressDialog(Welcome.this);
-            // pDialog.setMessage("Connecting to server");
-            // pDialog.setIndeterminate(false);
-            // pDialog.setCancelable(true);
-            // pDialog.show();
         }
 
         @Override
@@ -391,20 +374,6 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
                         // "No new records found", Toast.LENGTH_SHORT).show();
                     }
 
-                    // ////Log.d("Length", ""+size);
-
-                    // ////Log.d("Json Vertex", vertexNew.toString());
-                    // ////Log.d("Json Edge", edgeNew.toString());
-                    // ////Log.d("Json Route", routeNew.toString());
-                    // for (int i = 0; i < values.length(); i++) {
-                    // Vertex v = new Vertex();
-                    // if (names.getString(i).equals("id")) {
-                    // v.setId(values.getInt(i));
-                    // }else if (names.getString(i).equals("name")) {
-                    // v.setName(values.getString(i));
-                    // }
-                    // verts.add(v);
-                    // }
 
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block

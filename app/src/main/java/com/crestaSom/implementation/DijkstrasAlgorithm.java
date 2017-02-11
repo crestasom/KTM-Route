@@ -42,13 +42,9 @@ public class DijkstrasAlgorithm {
 	int i = 0;
 
 	public DijkstrasAlgorithm(Context context) {
-		// create a copy of the array so that we can operate on this array
-		// this.nodes = new ArrayList<Vertex>(graph.getVertexes());
-		// this.edges = new ArrayList<Edge>(graph.getEdges());
-		// setTotalDistance(0.00);
 		totalTime = 0;
 		db = new Database(context);
-		// routes=db.getallRoute();
+
 	}
 
 	public Edge getFlagEdge() {
@@ -73,7 +69,6 @@ public class DijkstrasAlgorithm {
 
 	public void execute(List<Vertex> nodes, List<Edge> edges, Vertex source,
 			Vertex destination,Vertex destination1,Vertex destination2, boolean flagrev) throws SQLException {
-		//reverseFlag=flagrev;
 		flag=true;
 		flag1=true;
 		flag2=true;

@@ -214,7 +214,7 @@ public class Database {
     //
     private Vertex cursorToVertex(Cursor cursor) {
 
-        Log.d("cursor",cursor.getColumnCount()+"");
+        //Log.d("cursor",cursor.getColumnCount()+"");
         List<String> items = null;
         int id1, id2, length;
         String refPoints;
@@ -239,7 +239,7 @@ public class Database {
         v.setLongCode(cursor.getDouble(4));
         v.setTransit(cursor.getInt(5) > 0);
         v.setNameNepali(cursor.getString(6));
-        Log.d("nepali name",v.getNameNepali());
+        //Log.d("nepali name",v.getNameNepali());
         return v;
     }
 

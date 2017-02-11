@@ -14,8 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--<android:uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!-- <android:uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -37,8 +38,7 @@
         </activity>
         <activity
             android:name=".DisclaimerActivity"
-            android:label="KTM Public Route"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
+            android:label="KTM Public Route" />
         <activity
             android:name=".NearestStopSelection"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
@@ -50,11 +50,17 @@
             android:label="@string/title_activity_about" />
         <activity
             android:name=".DetailActivity"
-            android:label="Route Detail"></activity>
+            android:label="Route Detail" />
         <activity
             android:name=".FeedBackActivity"
             android:label="@string/title_activity_feed_back"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"></activity>
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar"/>
+
+        <activity
+            android:name=".LanguageSelection"
+            >
+
+        </activity>
     </application>
 
 </manifest>

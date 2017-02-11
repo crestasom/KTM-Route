@@ -1,9 +1,11 @@
 package com.crestaSom.KTMPublicRoute;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.ListActivity;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,7 +28,10 @@ public class NearestStopSelection extends ListActivity {
     List<String> stopName;
     List<Integer> stopIds;
     List<Vertex> vertexList;
+    SharedPreferences prefs;
+    TextView tv;
     Intent recv;
+    int language;
 
 
     @Override
@@ -34,17 +39,25 @@ public class NearestStopSelection extends ListActivity {
         super.onCreate(savedInstanceState);
         setTheme(android.R.style.Theme_Holo_Dialog_NoActionBar);
         setContentView(R.layout.activity_nearest_stop_selection);
+        tv = (TextView) findViewById(R.id.tv1);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        language = Integer.parseInt(prefs.getString("language", "1"));
+        if (language == 2)
+            tv.setText("नजिकको स्टपहरु");
         stopIds = new ArrayList<Integer>();
         stopName = new ArrayList<String>();
         recv = getIntent();
+
         DataWrapper dw = (DataWrapper) getIntent().getSerializableExtra("data");
         vertexList = dw.getvList();
         stopList = getListView();
         if (vertexList.size() > 0) {
             for (Vertex v : vertexList) {
                 stopIds.add(v.getId());
-                //stopName.add(v.getName() + " (" + new DecimalFormat("#.##").format(v.getDistanceFromSource()) + " km" + ")");
-                stopName.add(v.getName());
+                if (language == 1)
+                    stopName.add(v.getName());
+                else if (language == 2)
+                    stopName.add(v.getNameNepali());
             }
 
             ArrayAdapter<String> ar = new ArrayAdapter<String>(this,
@@ -66,15 +79,6 @@ public class NearestStopSelection extends ListActivity {
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     // TODO Auto-generated method stub
-                    // source.postDelayed(new Runnable() {
-                    // @Override
-                    // public void run() {
-                    // source.showDropDown();
-                    // }
-                    // },100);
-                    // source.setText(source.getText().toString());
-                    // source.setSelection(source.getText().length());
-                    //source.dismissDropDown();
 
                     String vName = vertexList.get(position).getName();
                     recv.putExtra("vName", vName);
@@ -84,17 +88,13 @@ public class NearestStopSelection extends ListActivity {
             });
 
         } else {
-            TextView msg=(TextView)findViewById(R.id.textView);
+            TextView msg = (TextView) findViewById(R.id.textView);
             final float scale = getResources().getDisplayMetrics().density;
+            if(language==1)
             msg.setText("No nearby location found!!!");
+            else if(language==2)
+                msg.setText("कुनै नजिकको स्टप भेटिएन!!!");
             msg.setVisibility(View.VISIBLE);
-            //msg.setGravity(Gravity.CENTER_HORIZONTAL);
-            //msg.setTypeface(Typeface.DEFAULT_BOLD);
-            //int pixels = (int) (15 * scale + 0.5f);
-            //msg.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            //msg.setTextSize(pixels);
-            //msg.setPadding(2, 2, 2, 0);
-            //stopList.addHeaderView(msg);
         }
     }
 

@@ -326,36 +326,6 @@ public class KtmPublicRoute {
 
             System.out.println("Double Reference Source");
             refSrc1 = db.getVertex(refSource1);
-            // lat1 = source.getLatCode();
-            // long1 = source.getLongCode();
-            // lat2 = refSrc.getLatCode();
-            // long2 = refSrc.getLongCode();
-            // aerialSrc = fn.calculateAerialDistance(lat1, long1, lat2, long2);
-            // //
-            // System.out.println(source.getName()+","+refSrc.getName()+":"+aerialSrc);
-            // lat2 = refSrc1.getLatCode();
-            // long2 = refSrc1.getLongCode();
-            // aerialSrc1 = fn.calculateAerialDistance(lat1, long1, lat2,
-            // long2);
-            // //
-            // System.out.println(source.getName()+","+refSrc1.getName()+":"+aerialSrc1);
-            //
-            // lat1 = dest.getLatCode();
-            // long1 = dest.getLongCode();
-            // lat2 = refSrc.getLatCode();
-            // long2 = refSrc.getLongCode();
-            // aerialDest = fn.calculateAerialDistance(lat1, long1, lat2,
-            // long2);
-            // //
-            // System.out.println(dest.getName()+","+refSrc.getName()+":"+aerialDest);
-            // lat2 = refSrc1.getLatCode();
-            // long2 = refSrc1.getLongCode();
-            // aerialDest1 = fn.calculateAerialDistance(lat1, long1, lat2,
-            // long2);
-            // System.out.println(dest.getName()+","+refSrc1.getName()+":"+aerialDest1);
-            // //System.out.println("Reference Source:"+refSrc+" Reference Source1:"+refSrc1);
-
-            //nodes = db.getVertexes(refSource + "," + refSource1);
             edges = db.getEdges(refSource + "," + refSource1);
             allEdges.addAll(edges);
             // System.out.println(source + " " + refSrc);
@@ -367,14 +337,6 @@ public class KtmPublicRoute {
             path3 = algo.getPath(refSrc1, true);
             dist3 = algo.getTotalDistance();
             System.out.println("Path3" + path3);
-            // aerial1=fn.calculateAerialDistance(source.getLatCode(),
-            // source.getLongCode(), refSrc1.getLatCode(),
-            // refSrc1.getLongCode());
-            // //System.out.println("Dist1:"+dist1+"\tDist2:"+dist2);
-            // aerial = aerialSrc + aerialDest;
-            // aerial1 = aerialSrc1 + aerialDest1;
-            // //System.out.println("AerialSource:"+aerialSrc+"\tAerialSource1:"+aerialSrc1);
-            // System.out.println("AerialSrc:"+aerial+"\tAerialSrc1:"+aerial1);
             if (dest.equals(refSrc) || dest.equals(refSrc1)) {
                 // System.out.println("Reference Point matched");
                 if (dest.equals(refSrc)) {
@@ -498,29 +460,20 @@ public class KtmPublicRoute {
         } else if (refDest1 != -1) {
             System.out.println("Double Reference Destination");
             refDst1 = db.getVertex(refDest1);
-
-            //nodes = db.getVertexes(refDest + "," + refDest1);
             edges = db.getEdges(refDest + "," + refDest1);
             allEdges.addAll(edges);
             algo.execute(nodes, edges, dest, refDst, refDst1, temp, false);
             path3 = algo.getPath(refDst, false);
             dist3 = algo.getTotalDistance();
-            //System.out.println("\npath3:" + path3.toString());
-            // ////System.out.println(path3);
-//			nodes.clear();
-//			edges.clear();
-//			nodes = db.getVertexes(refDest + "," + refDest1);
-//			edges = db.getEdges(refDest + "," + refDest1);
-            //algo.execute(nodes, edges, refdDst1, dest, temp, temp, true);
             path4 = algo.getPath(refDst1, false);
             System.out.println("Path3: " + path3);
             System.out.println("Path4: " + path4);
             dist4 = algo.getTotalDistance();
-            //System.out.println("\npath4:" + path4.toString());
-            // //System.out.println(path4);
+
             if (source.equals(refDst) || source.equals(refDst1)) {
                 System.out.println("Source is reference stop for destination");
                 if (source.equals(refDst)) {
+                    Log.d("Reference dest",refDst.toString());
                     if (dist3 < dist4) {
                         setTotalDistance(dist3);
                         return path3;
@@ -528,10 +481,9 @@ public class KtmPublicRoute {
                         //		nodes = db.getVertexes("0");
                         edges = db.getEdges("0");
                         allEdges.addAll(edges);
-                        // System.out.println(source + " " + refSrc);
-                        algo.execute(nodes, edges, refDst1, refDst, temp, temp,
+                        algo.execute(nodes, edges, refDst, refDst1, temp, temp,
                                 true);
-                        path2 = algo.getPath(refDst, true);
+                        path2 = algo.getPath(refDst1, true);
                         dist2 = algo.getTotalDistance();
                         System.out.println("Path2:" + path2);
                         pathB = concatPathTest(path2, path4, path5, dist2,
@@ -550,18 +502,17 @@ public class KtmPublicRoute {
                         return path;
                     }
                 } else if (source.equals(refDst1)) {
+                    Log.d("Reference dest1 ",refDst.toString());
                     if (dist3 > dist4) {
                         setTotalDistance(dist4);
                         return path4;
 
                     } else {
-                        //	nodes = db.getVertexes("0");
                         edges = db.getEdges("0");
                         allEdges.addAll(edges);
-                        // System.out.println(source + " " + refSrc);
-                        algo.execute(nodes, edges, refDst, refDst1, temp, temp,
+                        algo.execute(nodes, edges, refDst1, refDst, temp, temp,
                                 true);
-                        path2 = algo.getPath(refDst1, true);
+                        path2 = algo.getPath(refDst, true);
                         dist2 = algo.getTotalDistance();
                         System.out.println("Path2:" + path2);
                         pathB = concatPathTest(path2, path3, path5, dist2,

@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.app.AlertDialog;
 
@@ -17,19 +21,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class DisclaimerActivity extends Activity {
+public class DisclaimerActivity extends AppCompatActivity {
 
 	Button searchBtn = null;
 	Intent locatorService = null;
 	AlertDialog alertDialog = null;
 	boolean flag=false;
 	ProgressDialog pDialog;
+	Toolbar toolbar;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_disclaimer);
+		toolbar = (Toolbar) findViewById(R.id.toolBar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setIcon(R.drawable.iconktmlogo);
+		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
 		searchBtn = (Button) findViewById(R.id.button);
 
 		searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +51,10 @@ public class DisclaimerActivity extends Activity {
 
 			}
 		});
-
+		Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+		animation.setDuration(1000);
+		searchBtn.setVisibility(View.VISIBLE);
+		searchBtn.startAnimation(animation);
 
 
 	}
