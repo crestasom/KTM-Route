@@ -62,7 +62,7 @@ public class Database {
     private static final String FARE_RATE = "fare";
 
     private static final String DATABASE_NAME = "ktm_public_route";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     String[] allColumnsEdge = {EDGE_ID, EDGE_REF_STOP, EDGE_SOURCE_STOP,
             EDGE_DEST_STOP, EDGE_DISTANCE, EDGE_ONEWAY};

@@ -162,11 +162,13 @@ public class TransitFragment extends Fragment {
             dyLayout.setLayoutParams(params);
             display = "";
 
-            if (language == 1)
-                display += "Travel " + 2;
-            else
-                display += "यात्रा " + convertNepali(2);
-            display += routeData1.getvList().get(0) + " - " + routeData1.getvList().get((routeData1.getvList().size() - 1));
+            if (language == 1) {
+                display += "Travel " + 2+": ";
+                display += routeData1.getvList().get(0) + " to " + routeData1.getvList().get((routeData1.getvList().size() - 1));
+            }else {
+                display += "यात्रा " + convertNepali(2)+": ";
+                display += routeData1.getvList().get(0).getNameNepali() + " देखी " + routeData1.getvList().get((routeData1.getvList().size() - 1)).getNameNepali();
+            }
             addTextView(new SpannableString(display), dyLayout, 24, true, textColor);
             display="";
             if(language==1)
@@ -274,7 +276,7 @@ public class TransitFragment extends Fragment {
                                 }
                             }
 
-                            addTextView(new SpannableString(display), dyLayout, 20, false, textColor);
+                            addTextView(new SpannableString(display), dyLayout, 16, false, textColor);
 
                         }
                         i++;

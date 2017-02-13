@@ -357,7 +357,10 @@ public class ViewRouteFragment extends Fragment {
         routeName.clear();
         routeId.clear();
         for(Route r:routeListPlace){
+            if(language==1)
             routeName.add(r.getName());
+            else
+                routeName.add(r.getNameNepali());
             routeId.add(r.getId());
         }
         routesTemp.clear();

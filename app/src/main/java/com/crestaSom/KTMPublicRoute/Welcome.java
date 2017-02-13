@@ -92,10 +92,10 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     ViewPagerAdapter mViewPagerAdapter;
 
     JSONParser jsonParser = new JSONParser();
-//    private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=version/checkNew";
-//    private static String url = "http://shresthasom.com.np/collegeProjectDatabase/admin.php?url=route/findNewRecords";
-    private static String urlCheck = "http://192.168.1.109/collegeDatabase/admin.php?url=version/checkNew";
-    private static String url = "http://192.168.1.109/collegeDatabase/admin.php?url=route/";
+    private static String urlCheck = "http://shresthasom.com.np/collegeProjectDatabaseNew/admin.php?url=version/checkNew";
+    private static String url = "http://shresthasom.com.np/collegeProjectDatabaseNew/admin.php?url=route/";
+//    private static String urlCheck = "http://192.168.1.109/collegeDatabase/admin.php?url=version/checkNew";
+//    private static String url = "http://192.168.1.109/collegeDatabase/admin.php?url=route/";
     //	private static String urlCheckTail = "/collegeDatabase/admin.php?url=version/checkNew";
 //	private static String urlTail = "/collegeDatabase/admin.php?url=route/findNewRecords";
 //	private static String urlCheck,url;
