@@ -246,7 +246,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     sourceSelected = true;
                   //  if (destinationSelected) {
-                        findPath();
+                       // findPath();
                     //} else
                         destination.requestFocus();
 
@@ -276,7 +276,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     destinationSelected = true;
                     //if (sourceSelected) {
-                        findPath();
+                        //findPath();
                     //}//else
                     //submit.requestFocus();
                     // TODO Auto-generated method stub
@@ -418,7 +418,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                             source.dismissDropDown();
                             destination.dismissDropDown();
                             //if(pathFound){
-                                findPath();
+                               // findPath();
                             //}
 
                         }
@@ -453,12 +453,22 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
         dest = db.getVertex(destId);
         path.clear();
 
-        path = imp.findShortestPath(source, dest);
-        path1.clear();
-        path1.addAll(path);
+        try {
 
-        return display;
 
+            path = imp.findShortestPath(source, dest);
+            path1.clear();
+            path1.addAll(path);
+
+            return display;
+        }catch(NullPointerException ex){
+            Log.i("source",source.getName());
+            Log.i("sourceId",srcId+"");
+            Log.i("destination",dest.getName());
+            Log.i("destinationId",destId+"");
+            ex.printStackTrace();
+            return null;
+        }
 
     }
 
@@ -872,8 +882,11 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                         List<Vertex> vertices1 = routeData.getRouteData1().get(0).getvList();
                         List<Vertex> vertices2 = routeData.getRouteData2().get(0).getvList();
                         Vertex transitStop = vertices2.get(0);
-
+                        totalCost=0;
+                        totalDist=0.0;
                         //display first transit
+//                        Log.d("vertices1",vertices1.toString());
+//                        Log.d("vertices2",vertices2.toString());
                         displaySingle = "";
                         if (language == 1)
                             displaySingle += "Route " + i + ":";
@@ -908,7 +921,8 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
                         }
                         addTextView(displayTravel, singleRouteLayout, 16, false, textColor);
-
+                        Log.d("d1",""+d1);
+                        Log.d("Total Distance here",""+totalDist);
                         //display second transit
                         double d2 = imp.getRouteDistance(vertices2);
                         int fare2 = imp.getRouteCost(d2);
@@ -924,7 +938,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
                             List<Vertex> tempList = new ArrayList<>();
                             tempList.add(transitStop);
                             tempList.add(destP);
-                            displayTravel = displayTravelText(tempList, d1, fare1, false, language);
+                            displayTravel = displayTravelText(tempList, d2, fare2, false, language);
                             totalCost += fare2;
                             totalDist += d2;
                         } else {
@@ -936,18 +950,19 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
                         }
                         addTextView(displayTravel, singleRouteLayout, 16, false, textColor);
-
-                        double totalDist1 = d1 + d2;
+                        Log.d("d1",""+d2);
+                        Log.d("Total Distance here",""+totalDist);
+                      /*  double totalDist1 = d1 + d2;
                         int totalCost1 = fare1 + fare2;
-
+*/
                         display = "";
                         if (language == 2) {
-                            display += "पूरा दुरी: " + convertNumberToNepali(new DecimalFormat("#.##").format(totalDist1)) + " कि.मी.";
-                            display += "\nभाडा रु. " + convertNumberToNepali(totalCost1);
+                            display += "पूरा दुरी: " + convertNumberToNepali(new DecimalFormat("#.##").format(totalDist)) + " कि.मी.";
+                            display += "\nभाडा रु. " + convertNumberToNepali(totalCost);
                             ;
                         } else {
-                            display += "Total Distance: " + new DecimalFormat("#.##").format(totalDist1) + " km";
-                            display += "\nTotal Cost: Rs. " + totalCost1;
+                            display += "Total Distance: " + new DecimalFormat("#.##").format(totalDist) + " km";
+                            display += "\nTotal Cost: Rs. " + totalCost;
                         }
                         addTextView(new SpannableString(display), singleRouteLayout, 16, true, textColor);
 //                            displaySingle = "";
@@ -1454,6 +1469,7 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 
             // if you want to see in the logcat what the user types
             //Log.e(TAG, "User input: " + userInput);
+            findPath();
             displayFlag = 0;
             List<Vertex> vertexes = getItemsFromDb(userInput
                     .toString());
@@ -1781,12 +1797,12 @@ public class SearchRouteFragment extends Fragment implements View.OnClickListene
 //                            Toast.LENGTH_SHORT).show();
             }
         } else if (src.equals(dst)) {
-            if (language == 1)
-                Toast.makeText(getActivity().getApplicationContext(), "Source and destination cannot be same!", Toast.LENGTH_SHORT)
-                        .show();
-            else
-                Toast.makeText(getActivity().getApplicationContext(), "स्रोत र गन्त्यब्य एउटै भयो!", Toast.LENGTH_SHORT)
-                        .show();
+//            if (language == 1)
+//                Toast.makeText(getActivity().getApplicationContext(), "Source and destination cannot be same!", Toast.LENGTH_SHORT)
+//                        .show();
+//            else
+//                Toast.makeText(getActivity().getApplicationContext(), "स्रोत र गन्त्यब्य एउटै भयो!", Toast.LENGTH_SHORT)
+//                        .show();
         } else {
             pathFound=true;
             sv.smoothScrollTo(0, 0);

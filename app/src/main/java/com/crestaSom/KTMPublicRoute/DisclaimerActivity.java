@@ -38,7 +38,7 @@ public class DisclaimerActivity extends AppCompatActivity {
 		toolbar = (Toolbar) findViewById(R.id.toolBar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setIcon(R.drawable.iconktmlogo);
-		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+		getSupportActionBar().setTitle(" KTM Public Route");
 		searchBtn = (Button) findViewById(R.id.button);
 
 		searchBtn.setOnClickListener(new View.OnClickListener() {

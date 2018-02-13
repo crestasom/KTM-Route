@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_nearest_stop_selection"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:alpha="@android:integer/config_mediumAnimTime"
+    android:background="#093F95"
+    tools:context="com.crestaSom.KTMPublicRoute.NearestStopSelection">
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/white"
+        android:divider="@drawable/blue"
+        android:dividerHeight="2dp"
+        android:visibility="invisible"
+        >
+
+    </ListView>
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="#00000000"
+        android:textAllCaps="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"
+        android:gravity="center_horizontal"
+        android:text="Nearby Stops"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:background="#ffffff"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center_horizontal"
+        android:text="Nearby Stops"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

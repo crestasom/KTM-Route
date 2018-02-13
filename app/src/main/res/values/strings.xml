@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">KTM Public Route</string>
-
+    <string name="app_name"> KTM Public Route</string>
+    <string name="view_string"> View</string>
+    <string name="search_string"> Search</string>
+    <string name="view_string_nep"> हेर</string>
+    <string name="search_string_nep"> खोज</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_help">HELP</string>
     <string name="title_activity_about">ABOUT</string>
@@ -55,9 +58,9 @@ Navigating the valley now becomes easier.\n\n
         - Complete offline Map Integration\n
         - Simple user friendly interface\n\n\n
 
-        KTM Public Route has been developed by Som Prasad Shrestha, Sudin Gurung and Sushant Suwal, under the supervision of Assistant Professor Dinesh Dangol and Department of Computer Science and Engineering.
-We would like to thank all the friends and relatives for helping us by providing the valid route information. Lastly, we are grateful to Nepal Engineering College for supporting us in every phase of our development of this app.\n\n
-       If you find any bug in App, Please report it email address\n
+        KTM Public Route has been developed by <b>Som Prasad Shrestha</b>, <b>Sudin Gurung</b> and <b>Sushant Suwal</b>, under the supervision of <b>Assistant Professor Dinesh Dangol</b> and <b>Department of Computer Science and Engineering</b>.
+We would like to thank all the friends and relatives for helping us by providing the valid route information. We are also grateful to <b>Nepal Engineering College</b> for supporting us in every phase of our development of this app. Lastly, We are grateful to <b>Ms Ajanta Dhakal</b> for helping in all task regarding Nepali Language Translation.\n\n
+       If you find any bug in App, Please report it to following email address\n
         ktmpublicroute@gmail.com\n\n
         For more information and updates regarding this app, Please visit official facebook page.
 

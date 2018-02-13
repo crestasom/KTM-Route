@@ -30,7 +30,7 @@ public class AboutActivity extends AppCompatActivity {
 		toolbar = (Toolbar) findViewById(R.id.toolBar);
 		setSupportActionBar(toolbar);
 		//getSupportActionBar().setIcon(R.drawable.buszcpy);
-		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+		getSupportActionBar().setTitle(" KTM Public Route");
 		getSupportActionBar().setSubtitle("About");
 		getSupportActionBar().setHomeButtonEnabled(true);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,15 +57,15 @@ public class AboutActivity extends AppCompatActivity {
 		super.onBackPressed();
 		dismiss();
 	}
-	
-	
+
+
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
 		dismiss();
 		return super.onTouchEvent(event);
-		
+
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class AboutActivity extends AppCompatActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	  public void dismiss() {
 	        finish();
 	    }

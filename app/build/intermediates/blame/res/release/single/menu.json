@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\main.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\menu_details.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\menu_details.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\auto_complete.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\auto_complete.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\test.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\test.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\menu_welcome_tabbed.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\menu_welcome_tabbed.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\help.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\help.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\tabbed_main.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\tabbed_main.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\score_card.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\score_card.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\player_selection.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\player_selection.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\detail.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\detail.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\welcome_.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\welcome_.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\async_main.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\async_main.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\welcome.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\welcome.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\route_detail.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\route_detail.xml"
+    },
+    {
+        "merged": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\res\\merged\\release\\menu\\test_main.xml",
+        "source": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\menu\\test_main.xml"
+    }
+]

@@ -62,7 +62,7 @@ public class Database {
     private static final String FARE_RATE = "fare";
 
     private static final String DATABASE_NAME = "ktm_public_route";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
 
     String[] allColumnsEdge = {EDGE_ID, EDGE_REF_STOP, EDGE_SOURCE_STOP,
             EDGE_DEST_STOP, EDGE_DISTANCE, EDGE_ONEWAY};
@@ -101,7 +101,7 @@ public class Database {
                     + VERTEX_LONG + " DOUBLE NOT NULL, " + VERTEX_ISTRANSIT
                     + " TINYINT NOT NULL DEFAULT '0', " + VERTEX_NAME_NEPALI
                     + " VARCHAR(255) ); ");
-            //Log.d("Database", "Creating Table Edge");
+            Log.d("Database", "Creating Table Edge");
             db.execSQL("CREATE TABLE " + DATABASE_TABLE_EDGE + "(" + EDGE_ID
                     + "  INTEGER PRIMARY KEY, " + EDGE_REF_STOP
                     + " INTEGER NOT NULL, " + EDGE_SOURCE_STOP
@@ -109,7 +109,7 @@ public class Database {
                     + " INTEGER NOT NULL, " + EDGE_DISTANCE
                     + " DOUBLE NOT NULL, "
                     + EDGE_ONEWAY + " TINYINT NOT NULL); ");
-            //Log.d("Database", "Creating Table Route");
+            Log.d("Database", "Creating Table Route");
             db.execSQL("CREATE TABLE " + DATABASE_TABLE_ROUTE + "(" + ROUTE_ID
                     + "  INTEGER PRIMARY KEY, " + ROUTE_NAME
                     + " VARCHAR(255) NOT NULL, "+ ROUTE_NAME_NEPALI
@@ -120,7 +120,7 @@ public class Database {
             db.execSQL("CREATE TABLE " + DATABASE_TABLE_FARE + "(" + FARE_DISTANCE
                     + "  DOUBLE NOT NULL , " + FARE_RATE
                     + " INTEGER NOT NULL); ");
-            //Log.d("Database", "Database Created");
+            Log.d("Database", "Database Created");
 
             String sqlEdge, sqlVertex, sqlRoute, sqlFare;
             SQLString sqls = new SQLString();
@@ -131,33 +131,34 @@ public class Database {
 
             try {
                 db.execSQL(sqlVertex);
-                //Log.d("Database", "Vertex Table Populated");
+                Log.d("Database", "Vertex Table Populated");
             } catch (SQLiteException ex) {
-                //Log.d("Sqlite Error", ex.getMessage());
+                Log.d("Sqlite Error", ex.getMessage());
                 //Log.d("Database", "Vertex Table Populated");
             }
 
             try {
                 db.execSQL(sqlEdge);
-                //Log.d("Database", "Edge Table Populated");
+                Log.d("Database", "Edge Table Populated");
             } catch (SQLiteException ex) {
-                //Log.d("Sqlite Error", ex.getMessage());
+                Log.d("Sqlite Error", ex.getMessage());
 
             }
 
             try {
                 db.execSQL(sqlRoute);
-                //Log.d("Database", "Route Table Populated");
+                Log.d("Database", "Route Table Populated");
             } catch (SQLiteException ex) {
-                //Log.d("Sqlite Error", ex.getMessage());
+                Log.d("Sqlite Error", ex.getMessage());
             }
 
             try {
                 db.execSQL(sqlFare);
-                //Log.d("Database", "Fare Table Populated");
+                Log.d("Database", "Fare Table Populated");
+
                 //Toast.makeText(con,"Fare Table Populated",Toast.LENGTH_LONG).show();
             } catch (SQLiteException ex) {
-                //Log.d("Sqlite Error", ex.getMessage());
+                Log.d("Sqlite Error", ex.getMessage());
                 Toast.makeText(con, ex.getMessage(), Toast.LENGTH_LONG).show();
             }
 
@@ -165,7 +166,7 @@ public class Database {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            //Log.d("Database", "Database Upgraded");
+            Log.d("Database", "Database Upgraded");
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_VERTEX);
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_EDGE);
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_ROUTE);

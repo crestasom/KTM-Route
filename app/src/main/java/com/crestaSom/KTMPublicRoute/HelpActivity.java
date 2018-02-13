@@ -19,7 +19,7 @@ public class HelpActivity extends AppCompatActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
 		setSupportActionBar(toolbar);
 		//getSupportActionBar().setIcon(R.drawable.buszcpy);
-		getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+		getSupportActionBar().setTitle(" KTM Public Route");
 		getSupportActionBar().setSubtitle("User Guide");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}

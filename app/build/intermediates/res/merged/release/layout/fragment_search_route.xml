@@ -1,0 +1,251 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeFrag"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crestaSom.KTMPublicRoute.Welcome">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/detailBackground"
+        tools:context="com.crestaSom.KTMPublicRoute.AutoCompleteete">
+
+        <com.crestaSom.autocomplete.CustomAutoCompleteView
+            android:id="@+id/editDestination"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editSource"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_text_view"
+            android:completionThreshold="1"
+            android:ems="10"
+            android:foregroundGravity="center_vertical"
+            android:gravity="center"
+            android:hint="Destination"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:textColor="#093F95"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="italic"></com.crestaSom.autocomplete.CustomAutoCompleteView>
+
+        <com.crestaSom.autocomplete.CustomAutoCompleteView
+            android:id="@+id/editSource"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_text_view"
+            android:completionThreshold="1"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Source"
+            android:inputType="text"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:textColor="#093F95"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="italic">
+
+            <requestFocus />
+        </com.crestaSom.autocomplete.CustomAutoCompleteView>
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="800dp"
+            android:layout_height="800dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/findRoute"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <LinearLayout
+                    android:id="@+id/shortestRouteLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="2dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_layout"
+                    android:paddingLeft="10dp"
+                    android:visibility="invisible"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/shortestRoute"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:background="@color/colorPrimary"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/viewDetailRoute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="right"
+                        android:paddingRight="0dp"
+                        android:text="[View Detail] "
+                        android:textColor="#32CD32"
+                        android:textColorHighlight="#000000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/singleRouteDisplay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_layout"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/singleRoute"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/colorPrimary"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp" />
+
+                    <TextView
+                        android:id="@+id/viewSingleRoute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:background="@color/colorPrimary"
+                        android:gravity="right"
+                        android:paddingRight="5dp"
+                        android:text="[View Detail] "
+                        android:textColor="#32CD32"
+                        android:textColorHighlight="#000000"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/findRoute"
+            style="@style/button_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editDestination"
+            android:layout_below="@+id/editDestination"
+            android:visibility="gone"
+            android:layout_weight="2.05"
+            android:background="@drawable/custom_button"
+            android:layout_centerInParent="true"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:text="Search Route"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/gpslocation"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_alignLeft="@+id/editSource"
+            android:layout_alignBottom="@id/editSource"
+            android:layout_alignTop="@id/editSource"
+            android:scaleType="fitXY"
+            android:src="@drawable/gps" />
+
+        <ImageView
+            android:id="@+id/swapText"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignLeft="@+id/editDestination"
+            android:layout_alignBottom="@id/editDestination"
+            android:layout_alignTop="@id/editDestination"
+            android:scaleType="fitXY"
+            android:src="@drawable/swap" />
+
+        <ImageView
+            android:id="@+id/gpslocationDest"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_alignLeft="@+id/editDestination"
+            android:layout_alignBottom="@id/editDestination"
+            android:layout_alignTop="@id/editDestination"
+            android:scaleType="fitXY"
+            android:src="@drawable/gps"
+            android:visibility="invisible"/>
+        <ImageView
+            android:id="@+id/clearSource"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="3dp"
+            android:layout_alignRight="@+id/editSource"
+            android:layout_alignBottom="@id/editSource"
+            android:layout_alignTop="@id/editSource"
+            android:gravity="right"
+            android:scaleType="fitXY"
+            android:src="@drawable/clear"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/clearDestination"
+            android:layout_width="35dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="3dp"
+            android:layout_alignRight="@id/editDestination"
+            android:layout_alignBottom="@id/editDestination"
+            android:layout_alignTop="@id/editDestination"
+            android:gravity="right"
+            android:scaleType="fitXY"
+            android:src="@drawable/clear"
+            android:visibility="invisible"/>
+    </RelativeLayout>
+
+</FrameLayout>

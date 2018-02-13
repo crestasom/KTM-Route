@@ -642,9 +642,9 @@ public class KtmPublicRoute {
                                         List<Vertex> pathMain, List<Vertex> pathDst, double src,
                                         double main, double dist) {
         // TODO Auto-generated method stub
-        // System.out.println("Dist1:" + src);
-        // System.out.println("Dist2:" + main);
-        // System.out.println("Dist3:" + dist);
+         System.out.println("Dist1:" + pathSrc);
+         System.out.println("Dist2:" + pathMain);
+         System.out.println("Dist3:" + pathDst);
         int i = 0;
 
         List<Vertex> temp = new ArrayList<Vertex>();

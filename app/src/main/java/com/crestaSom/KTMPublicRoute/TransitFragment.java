@@ -313,7 +313,7 @@ public class TransitFragment extends Fragment {
                 display = "";
                 int cnt = 0;
                 display=getVertexList(path,language);
-                addTextView(new SpannableString(display), dyLayout, 16, false, textColor);
+                addTextView(new SpannableString(display), dyLayout, 16, true, textColor);
                 display = "";
                 displayTransit.addView(dyLayout);
                 Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right);

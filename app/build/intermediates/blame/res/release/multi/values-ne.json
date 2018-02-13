@@ -1,0 +1,555 @@
+[
+    {
+        "outputFile": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ne\\values-ne.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 5,
+                    "endColumn": 19,
+                    "endOffset": 174
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 228,
+                        "endLine": 13,
+                        "endColumn": 19,
+                        "endOffset": 350
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 179,
+                    "endLine": 9,
+                    "endColumn": 19,
+                    "endOffset": 287
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 356,
+                        "endLine": 17,
+                        "endColumn": 19,
+                        "endOffset": 467
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 292,
+                    "endLine": 17,
+                    "endColumn": 19,
+                    "endOffset": 537
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 661,
+                        "endLine": 30,
+                        "endColumn": 19,
+                        "endOffset": 913
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 542,
+                    "endLine": 25,
+                    "endColumn": 19,
+                    "endOffset": 756
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 4,
+                        "startOffset": 919,
+                        "endLine": 38,
+                        "endColumn": 19,
+                        "endOffset": 1140
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 761,
+                    "endLine": 45,
+                    "endColumn": 9,
+                    "endOffset": 2297
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 4,
+                        "startOffset": 2939,
+                        "endLine": 67,
+                        "endColumn": 9,
+                        "endOffset": 4494
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 2302,
+                    "endColumn": 52,
+                    "endOffset": 2350
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 123,
+                        "endColumn": 52,
+                        "endOffset": 171
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 2355,
+                    "endColumn": 60,
+                    "endOffset": 2411
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 59,
+                        "endColumn": 60,
+                        "endOffset": 115
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 2416,
+                    "endLine": 51,
+                    "endColumn": 9,
+                    "endOffset": 2740
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 2320,
+                        "endLine": 43,
+                        "endColumn": 9,
+                        "endOffset": 2647
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 2745,
+                    "endLine": 54,
+                    "endColumn": 13,
+                    "endOffset": 3021
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 4,
+                        "startOffset": 2653,
+                        "endLine": 46,
+                        "endColumn": 13,
+                        "endOffset": 2931
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3026,
+                    "endLine": 81,
+                    "endColumn": 9,
+                    "endOffset": 4829
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 483,
+                        "endLine": 38,
+                        "endColumn": 9,
+                        "endOffset": 2312
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 82,
+                    "startColumn": 4,
+                    "startOffset": 4834,
+                    "endColumn": 65,
+                    "endOffset": 4895
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endColumn": 65,
+                        "endOffset": 583
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 4900,
+                    "endColumn": 67,
+                    "endOffset": 4963
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 4,
+                        "startOffset": 1281,
+                        "endColumn": 67,
+                        "endOffset": 1344
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 84,
+                    "startColumn": 4,
+                    "startOffset": 4968,
+                    "endColumn": 55,
+                    "endOffset": 5019
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 4,
+                        "startOffset": 1500,
+                        "endColumn": 55,
+                        "endOffset": 1551
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 5024,
+                    "endColumn": 56,
+                    "endOffset": 5076
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 168,
+                        "endColumn": 56,
+                        "endOffset": 220
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 5081,
+                    "endColumn": 90,
+                    "endOffset": 5167
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 4,
+                        "startOffset": 1350,
+                        "endColumn": 90,
+                        "endOffset": 1436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 5172,
+                    "endColumn": 56,
+                    "endOffset": 5224
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 4,
+                        "startOffset": 1442,
+                        "endColumn": 56,
+                        "endOffset": 1494
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 5229,
+                    "endColumn": 68,
+                    "endOffset": 5293
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 589,
+                        "endColumn": 68,
+                        "endOffset": 653
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 5298,
+                    "endColumn": 80,
+                    "endOffset": 5374
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 4,
+                        "startOffset": 1148,
+                        "endColumn": 80,
+                        "endOffset": 1224
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 90,
+                    "startColumn": 4,
+                    "startOffset": 5379,
+                    "endColumn": 54,
+                    "endOffset": 5429
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 4,
+                        "startOffset": 1557,
+                        "endColumn": 54,
+                        "endOffset": 1607
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 5434,
+                    "endColumn": 46,
+                    "endOffset": 5476
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 379,
+                        "endColumn": 46,
+                        "endOffset": 421
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 5481,
+                    "endColumn": 50,
+                    "endOffset": 5527
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 327,
+                        "endColumn": 50,
+                        "endOffset": 373
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 5532,
+                    "endColumn": 54,
+                    "endOffset": 5582
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 427,
+                        "endColumn": 54,
+                        "endOffset": 477
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 5587,
+                    "endColumn": 73,
+                    "endOffset": 5656
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 4,
+                        "startOffset": 4502,
+                        "endColumn": 73,
+                        "endOffset": 4571
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 5661,
+                    "endColumn": 69,
+                    "endOffset": 5726
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 70,
+                        "startColumn": 4,
+                        "startOffset": 4577,
+                        "endColumn": 69,
+                        "endOffset": 4642
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 96,
+                    "startColumn": 4,
+                    "startOffset": 5731,
+                    "endColumn": 52,
+                    "endOffset": 5779
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 177,
+                        "endColumn": 52,
+                        "endOffset": 225
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 97,
+                    "startColumn": 4,
+                    "startOffset": 5784,
+                    "endColumn": 60,
+                    "endOffset": 5840
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings_activity_settings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 19,
+                        "endColumn": 60,
+                        "endOffset": 75
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 5845,
+                    "endColumn": 44,
+                    "endOffset": 5885
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 231,
+                        "endColumn": 44,
+                        "endOffset": 271
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 5890,
+                    "endColumn": 48,
+                    "endOffset": 5934
+                },
+                "from": {
+                    "file": "C:\\Acer Backups\\projects\\KTM Public Route\\ktm-public-route\\app\\src\\main\\res\\values-ne\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 277,
+                        "endColumn": 48,
+                        "endOffset": 321
+                    }
+                }
+            }
+        ]
+    }
+]

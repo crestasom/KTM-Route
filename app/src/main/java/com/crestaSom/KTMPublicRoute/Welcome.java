@@ -22,11 +22,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-
-
+import com.crestaSom.KTMPublicRoute.data.DataWrapper;
 import com.crestaSom.KTMPublicRoute.data.JSONParser;
 import com.crestaSom.autocomplete.CustomAutoCompleteView;
 import com.crestaSom.database.Database;
+import com.crestaSom.model.Route;
 import com.crestaSom.model.Vertex;
 
 import android.app.AlertDialog;
@@ -109,7 +109,10 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
     private ProgressDialog pDialog;
     String dbCheckFlag = "0";
     String urlHead;
+    List<Route> routeList;
+    Database db;
 
+    int language;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,16 +121,22 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.iconktmlogo);
-        getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         viewPager=(ViewPager)findViewById(R.id.viewPager);
         mViewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragments(new SearchRouteFragment()," Search");
-        mViewPagerAdapter.addFragments(new ViewRouteFragment()," View");
+        mViewPagerAdapter.addFragments(new SearchRouteFragment(),getResources().getString(R.string.search_string));
+        mViewPagerAdapter.addFragments(new ViewRouteFragmentNew(),getResources().getString(R.string.view_string));
         viewPager.setAdapter(mViewPagerAdapter);
+
+        db=new Database(this);
+        routeList=db.getAllRoute();
+
         tabLayout.setupWithViewPager(viewPager);
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        setupTabIcons();
+        //setupTabIcons();
         sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         startFlag = sharedPref.getInt(KEY, -1);
         if (startFlag == -1) {
@@ -137,7 +146,7 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
             sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             editor = sharedPref.edit();
             editor.putInt(KEY, 1);
-            editor.putInt(DB_KEY, 1);
+            editor.putInt(DB_KEY, 2);
             editor.commit();
             startActivityForResult(new Intent(this, DisclaimerActivity.class),100);
 
@@ -150,6 +159,39 @@ public class Welcome extends AppCompatActivity implements OnClickListener {
 
             }
         }
+
+    }
+
+    public void viewRoute(View view){
+       // Log.d("pos",view.getTag().toString());
+        language = Integer.parseInt(prefs.getString("language", "1"));
+        int pos=Integer.parseInt(view.getTag().toString());
+        List<Integer> vList=new ArrayList<Integer>();
+        List<Vertex> vLists=new ArrayList<Vertex>();
+        List<Route> routes1=new ArrayList<>();
+        routes1.addAll(routeList);
+        Route r1=null;
+        for(Route r:routeList){
+            if(r.getId()==pos){
+                r1=r;
+            }
+        }
+        vList=r1.getAllVertexes();
+
+        Vertex v=null;
+        for(int idr:vList){
+            v=db.getVertex(idr);
+            vLists.add(v);
+        }
+        Intent i = new Intent(this, DetailActivity.class);
+        i.putExtra("data", new DataWrapper(vLists));
+        i.putExtra("flag", true);
+        i.putExtra("routeName", r1.getName());
+        if(language==1)
+            i.putExtra("vehicleType", r1.getVehicleType());
+        else
+            i.putExtra("vehicleType", r1.getVehicleTypeNepali());
+        startActivity(i);
 
     }
 

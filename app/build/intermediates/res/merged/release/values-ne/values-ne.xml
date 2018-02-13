@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_language_titles">
+        <item>English</item>
+        <item>नेपाली</item>
+    </string-array>
+    <string-array name="pref_language_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+    <string name="about_text">
+       KTM Public Route is an offline android application that aims to provide the detailed information about the public vehicle routes of the Kathmandu valley.
+KTM Public Route will help you get around the Kathmandu valley and know the public vehicle routes better along with the total distance and cost needed for your journey.
+Navigating the valley now becomes easier.\n\n
+
+       Features:\n
+       - Routes info with distance and vehicle fares\n
+       - Shortest routes prioritized\n
+        - Direct and Alternate routes suggestions\n
+        - GPS for current location (Nearby Stops)\n
+        - Complete offline Map Integration\n
+        - Simple user friendly interface\n\n\n
+
+        KTM Public Route has been developed by <b>Som Prasad Shrestha</b>, <b>Sudin Gurung</b> and <b>Sushant Suwal</b>, under the supervision of <b>Assistant Professor Dinesh Dangol</b> and <b>Department of Computer Science and Engineering</b>.
+We would like to thank all the friends and relatives for helping us by providing the valid route information. We are also grateful to <b>Nepal Engineering College</b> for supporting us in every phase of our development of this app. Lastly, We are grateful to <b>Ms Ajanta Dhakal</b> for helping in all task regarding Nepali Language Translation.\n\n
+       If you find any bug in App, Please report it to following email address\n
+        ktmpublicroute@gmail.com\n\n
+        For more information and updates regarding this app, Please visit official facebook page.
+
+</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name"> काठमाडौँ सार्वजनिक रुट</string>
+    <string name="disclaimer_text">
+        Travel cost shown in this app is calculated according to the transportation rates provided by DOTM (Department of Transportation Management), Nepal.
+Costs shown in the app should be taken as reference only. Developers do not guarantee the correctness of the costs displayed.
+</string>
+    <string name="disclaimer_text_nepali">
+       यो एपमा देखाइएको यात्राको भाडाहरु यातायात ब्यबस्था बिभागको व्यवस्था अनुसार छ। स्थानिय भाडादर फरक पर्न सक्छ। एपमा देखाइएको यात्राको भाडाहरुलाई जानकारीका रुपमा लिनसकिन्छ । एपको डेभलपरहरु भाडादरको लागी जिम्मेवार छैनन् ।
+    </string>
+    <string name="help_text"><b>Finding Route</b>\n\n
+        1. Click on <b>Find Route</b>\n
+        2.Enter Source and Destination.
+        The possible stops will be displayed when three characters are entered in each input section.
+        3.Click Search Route.\n\n
+        Path 1:\n
+        Shortest path between the source and destination will be displayed base on public vehicle routes available.\n
+        The path information will include travel transits with available routes, distance and transport fare for each transit and total distance and total fare of transit.\n
+        Path2:\n
+        A single route between source and destination will be displayed if available.\n
+        Each path cah be seperately viewed in map to visualize the path information.
+        4. Click on [VIEW DEATAIL] to view more details about route. It will display details regarding routes like intermediate stop map view.
+
+
+ \n\n<b>Nearby Location</b>\n
+        An alternative is provided to user where the user can select source from (at max. four) nearest stops based on aerial distance between the current location of user and nearby stops.
+ \n\n<b>Viewing Route Details</b>\n
+        1. Click on <b>View Route</b>\n
+        2. Click on a route from the list\n
+        3. The details of route will be shown in map and each stop name can be viewed by clicking on stop icon.\n
+        <b>Detail Route</b>\n
+        Detail Route will contain two section.
+        \na. Transit:\n
+        This section will contain detail regarding route. It will show intermediate transit stops and available routes for given transit
+        \nb. Map:\n
+        This section will show display all the transit position in an offline map where user can visualize the route. User can also tap on stop icon to see the stop name.
+</string>
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_ringtone_silent">Silent</string>
+    <string name="pref_title_language">Language</string>
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="search_string"> खोज</string>
+    <string name="search_string_nep"> खोज</string>
+    <string name="title_activity_about">ABOUT</string>
+    <string name="title_activity_auto_complete">KTM Public Route</string>
+    <string name="title_activity_feed_back">FeedBackActivity</string>
+    <string name="title_activity_help">HELP</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="view_string"> हेर</string>
+    <string name="view_string_nep"> हेर</string>
+</resources>

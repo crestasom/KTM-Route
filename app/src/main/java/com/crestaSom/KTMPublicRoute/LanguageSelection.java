@@ -30,7 +30,7 @@ public class LanguageSelection extends AppCompatActivity implements View.OnClick
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.drawable.iconktmlogo);
-        getSupportActionBar().setTitle(" KTM Public Route (Beta)");
+        getSupportActionBar().setTitle(" KTM Public Route");
         sharedPref = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         english=(Button)findViewById(R.id.englishLan);

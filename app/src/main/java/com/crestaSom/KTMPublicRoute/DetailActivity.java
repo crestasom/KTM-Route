@@ -81,7 +81,7 @@ public class DetailActivity extends AppCompatActivity {
         mViewPagerAdapter.addFragments(getFragmentData(new MapFragment())," Map");
         viewPager.setAdapter(mViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-        setupTabIcons();
+        //setupTabIcons();
 
     }
 
