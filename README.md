@@ -9,3 +9,4 @@ Features:<br>
         - GPS for current location (Nearby Stops) <br>
         - Complete offline Map Integration <br>
         - Simple user friendly interface <br>
+ <a href="https://github.com/crestasom/KTM-Route/tree/master/screenshots">View Screenshots here</a>
