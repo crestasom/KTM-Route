@@ -4,6 +4,7 @@ This app was created as Final Year Project by Nepal Engineering College 012-Batc
 Features:<br>
         -Routes info with distance and vehicle fares <br>
        - Shortest routes prioritized <br>
+        -Result in both english and Nepali Language<br>
         - Direct and Alternate routes suggestions <br>
         - GPS for current location (Nearby Stops) <br>
         - Complete offline Map Integration <br>
